@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luaan.Yggmire.Core", "Core\Luaan.Yggmire.Core\Luaan.Yggmire.Core.csproj", "{FF2C5FAB-70CE-41C3-B424-F0B5F0728E84}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E64F7A03-B84E-470F-BEE2-37C71692A9EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{786BA5D1-DCCA-4C9C-A5BB-794161FD21AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{5C2ECDA6-8F21-4B5D-93F2-82AC65489C68}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{A9E40A38-84BB-47C6-8DED-CFE9F22FC02C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luaan.Yggmire.ConsoleClient", "Client\Luaan.Yggmire.ConsoleClient\Luaan.Yggmire.ConsoleClient.csproj", "{40C3E829-7FD6-4F54-994F-A01D5337FF1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luaan.Yggmire.SharpClient", "Client\Luaan.Yggmire.SharpClient\Luaan.Yggmire.SharpClient.csproj", "{187D2879-4772-4A0A-B428-ACB2A6148A38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luaan.Yggmire.OrleansInterfaces", "Core\Luaan.Yggmire.OrleansInterfaces\Luaan.Yggmire.OrleansInterfaces.csproj", "{8477394A-76A5-4698-A929-A3874D92C910}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luaan.Yggmire.OrleansServer", "Server\Luaan.Yggmire.OrleansServer\Luaan.Yggmire.OrleansServer.csproj", "{D00AA61C-4E08-49D9-9CD1-6EA71E3ECE7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luaan.Yggmire.ClientCore", "Client\Luaan.Yggmire.ClientCore\Luaan.Yggmire.ClientCore.csproj", "{AC12AE48-B369-488E-8951-AC98310E56F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luaan.Yggmire.OrleansStorage", "Server\Luaan.Yggmire.OrleansStorage\Luaan.Yggmire.OrleansStorage.csproj", "{363AFF0B-243F-4E05-A768-DB5DA12AA9D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfHelper", "WpfHelper\WpfHelper.csproj", "{B6195C44-A9BC-4411-A54A-69F8D57580A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luaan.Yggmire.OrleansServerInterfaces", "Server\Luaan.Yggmire.OrleansServerInterfaces\Luaan.Yggmire.OrleansServerInterfaces.csproj", "{52AEE808-13A8-47E6-B0D8-427D29BF9623}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF2C5FAB-70CE-41C3-B424-F0B5F0728E84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF2C5FAB-70CE-41C3-B424-F0B5F0728E84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF2C5FAB-70CE-41C3-B424-F0B5F0728E84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF2C5FAB-70CE-41C3-B424-F0B5F0728E84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40C3E829-7FD6-4F54-994F-A01D5337FF1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40C3E829-7FD6-4F54-994F-A01D5337FF1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40C3E829-7FD6-4F54-994F-A01D5337FF1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40C3E829-7FD6-4F54-994F-A01D5337FF1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{187D2879-4772-4A0A-B428-ACB2A6148A38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{187D2879-4772-4A0A-B428-ACB2A6148A38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{187D2879-4772-4A0A-B428-ACB2A6148A38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{187D2879-4772-4A0A-B428-ACB2A6148A38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8477394A-76A5-4698-A929-A3874D92C910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8477394A-76A5-4698-A929-A3874D92C910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8477394A-76A5-4698-A929-A3874D92C910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8477394A-76A5-4698-A929-A3874D92C910}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D00AA61C-4E08-49D9-9CD1-6EA71E3ECE7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D00AA61C-4E08-49D9-9CD1-6EA71E3ECE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D00AA61C-4E08-49D9-9CD1-6EA71E3ECE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D00AA61C-4E08-49D9-9CD1-6EA71E3ECE7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC12AE48-B369-488E-8951-AC98310E56F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC12AE48-B369-488E-8951-AC98310E56F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC12AE48-B369-488E-8951-AC98310E56F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC12AE48-B369-488E-8951-AC98310E56F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{363AFF0B-243F-4E05-A768-DB5DA12AA9D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{363AFF0B-243F-4E05-A768-DB5DA12AA9D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{363AFF0B-243F-4E05-A768-DB5DA12AA9D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{363AFF0B-243F-4E05-A768-DB5DA12AA9D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6195C44-A9BC-4411-A54A-69F8D57580A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6195C44-A9BC-4411-A54A-69F8D57580A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52AEE808-13A8-47E6-B0D8-427D29BF9623}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52AEE808-13A8-47E6-B0D8-427D29BF9623}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52AEE808-13A8-47E6-B0D8-427D29BF9623}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52AEE808-13A8-47E6-B0D8-427D29BF9623}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FF2C5FAB-70CE-41C3-B424-F0B5F0728E84} = {E64F7A03-B84E-470F-BEE2-37C71692A9EC}
+		{8477394A-76A5-4698-A929-A3874D92C910} = {E64F7A03-B84E-470F-BEE2-37C71692A9EC}
+		{D00AA61C-4E08-49D9-9CD1-6EA71E3ECE7E} = {5C2ECDA6-8F21-4B5D-93F2-82AC65489C68}
+		{363AFF0B-243F-4E05-A768-DB5DA12AA9D6} = {5C2ECDA6-8F21-4B5D-93F2-82AC65489C68}
+		{52AEE808-13A8-47E6-B0D8-427D29BF9623} = {5C2ECDA6-8F21-4B5D-93F2-82AC65489C68}
+		{40C3E829-7FD6-4F54-994F-A01D5337FF1F} = {A9E40A38-84BB-47C6-8DED-CFE9F22FC02C}
+		{187D2879-4772-4A0A-B428-ACB2A6148A38} = {A9E40A38-84BB-47C6-8DED-CFE9F22FC02C}
+		{AC12AE48-B369-488E-8951-AC98310E56F7} = {A9E40A38-84BB-47C6-8DED-CFE9F22FC02C}
+	EndGlobalSection
+EndGlobal

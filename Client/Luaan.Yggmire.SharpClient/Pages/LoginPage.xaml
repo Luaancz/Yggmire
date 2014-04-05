@@ -1,0 +1,43 @@
+﻿<Page x:Class="Luaan.Yggmire.SharpClient.Pages.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="500"
+	Title="Login">
+
+    <DockPanel Background="CornflowerBlue">
+        <Border Background="#FFDEF1F9" VerticalAlignment="Center" HorizontalAlignment="Center" Height="180" Width="400" BorderBrush="White" BorderThickness="5px" CornerRadius="3">
+            <Border.Effect>
+                <DropShadowEffect/>
+            </Border.Effect>
+
+            <Grid Margin="5,25,5,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label x:Name="lblUsername" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="0">Username:</Label>
+                <Label x:Name="lblPassword" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="0">Password:</Label>
+                
+                <TextBlock x:Name="txtError" Foreground="Red" Grid.Row="3" Grid.ColumnSpan="2" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontWeight="Bold" Margin="5"></TextBlock>
+                
+                <TextBox x:Name="tbxUsername" Height="23" TextWrapping="Wrap" Text="Luaan" Width="120" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="5"/>
+                <PasswordBox x:Name="tbxPassword" Height="23" Width="120" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"  Margin="5" />
+
+                <WrapPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="5">
+                    <Button x:Name="btnCreate" Content="Create" Width="75" Click="btnCreate_Click" Margin="2"/>
+                    <Button x:Name="btnLogin" Content="Login" Width="75" Click="btnLogin_Click" Margin="2" />
+                </WrapPanel>
+            </Grid>
+        </Border>
+    </DockPanel>
+</Page>

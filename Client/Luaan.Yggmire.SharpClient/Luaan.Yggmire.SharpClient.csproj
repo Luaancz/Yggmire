@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <!-- Common Properties -->
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{187D2879-4772-4A0A-B428-ACB2A6148A38}</ProjectGuid>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Luaan.Yggmire.SharpClient</RootNamespace>
+    <AssemblyName>YggmireClient</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <!-- Platform Dependent Properties -->
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Luaan.Yggmire.SharpClient.App</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Orleans">
+      <HintPath>D:\Microsoft Codename Orleans SDK v0.9\SDK\Binaries\OrleansClient\Orleans.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actors\Actor.cs" />
+    <Compile Include="Actors\BoxActor.cs" />
+    <Compile Include="Actors\Cameras\CameraBase.cs" />
+    <Compile Include="Actors\Cameras\FreeCamera.cs" />
+    <Compile Include="Actors\PlacedActor.cs" />
+    <Compile Include="Actors\TerrainActor.cs" />
+    <Compile Include="Actors\TreeActor.cs" />
+    <Compile Include="Actors\VisibleActor.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ChatWindow.xaml.cs">
+      <DependentUpon>ChatWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Graphics\VertexFormats\PositionNormalVertex.cs" />
+    <Compile Include="Graphics\VertexFormats\PositionVertex.cs" />
+    <Compile Include="InputManager.cs" />
+    <Compile Include="Pages\GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="YggmireGame.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Graphics\Models\Trees\Tree-1.mtl">
+      <Link>Content\Models\Trees\Tree-1.mtl</Link>
+    </None>
+    <ToolkitModel Include="..\..\Graphics\Models\Trees\Tree-1.obj">
+      <Link>Content\Models\Trees\Tree-1.obj</Link>
+    </ToolkitModel>
+    <None Include="app.config" />
+    <ToolkitTexture Include="Content\Dirt.dds" />
+  </ItemGroup>
+  <ItemGroup>
+    <ToolkitFont Include="Content\Arial16.xml" />
+    <ToolkitTexture Include="Content\Balls.dds" />
+    <ToolkitModel Include="Content\Ship.fbx" />
+    <ToolkitTexture Include="Content\ShipDiffuse.dds" />
+    <ToolkitFxc Include="Content\Bloom.fx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ToolkitFxc Include="Content\Mandelbrot.fx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Controls\ChatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\GamePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Luaan.Yggmire.Core\Luaan.Yggmire.Core.csproj">
+      <Project>{ff2c5fab-70ce-41c3-b424-f0b5f0728e84}</Project>
+      <Name>Luaan.Yggmire.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Luaan.Yggmire.OrleansInterfaces\Luaan.Yggmire.OrleansInterfaces.csproj">
+      <Project>{8477394a-76a5-4698-a929-a3874d92c910}</Project>
+      <Name>Luaan.Yggmire.OrleansInterfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ToolkitFxc Include="Content\Terrain.fx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Actors\Containers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ToolkitTexture Include="..\..\Graphics\Models\Trees\Tree-1.Texture.png">
+      <Link>Content\Models\Trees\Tree-1.Texture.png</Link>
+    </ToolkitTexture>
+    <Content Include="ClientConfiguration.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="heightmap01.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <ToolkitFxc Include="Content\Simple.fx" />
+    <ToolkitTexture Include="Content\Crate.jpg" />
+    <Content Include="Europe.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SharpDXSdkDir)\SharpDX.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
