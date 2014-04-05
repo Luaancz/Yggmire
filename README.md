@@ -11,4 +11,7 @@ Next, you're going to have to setup your silo. At this point, this is tricky, si
 To launch the server, you just have to open the solution, build it (make sure everything actually worked) and then just use the StartLocalSilo.cmd script in your Orleans SDK directory, and that should do it.
 Make sure that the OrleansConfiguration.XML in the LocalSilo folder is actually setup properly. You have to add a storage provider like this:
 
-<Provider Type="Luaan.Yggmire.OrleansStorage.OrleansFileStorage" Name="Default" RootDirectory="P:\Software\Yggmire\Data\"/>
+    <Provider Type="Luaan.Yggmire.OrleansStorage.OrleansFileStorage" Name="Default" RootDirectory="..\Data\"/>
+
+There's usually a server running on the address `yggmire.net`. You can see the Git revision used to build the server on http://www.yggmire.net/. Using the same client, you should be able to connect
+and test that everything is working fine.
