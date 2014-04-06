@@ -8,8 +8,9 @@ using Orleans;
 using Luaan.Yggmire.OrleansInterfaces;
 using Luaan.Yggmire.OrleansServerInterfaces;
 using Luaan.Yggmire.OrleansInterfaces.Account;
+using Luaan.Yggmire.OrleansServerInterfaces.Account;
 
-namespace Luaan.Yggmire.OrleansServer
+namespace Luaan.Yggmire.OrleansServer.Account
 {
     /// <summary>
     /// Orleans grain implementation class AccountGrain
@@ -18,12 +19,24 @@ namespace Luaan.Yggmire.OrleansServer
     public class AccountGrain : GrainBase<IAccountGrainState>, IAccountGrain
     {
         ISessionGrain currentSession;
+
+        Task<string> IAccountGrain.Name
+        {
+            get
+            {
+                return Task.FromResult(State.Name);
+            }
+        }
         
         Task IAccountGrain.CaptureSession(ISessionGrain session)
         {
+            if (currentSession != null && session != null)
+                throw new InvalidOperationException("The account is already logged in.");
+
             currentSession = session;
 
-            return TaskDone.Done;
+            State.LastLogin = DateTimeOffset.Now;
+            return State.WriteStateAsync();
         }
 
         Task IAccountGrain.Create(string password)

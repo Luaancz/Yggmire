@@ -31,8 +31,15 @@ namespace Luaan.Yggmire.SharpClient.Pages
             
             game = new YggmireGame(session);
             game.Run(surface);
+
+            this.Loaded += GamePage_Loaded;
         }
-        
+
+        async void GamePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            await chat.Init(game.Session);
+        }
+
         public void SetFocus()
         {
             var scope = FocusManager.GetFocusScope(chat.tbxChat);

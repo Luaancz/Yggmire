@@ -7,6 +7,9 @@ using Orleans;
 using Luaan.Yggmire.OrleansInterfaces;
 using Luaan.Yggmire.OrleansServerInterfaces;
 using Luaan.Yggmire.OrleansInterfaces.Account;
+using Luaan.Yggmire.OrleansServerInterfaces.Account;
+using Luaan.Yggmire.OrleansServerInterfaces.Chat;
+using Luaan.Yggmire.OrleansInterfaces.Chat;
 
 namespace Luaan.Yggmire.OrleansServer
 {
@@ -16,17 +19,39 @@ namespace Luaan.Yggmire.OrleansServer
     public class SessionGrain : Orleans.GrainBase, ISessionGrain
     {
         IAccountGrain loggedAccount;
+        string name;
+
+        public override Task ActivateAsync()
+        {
+            mySubscriptions = new List<Tuple<int, IChatObserver>>();
+
+            return base.ActivateAsync();
+        }
 
         /// <summary>
         /// When the session dies, we have to clean up a bit.
         /// </summary>
         /// <returns></returns>
-        public override Task DeactivateAsync()
+        public async override Task DeactivateAsync()
         {
             if (loggedAccount != null)
-                loggedAccount.CaptureSession(null);
+                await loggedAccount.CaptureSession(null);
 
-            return base.DeactivateAsync();
+            if (mySubscriptions.Count > 0)
+            {
+                var tasks = 
+                    mySubscriptions.Select
+                        (
+                            i => 
+                                {
+                                    var chat = ChatGrainFactory.GetGrain(i.Item1);
+
+                                    return chat.Unsubscribe(name, i.Item2);
+                                }
+                        ).ToArray();
+
+                await Task.WhenAll(tasks);
+            }
         }
 
         async Task<AccountInformation> CompleteLogin(IAccountGrain account)
@@ -34,7 +59,10 @@ namespace Luaan.Yggmire.OrleansServer
             await account.CaptureSession(this);
             loggedAccount = account;
 
-            return await account.GetState();
+            var state = await account.GetState();
+            name = state.Name;
+
+            return state;
         }
 
         /// <summary>
@@ -76,6 +104,47 @@ namespace Luaan.Yggmire.OrleansServer
                 throw new UnauthorizedAccessException("Not logged in or session expired.");
 
             return loggedAccount.GetState();
+        }
+
+        Task<string> ISessionGrain.PlayerName
+        {
+            get
+            {
+                if (loggedAccount == null)
+                    throw new UnauthorizedAccessException("Not logged in or session expired.");
+
+                return loggedAccount.Name;
+            }
+        }
+
+        async Task ISessionGrain.SendChatMessage(int channel, string message)
+        {
+            var chat = ChatGrainFactory.GetGrain(channel);
+
+            await chat.SendMessage(name, message);
+        }
+
+        private List<Tuple<int, IChatObserver>> mySubscriptions;
+
+        Task ISessionGrain.SubscribeForChat(int channel, IChatObserver observer)
+        {
+            var chat = ChatGrainFactory.GetGrain(channel);
+
+            if (mySubscriptions.Any(i => i.Item1 == channel))
+                throw new InvalidOperationException("Already subscribed to channel " + channel);
+
+            mySubscriptions.Add(new Tuple<int, IChatObserver>(channel, observer));
+            return chat.Subscribe(name, observer);
+        }
+
+        Task ISessionGrain.UnsubscribeFromChat(int channel, IChatObserver observer)
+        {
+            var chat = ChatGrainFactory.GetGrain(channel);
+
+            if (mySubscriptions.RemoveAll(i => i.Item1 == channel) == 0)
+                throw new InvalidOperationException("Not subscribed to channel " + channel);
+
+            return chat.Unsubscribe(name, observer);
         }
     }
 }

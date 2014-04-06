@@ -14,6 +14,178 @@
 #pragma warning disable 1591
 #pragma warning disable 1998
 
+namespace Luaan.Yggmire.OrleansInterfaces.Chat
+{
+    using System;
+    using System.Net;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.IO;
+    using System.Collections.Generic;
+    using Orleans;
+    using System.Collections;
+    
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    public class ChatObserverFactory
+    {
+        
+
+            public static IChatObserver Cast(IAddressable grainRef)
+            {
+                
+                return ChatObserverReference.Cast(grainRef);
+            }
+
+        private static IGrainMethodInvoker methodInvoker;
+
+        public async static System.Threading.Tasks.Task<IChatObserver> CreateObjectReference(IChatObserver obj)
+        {
+            if (methodInvoker == null) methodInvoker = new ChatObserverMethodInvoker();
+            return ChatObserverFactory.Cast(await GrainReference.CreateObjectReference(obj, methodInvoker));
+        }
+
+        public static void DeleteObjectReference(IChatObserver reference)
+        {
+            GrainReference.DeleteObjectReference(reference);
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+        [System.SerializableAttribute()]
+        [Orleans.GrainReferenceAttribute("Luaan.Yggmire.OrleansInterfaces.Chat.IChatObserver")]
+        internal class ChatObserverReference : Orleans.GrainReference, IChatObserver, Orleans.IAddressable
+        {
+            
+
+            public static IChatObserver Cast(IAddressable grainRef)
+            {
+                
+                return (IChatObserver) GrainReference.CastInternal(typeof(IChatObserver), (GrainReference gr) => { return new ChatObserverReference(gr);}, grainRef, 1633131735);
+            }
+
+                protected override int InterfaceId { get { return 1633131735; } }
+
+                public override bool IsCompatible(int interfaceId) { return interfaceId == this.InterfaceId; }
+
+                protected override string InterfaceName { get { return "Luaan.Yggmire.OrleansInterfaces.Chat.IChatObserver"; } }
+
+                protected override string GetMethodName(int interfaceId, int methodId) { return ChatObserverMethodInvoker.GetMethodName(interfaceId, methodId); }
+            
+            protected internal ChatObserverReference(GrainReference reference) : 
+                    base(reference)
+            {
+            }
+            
+            [Orleans.CopierMethodAttribute()]
+            public static object _Copier(object original)
+            {
+                ChatObserverReference input = ((ChatObserverReference)(original));
+                return ((ChatObserverReference)(GrainReference.CopyGrainReference(input)));
+            }
+            
+            [Orleans.SerializerMethodAttribute()]
+            public static void _Serializer(object original, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
+            {
+                ChatObserverReference input = ((ChatObserverReference)(original));
+                GrainReference.SerializeGrainReference(input, stream, expected);
+            }
+            
+            [Orleans.DeserializerMethodAttribute()]
+            public static object _Deserializer(System.Type expected, Orleans.Serialization.BinaryTokenStreamReader stream)
+            {
+                return ChatObserverReference.Cast(((Orleans.GrainReference)(GrainReference.DeserializeGrainReference(expected, stream))));
+            }
+            
+            public void UpdateChat(string name, string message)
+            {
+
+                base.InvokeOneWayMethod(167103139, new object[] {name, message} );
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    [Orleans.MethodInvokerAttribute("Luaan.Yggmire.OrleansInterfaces.Chat.IChatObserver", 1633131735)]
+    internal class ChatObserverMethodInvoker : IGrainMethodInvoker
+    {
+        
+        public int InterfaceId
+        {
+            get
+            {
+                return 1633131735;
+            }
+        }
+        
+        public async System.Threading.Tasks.Task<System.Object> Invoke(IAddressable grain, int interfaceId, int methodId, object[] arguments)
+        {
+                if (grain == null) throw new System.ArgumentNullException("grain");
+                switch (interfaceId)
+                {
+                    case 1633131735:  // IChatObserver
+                        switch (methodId)
+                        {
+                            case 167103139: 
+                                ((IChatObserver)grain).UpdateChat((System.String)arguments[0], (System.String)arguments[1]); return true;
+                            default: 
+                                throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
+                        }
+                    default:
+                        throw new System.InvalidCastException("interfaceId="+interfaceId);
+                }
+        }
+        
+        public static string GetMethodName(int interfaceId, int methodId)
+        {
+
+            switch (interfaceId)
+            {
+                
+                case 1633131735:  // IChatObserver
+                    switch (methodId)
+                    {
+                        case 167103139:
+                            return "UpdateChat";
+                    case -606142484:
+                            return "GetProperties";
+                    
+                        default: 
+                            throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
+                    }
+
+                default:
+                    throw new System.InvalidCastException("interfaceId="+interfaceId);
+            }
+        }
+    }
+    
+    [Serializable()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    public class ChatObserverProperties
+    {
+        
+
+            public Dictionary<string,object> AsDictionary()
+            {  
+                var retValue = new Dictionary<string,object>();
+                return retValue;
+            }
+    }
+}
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//     Runtime Version:4.0.30319.18444
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
 namespace Luaan.Yggmire.OrleansInterfaces
 {
     using System;
@@ -23,6 +195,7 @@ namespace Luaan.Yggmire.OrleansInterfaces
     using System.IO;
     using System.Collections.Generic;
     using Orleans;
+    using System.Collections;
     using Luaan.Yggmire.OrleansInterfaces.Account;
     
     
@@ -79,10 +252,25 @@ namespace Luaan.Yggmire.OrleansInterfaces
                 protected override string InterfaceName { get { return "Luaan.Yggmire.OrleansInterfaces.ISessionGrain"; } }
 
                 protected override string GetMethodName(int interfaceId, int methodId) { return SessionGrainMethodInvoker.GetMethodName(interfaceId, methodId); }
+
+            public async System.Threading.Tasks.Task<SessionGrainProperties> GetProperties() 
+            { 
+                return await base.InvokeMethodAsync<SessionGrainProperties>( -606142484, new object[]{}, TimeSpan.Zero);
+            }
+            
             
             protected internal SessionGrainReference(GrainReference reference) : 
                     base(reference)
             {
+            }
+            
+            public System.Threading.Tasks.Task<string> PlayerName
+            {
+                get
+                {
+
+                return base.InvokeMethodAsync<System.String>(-234171525, new object[] {}, TimeSpan.Zero , options: InvokeMethodOptions.ReadOnly);
+                }
             }
             
             [Orleans.CopierMethodAttribute()]
@@ -122,6 +310,26 @@ namespace Luaan.Yggmire.OrleansInterfaces
 
                 return base.InvokeMethodAsync<Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation>(2013465976, new object[] {name, password}, TimeSpan.Zero );
             }
+            
+            public System.Threading.Tasks.Task SubscribeForChat(int channel, Luaan.Yggmire.OrleansInterfaces.Chat.IChatObserver observer)
+            {
+GrainFactoryBase.CheckGrainObserverParamInternal(observer);
+
+                return base.InvokeMethodAsync<object>(-950310688, new object[] {channel, observer is GrainBase ? Luaan.Yggmire.OrleansInterfaces.Chat.ChatObserverFactory.Cast(observer.AsReference()) : observer}, TimeSpan.Zero );
+            }
+            
+            public System.Threading.Tasks.Task UnsubscribeFromChat(int channel, Luaan.Yggmire.OrleansInterfaces.Chat.IChatObserver observer)
+            {
+GrainFactoryBase.CheckGrainObserverParamInternal(observer);
+
+                return base.InvokeMethodAsync<object>(-1965559293, new object[] {channel, observer is GrainBase ? Luaan.Yggmire.OrleansInterfaces.Chat.ChatObserverFactory.Cast(observer.AsReference()) : observer}, TimeSpan.Zero );
+            }
+            
+            public System.Threading.Tasks.Task SendChatMessage(int channel, string message)
+            {
+
+                return base.InvokeMethodAsync<object>(-46125154, new object[] {channel, message}, TimeSpan.Zero );
+            }
         }
     }
     
@@ -147,13 +355,25 @@ namespace Luaan.Yggmire.OrleansInterfaces
                     case -705986448:  // ISessionGrain
                         switch (methodId)
                         {
+                            case -234171525: 
+                                return await ((ISessionGrain)grain).PlayerName;
                             case 1891548347: 
                                 return await ((ISessionGrain)grain).Authorize((String)arguments[0], (String)arguments[1]);
                             case 1960002325: 
                                 return await ((ISessionGrain)grain).GetAccount();
                             case 2013465976: 
                                 return await ((ISessionGrain)grain).CreateAccount((String)arguments[0], (String)arguments[1]);
-                            default: 
+                            case -950310688: 
+                                await ((ISessionGrain)grain).SubscribeForChat((Int32)arguments[0], (Luaan.Yggmire.OrleansInterfaces.Chat.IChatObserver)arguments[1]);
+                              return true;
+                            case -1965559293: 
+                                await ((ISessionGrain)grain).UnsubscribeFromChat((Int32)arguments[0], (Luaan.Yggmire.OrleansInterfaces.Chat.IChatObserver)arguments[1]);
+                              return true;
+                            case -46125154: 
+                                await ((ISessionGrain)grain).SendChatMessage((Int32)arguments[0], (String)arguments[1]);
+                              return true;
+                            case -606142484: return ((ISessionGrain)grain).GetProperties();
+                                                        default: 
                                 throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
                         }
                     default:
@@ -170,12 +390,20 @@ namespace Luaan.Yggmire.OrleansInterfaces
                 case -705986448:  // ISessionGrain
                     switch (methodId)
                     {
-                        case 1891548347:
+                        case -234171525:
+                            return "get_PlayerName";
+                    case 1891548347:
                             return "Authorize";
                     case 1960002325:
                             return "GetAccount";
                     case 2013465976:
                             return "CreateAccount";
+                    case -950310688:
+                            return "SubscribeForChat";
+                    case -1965559293:
+                            return "UnsubscribeFromChat";
+                    case -46125154:
+                            return "SendChatMessage";
                     case -606142484:
                             return "GetProperties";
                     
@@ -189,6 +417,20 @@ namespace Luaan.Yggmire.OrleansInterfaces
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    [System.SerializableAttribute()]
+    public static class SessionGrainExtensionMethods
+    {
+        
+static public System.Threading.Tasks.Task<SessionGrainProperties> GetProperties(this ISessionGrain interfaceData) 
+            { 
+                SessionGrainFactory.SessionGrainReference gref = interfaceData as SessionGrainFactory.SessionGrainReference;
+                 return gref.GetProperties();
+            }
+            
+    }
+    
     [Serializable()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
@@ -196,9 +438,11 @@ namespace Luaan.Yggmire.OrleansInterfaces
     {
         
 
+            public String PlayerName { get; set; }
             public Dictionary<string,object> AsDictionary()
             {  
                 var retValue = new Dictionary<string,object>();
+                retValue["PlayerName"] = PlayerName;
                 return retValue;
             }
     }

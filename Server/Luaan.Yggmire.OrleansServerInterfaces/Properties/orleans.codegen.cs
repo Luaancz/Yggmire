@@ -14,7 +14,7 @@
 #pragma warning disable 1591
 #pragma warning disable 1998
 
-namespace Luaan.Yggmire.OrleansServerInterfaces
+namespace Luaan.Yggmire.OrleansServerInterfaces.Account
 {
     using System;
     using System.Net;
@@ -23,6 +23,7 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
     using System.IO;
     using System.Collections.Generic;
     using Orleans;
+    using System.Collections;
     using Luaan.Yggmire.OrleansInterfaces.Account;
     
     
@@ -34,22 +35,22 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
 
                         public static IAccountGrain GetGrain(long primaryKey, string keyExt)
                         {
-                            return Cast(GrainFactoryBase.MakeKeyExtendedGrainReferenceInternal(typeof(IAccountGrain), 2048450655, primaryKey, keyExt));
+                            return Cast(GrainFactoryBase.MakeKeyExtendedGrainReferenceInternal(typeof(IAccountGrain), 1033839444, primaryKey, keyExt));
                         }
 
                         public static IAccountGrain GetGrain(long primaryKey, string keyExt, string grainClassNamePrefix)
                         {
-                            return Cast(GrainFactoryBase.MakeKeyExtendedGrainReferenceInternal(typeof(IAccountGrain), 2048450655, primaryKey, keyExt, grainClassNamePrefix));
+                            return Cast(GrainFactoryBase.MakeKeyExtendedGrainReferenceInternal(typeof(IAccountGrain), 1033839444, primaryKey, keyExt, grainClassNamePrefix));
                         }
 
                         public static IAccountGrain GetGrain(Guid primaryKey, string keyExt)
                         {
-                            return Cast(GrainFactoryBase.MakeKeyExtendedGrainReferenceInternal(typeof(IAccountGrain), 2048450655, primaryKey, keyExt));
+                            return Cast(GrainFactoryBase.MakeKeyExtendedGrainReferenceInternal(typeof(IAccountGrain), 1033839444, primaryKey, keyExt));
                         }
 
                         public static IAccountGrain GetGrain(Guid primaryKey, string keyExt, string grainClassNamePrefix)
                         {
-                            return Cast(GrainFactoryBase.MakeKeyExtendedGrainReferenceInternal(typeof(IAccountGrain), 2048450655, primaryKey, keyExt,grainClassNamePrefix));
+                            return Cast(GrainFactoryBase.MakeKeyExtendedGrainReferenceInternal(typeof(IAccountGrain), 1033839444, primaryKey, keyExt,grainClassNamePrefix));
                         }
 
             public static IAccountGrain Cast(IAddressable grainRef)
@@ -61,7 +62,7 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
         [System.SerializableAttribute()]
-        [Orleans.GrainReferenceAttribute("Luaan.Yggmire.OrleansServerInterfaces.IAccountGrain")]
+        [Orleans.GrainReferenceAttribute("Luaan.Yggmire.OrleansServerInterfaces.Account.IAccountGrain")]
         internal class AccountGrainReference : Orleans.GrainReference, IAccountGrain, Orleans.IAddressable
         {
             
@@ -69,20 +70,35 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
             public static IAccountGrain Cast(IAddressable grainRef)
             {
                 
-                return (IAccountGrain) GrainReference.CastInternal(typeof(IAccountGrain), (GrainReference gr) => { return new AccountGrainReference(gr);}, grainRef, 2048450655);
+                return (IAccountGrain) GrainReference.CastInternal(typeof(IAccountGrain), (GrainReference gr) => { return new AccountGrainReference(gr);}, grainRef, 1033839444);
             }
 
-                protected override int InterfaceId { get { return 2048450655; } }
+                protected override int InterfaceId { get { return 1033839444; } }
 
                 public override bool IsCompatible(int interfaceId) { return interfaceId == this.InterfaceId; }
 
-                protected override string InterfaceName { get { return "Luaan.Yggmire.OrleansServerInterfaces.IAccountGrain"; } }
+                protected override string InterfaceName { get { return "Luaan.Yggmire.OrleansServerInterfaces.Account.IAccountGrain"; } }
 
                 protected override string GetMethodName(int interfaceId, int methodId) { return AccountGrainMethodInvoker.GetMethodName(interfaceId, methodId); }
+
+            public async System.Threading.Tasks.Task<AccountGrainProperties> GetProperties() 
+            { 
+                return await base.InvokeMethodAsync<AccountGrainProperties>( -606142484, new object[]{}, TimeSpan.Zero);
+            }
+            
             
             protected internal AccountGrainReference(GrainReference reference) : 
                     base(reference)
             {
+            }
+            
+            public System.Threading.Tasks.Task<string> Name
+            {
+                get
+                {
+
+                return base.InvokeMethodAsync<System.String>(1096274493, new object[] {}, TimeSpan.Zero , options: InvokeMethodOptions.ReadOnly);
+                }
             }
             
             [Orleans.CopierMethodAttribute()]
@@ -133,7 +149,7 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
-    [Orleans.MethodInvokerAttribute("Luaan.Yggmire.OrleansServerInterfaces.IAccountGrain", 2048450655)]
+    [Orleans.MethodInvokerAttribute("Luaan.Yggmire.OrleansServerInterfaces.Account.IAccountGrain", 1033839444)]
     internal class AccountGrainMethodInvoker : IGrainMethodInvoker
     {
         
@@ -141,7 +157,7 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
         {
             get
             {
-                return 2048450655;
+                return 1033839444;
             }
         }
         
@@ -150,9 +166,11 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
                 if (grain == null) throw new System.ArgumentNullException("grain");
                 switch (interfaceId)
                 {
-                    case 2048450655:  // IAccountGrain
+                    case 1033839444:  // IAccountGrain
                         switch (methodId)
                         {
+                            case 1096274493: 
+                                return await ((IAccountGrain)grain).Name;
                             case 1590561359: 
                                 await ((IAccountGrain)grain).CaptureSession((Luaan.Yggmire.OrleansInterfaces.ISessionGrain)arguments[0]);
                               return true;
@@ -163,7 +181,8 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
                               return true;
                             case 1379941908: 
                                 return await ((IAccountGrain)grain).ValidatePassword((String)arguments[0]);
-                            default: 
+                            case -606142484: return ((IAccountGrain)grain).GetProperties();
+                                                        default: 
                                 throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
                         }
                     default:
@@ -177,10 +196,12 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
             switch (interfaceId)
             {
                 
-                case 2048450655:  // IAccountGrain
+                case 1033839444:  // IAccountGrain
                     switch (methodId)
                     {
-                        case 1590561359:
+                        case 1096274493:
+                            return "get_Name";
+                    case 1590561359:
                             return "CaptureSession";
                     case -454132849:
                             return "GetState";
@@ -201,6 +222,20 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    [System.SerializableAttribute()]
+    public static class AccountGrainExtensionMethods
+    {
+        
+static public System.Threading.Tasks.Task<AccountGrainProperties> GetProperties(this IAccountGrain interfaceData) 
+            { 
+                AccountGrainFactory.AccountGrainReference gref = interfaceData as AccountGrainFactory.AccountGrainReference;
+                 return gref.GetProperties();
+            }
+            
+    }
+    
     [Serializable()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
@@ -208,9 +243,11 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
     {
         
 
+            public String Name { get; set; }
             public Dictionary<string,object> AsDictionary()
             {  
                 var retValue = new Dictionary<string,object>();
+                retValue["Name"] = Name;
                 return retValue;
             }
     }
@@ -223,22 +260,22 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
 
                         public static IPlayerGrain GetGrain(long primaryKey)
                         {
-                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IPlayerGrain), 1141825993, primaryKey));
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IPlayerGrain), 1768646660, primaryKey));
                         }
 
                         public static IPlayerGrain GetGrain(long primaryKey, string grainClassNamePrefix)
                         {
-                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IPlayerGrain), 1141825993, primaryKey, grainClassNamePrefix));
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IPlayerGrain), 1768646660, primaryKey, grainClassNamePrefix));
                         }
 
                         public static IPlayerGrain GetGrain(Guid primaryKey)
                         {
-                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IPlayerGrain), 1141825993, primaryKey));
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IPlayerGrain), 1768646660, primaryKey));
                         }
 
                         public static IPlayerGrain GetGrain(Guid primaryKey, string grainClassNamePrefix)
                         {
-                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IPlayerGrain), 1141825993, primaryKey, grainClassNamePrefix));
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IPlayerGrain), 1768646660, primaryKey, grainClassNamePrefix));
                         }
 
             public static IPlayerGrain Cast(IAddressable grainRef)
@@ -250,7 +287,7 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
         [System.SerializableAttribute()]
-        [Orleans.GrainReferenceAttribute("Luaan.Yggmire.OrleansServerInterfaces.IPlayerGrain")]
+        [Orleans.GrainReferenceAttribute("Luaan.Yggmire.OrleansServerInterfaces.Account.IPlayerGrain")]
         internal class PlayerGrainReference : Orleans.GrainReference, IPlayerGrain, Orleans.IAddressable
         {
             
@@ -258,14 +295,14 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
             public static IPlayerGrain Cast(IAddressable grainRef)
             {
                 
-                return (IPlayerGrain) GrainReference.CastInternal(typeof(IPlayerGrain), (GrainReference gr) => { return new PlayerGrainReference(gr);}, grainRef, 1141825993);
+                return (IPlayerGrain) GrainReference.CastInternal(typeof(IPlayerGrain), (GrainReference gr) => { return new PlayerGrainReference(gr);}, grainRef, 1768646660);
             }
 
-                protected override int InterfaceId { get { return 1141825993; } }
+                protected override int InterfaceId { get { return 1768646660; } }
 
                 public override bool IsCompatible(int interfaceId) { return interfaceId == this.InterfaceId; }
 
-                protected override string InterfaceName { get { return "Luaan.Yggmire.OrleansServerInterfaces.IPlayerGrain"; } }
+                protected override string InterfaceName { get { return "Luaan.Yggmire.OrleansServerInterfaces.Account.IPlayerGrain"; } }
 
                 protected override string GetMethodName(int interfaceId, int methodId) { return PlayerGrainMethodInvoker.GetMethodName(interfaceId, methodId); }
             
@@ -298,7 +335,7 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
-    [Orleans.MethodInvokerAttribute("Luaan.Yggmire.OrleansServerInterfaces.IPlayerGrain", 1141825993)]
+    [Orleans.MethodInvokerAttribute("Luaan.Yggmire.OrleansServerInterfaces.Account.IPlayerGrain", 1768646660)]
     internal class PlayerGrainMethodInvoker : IGrainMethodInvoker
     {
         
@@ -306,7 +343,7 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
         {
             get
             {
-                return 1141825993;
+                return 1768646660;
             }
         }
         
@@ -315,7 +352,7 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
                 if (grain == null) throw new System.ArgumentNullException("grain");
                 switch (interfaceId)
                 {
-                    case 1141825993:  // IPlayerGrain
+                    case 1768646660:  // IPlayerGrain
                         switch (methodId)
                         {
                             default: 
@@ -332,7 +369,7 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
             switch (interfaceId)
             {
                 
-                case 1141825993:  // IPlayerGrain
+                case 1768646660:  // IPlayerGrain
                     switch (methodId)
                     {
                         case -606142484:
@@ -352,6 +389,209 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
     public class PlayerGrainProperties
+    {
+        
+
+            public Dictionary<string,object> AsDictionary()
+            {  
+                var retValue = new Dictionary<string,object>();
+                return retValue;
+            }
+    }
+}
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//     Runtime Version:4.0.30319.18444
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+namespace Luaan.Yggmire.OrleansServerInterfaces.Chat
+{
+    using System;
+    using System.Net;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.IO;
+    using System.Collections.Generic;
+    using Orleans;
+    
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    public class ChatGrainFactory
+    {
+        
+
+                        public static IChatGrain GetGrain(long primaryKey)
+                        {
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IChatGrain), -1455653208, primaryKey));
+                        }
+
+                        public static IChatGrain GetGrain(long primaryKey, string grainClassNamePrefix)
+                        {
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IChatGrain), -1455653208, primaryKey, grainClassNamePrefix));
+                        }
+
+                        public static IChatGrain GetGrain(Guid primaryKey)
+                        {
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IChatGrain), -1455653208, primaryKey));
+                        }
+
+                        public static IChatGrain GetGrain(Guid primaryKey, string grainClassNamePrefix)
+                        {
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IChatGrain), -1455653208, primaryKey, grainClassNamePrefix));
+                        }
+
+            public static IChatGrain Cast(IAddressable grainRef)
+            {
+                
+                return ChatGrainReference.Cast(grainRef);
+            }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+        [System.SerializableAttribute()]
+        [Orleans.GrainReferenceAttribute("Luaan.Yggmire.OrleansServerInterfaces.Chat.IChatGrain")]
+        internal class ChatGrainReference : Orleans.GrainReference, IChatGrain, Orleans.IAddressable
+        {
+            
+
+            public static IChatGrain Cast(IAddressable grainRef)
+            {
+                
+                return (IChatGrain) GrainReference.CastInternal(typeof(IChatGrain), (GrainReference gr) => { return new ChatGrainReference(gr);}, grainRef, -1455653208);
+            }
+
+                protected override int InterfaceId { get { return -1455653208; } }
+
+                public override bool IsCompatible(int interfaceId) { return interfaceId == this.InterfaceId; }
+
+                protected override string InterfaceName { get { return "Luaan.Yggmire.OrleansServerInterfaces.Chat.IChatGrain"; } }
+
+                protected override string GetMethodName(int interfaceId, int methodId) { return ChatGrainMethodInvoker.GetMethodName(interfaceId, methodId); }
+            
+            protected internal ChatGrainReference(GrainReference reference) : 
+                    base(reference)
+            {
+            }
+            
+            [Orleans.CopierMethodAttribute()]
+            public static object _Copier(object original)
+            {
+                ChatGrainReference input = ((ChatGrainReference)(original));
+                return ((ChatGrainReference)(GrainReference.CopyGrainReference(input)));
+            }
+            
+            [Orleans.SerializerMethodAttribute()]
+            public static void _Serializer(object original, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
+            {
+                ChatGrainReference input = ((ChatGrainReference)(original));
+                GrainReference.SerializeGrainReference(input, stream, expected);
+            }
+            
+            [Orleans.DeserializerMethodAttribute()]
+            public static object _Deserializer(System.Type expected, Orleans.Serialization.BinaryTokenStreamReader stream)
+            {
+                return ChatGrainReference.Cast(((Orleans.GrainReference)(GrainReference.DeserializeGrainReference(expected, stream))));
+            }
+            
+            public System.Threading.Tasks.Task SendMessage(string name, string message)
+            {
+
+                return base.InvokeMethodAsync<object>(-419561747, new object[] {name, message}, TimeSpan.Zero );
+            }
+            
+            public System.Threading.Tasks.Task Subscribe(string name, Luaan.Yggmire.OrleansInterfaces.Chat.IChatObserver observer)
+            {
+GrainFactoryBase.CheckGrainObserverParamInternal(observer);
+
+                return base.InvokeMethodAsync<object>(-430058874, new object[] {name, observer is GrainBase ? Luaan.Yggmire.OrleansInterfaces.Chat.ChatObserverFactory.Cast(observer.AsReference()) : observer}, TimeSpan.Zero );
+            }
+            
+            public System.Threading.Tasks.Task Unsubscribe(string name, Luaan.Yggmire.OrleansInterfaces.Chat.IChatObserver observer)
+            {
+GrainFactoryBase.CheckGrainObserverParamInternal(observer);
+
+                return base.InvokeMethodAsync<object>(425627646, new object[] {name, observer is GrainBase ? Luaan.Yggmire.OrleansInterfaces.Chat.ChatObserverFactory.Cast(observer.AsReference()) : observer}, TimeSpan.Zero );
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    [Orleans.MethodInvokerAttribute("Luaan.Yggmire.OrleansServerInterfaces.Chat.IChatGrain", -1455653208)]
+    internal class ChatGrainMethodInvoker : IGrainMethodInvoker
+    {
+        
+        public int InterfaceId
+        {
+            get
+            {
+                return -1455653208;
+            }
+        }
+        
+        public async System.Threading.Tasks.Task<Object> Invoke(IAddressable grain, int interfaceId, int methodId, object[] arguments)
+        {
+                if (grain == null) throw new System.ArgumentNullException("grain");
+                switch (interfaceId)
+                {
+                    case -1455653208:  // IChatGrain
+                        switch (methodId)
+                        {
+                            case -419561747: 
+                                await ((IChatGrain)grain).SendMessage((String)arguments[0], (String)arguments[1]);
+                              return true;
+                            case -430058874: 
+                                await ((IChatGrain)grain).Subscribe((String)arguments[0], (Luaan.Yggmire.OrleansInterfaces.Chat.IChatObserver)arguments[1]);
+                              return true;
+                            case 425627646: 
+                                await ((IChatGrain)grain).Unsubscribe((String)arguments[0], (Luaan.Yggmire.OrleansInterfaces.Chat.IChatObserver)arguments[1]);
+                              return true;
+                            default: 
+                                throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
+                        }
+                    default:
+                        throw new System.InvalidCastException("interfaceId="+interfaceId);
+                }
+        }
+        
+        public static string GetMethodName(int interfaceId, int methodId)
+        {
+
+            switch (interfaceId)
+            {
+                
+                case -1455653208:  // IChatGrain
+                    switch (methodId)
+                    {
+                        case -419561747:
+                            return "SendMessage";
+                    case -430058874:
+                            return "Subscribe";
+                    case 425627646:
+                            return "Unsubscribe";
+                    case -606142484:
+                            return "GetProperties";
+                    
+                        default: 
+                            throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
+                    }
+
+                default:
+                    throw new System.InvalidCastException("interfaceId="+interfaceId);
+            }
+        }
+    }
+    
+    [Serializable()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    public class ChatGrainProperties
     {
         
 

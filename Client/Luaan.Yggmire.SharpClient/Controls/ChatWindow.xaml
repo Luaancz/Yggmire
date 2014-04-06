@@ -12,7 +12,6 @@
         </Grid.RowDefinitions>
         <ScrollViewer x:Name="scroll" VerticalScrollBarVisibility="Auto" CanContentScroll="True" VerticalAlignment="Top">
             <TextBlock x:Name="txtChatLog" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" VerticalAlignment="Top" Margin="10">
-                    Welcome!
             </TextBlock>
         </ScrollViewer>
         <TextBox x:Name="tbxChat" Height="23" TextWrapping="Wrap" VerticalAlignment="Bottom" KeyUp="tbxChat_KeyUp" Grid.Row="1"/>

@@ -1,4 +1,6 @@
-﻿using Luaan.Yggmire.SharpClient.Pages;
+﻿using Luaan.Yggmire.OrleansInterfaces;
+using Luaan.Yggmire.OrleansInterfaces.Chat;
+using Luaan.Yggmire.SharpClient.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +40,7 @@ namespace Luaan.Yggmire.SharpClient.Controls
         {
             InitializeComponent();
 
-            txtChatLog.ContentEnd.InsertLineBreak();
+            //txtChatLog.ContentEnd.InsertLineBreak();
             txtChatLog.ContentEnd.InsertLineBreak();
         }
         public void AppendLine(string text)
@@ -48,15 +50,52 @@ namespace Luaan.Yggmire.SharpClient.Controls
             scroll.ScrollToBottom();
         }
 
-        private void tbxChat_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        public class ChatObserver : IChatObserver
+        {
+            ChatWindow chat;
+
+            public ChatObserver(ChatWindow chat)
+            {
+                this.chat = chat;
+            }
+
+            public void UpdateChat(string name, string message)
+            {
+                chat.Dispatcher.Invoke(() => { chat.AppendLine(name + "> " + message); });
+            }
+        }
+
+        ChatObserver observer;
+        IChatObserver observerReference;
+
+        public async Task Init(ISessionGrain session)
+        {
+            observer = new ChatObserver(this);
+            observerReference = await ChatObserverFactory.CreateObjectReference(observer);
+
+            try
+            {
+                await session.SubscribeForChat(0, observerReference);
+            }
+            catch (AggregateException ae)
+            {
+                ae = ae.Flatten();
+
+                ae.Handle((ex) => { AppendLine("Error: " + ex.Message); return true; });
+
+                return;
+            }
+
+            AppendLine("Welcome!");
+        }
+
+        private async void tbxChat_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.Enter)
             {
                 if (!string.IsNullOrEmpty(tbxChat.Text))
                 {
-                    AppendLine(tbxChat.Text);
-
-                    // Main.Game.Network.SendChat(tbxChat.Text);
+                    await Main.Game.Session.SendChatMessage(0, tbxChat.Text);
                     tbxChat.Text = string.Empty;
                 }
 

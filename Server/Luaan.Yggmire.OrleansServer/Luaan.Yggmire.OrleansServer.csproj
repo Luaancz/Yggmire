@@ -49,8 +49,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountGrain.cs" />
-    <Compile Include="PlayerGrain.cs" />
+    <Compile Include="Account\AccountGrain.cs" />
+    <Compile Include="Account\PlayerGrain.cs" />
+    <Compile Include="Chat\ChatGrain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionGrain.cs" />
   </ItemGroup>
@@ -72,6 +73,9 @@
     <None Include="D:\Microsoft Codename Orleans SDK v0.9\SDK\LocalSilo\OrleansConfiguration.xml">
       <Link>OrleansConfiguration.xml</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Actors\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -40,7 +40,7 @@ namespace Luaan.Yggmire.SharpClient.Pages
             {
                 if (!OrleansClient.IsInitialized)
                 {
-                    OrleansClient.Initialize();
+                    await Task.Run(() => OrleansClient.Initialize());
                 }
 
                 session = SessionGrainFactory.GetGrain(Guid.NewGuid());

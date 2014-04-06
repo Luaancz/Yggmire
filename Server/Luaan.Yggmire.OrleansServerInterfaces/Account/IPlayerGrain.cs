@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Orleans;
 
-namespace Luaan.Yggmire.OrleansServerInterfaces
+namespace Luaan.Yggmire.OrleansServerInterfaces.Account
 {
     public interface IPlayerGrain : IGrain
     {

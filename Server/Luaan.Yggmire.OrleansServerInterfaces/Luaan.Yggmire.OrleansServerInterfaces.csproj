@@ -43,8 +43,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAccountGrain.cs" />
-    <Compile Include="IPlayerGrain.cs" />
+    <Compile Include="Account\IAccountGrain.cs" />
+    <Compile Include="Chat\IChatGrain.cs" />
+    <Compile Include="Account\IPlayerGrain.cs" />
     <Compile Include="Properties\orleans.codegen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -53,6 +54,9 @@
       <Project>{8477394a-76a5-4698-a929-a3874d92c910}</Project>
       <Name>Luaan.Yggmire.OrleansInterfaces</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Actors\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

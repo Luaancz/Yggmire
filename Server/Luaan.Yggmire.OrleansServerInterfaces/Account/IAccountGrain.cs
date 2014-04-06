@@ -8,7 +8,7 @@ using Orleans;
 using Luaan.Yggmire.OrleansInterfaces;
 using Luaan.Yggmire.OrleansInterfaces.Account;
 
-namespace Luaan.Yggmire.OrleansServerInterfaces
+namespace Luaan.Yggmire.OrleansServerInterfaces.Account
 {
     /// <summary>
     /// Orleans grain communication interface IAccountGrain
@@ -16,6 +16,8 @@ namespace Luaan.Yggmire.OrleansServerInterfaces
     [ExtendedPrimaryKey]
     public interface IAccountGrain : Orleans.IGrain
     {
+        Task<string> Name { get; }
+
         Task CaptureSession(ISessionGrain session);
         Task<AccountInformation> GetState();
 

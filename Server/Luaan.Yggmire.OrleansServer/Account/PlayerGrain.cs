@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using Luaan.Yggmire.OrleansInterfaces;
 using Luaan.Yggmire.OrleansServerInterfaces;
 using Orleans;
+using Luaan.Yggmire.OrleansServerInterfaces.Account;
 
-namespace Luaan.Yggmire.OrleansServer
+namespace Luaan.Yggmire.OrleansServer.Account
 {
     public class PlayerGrain : GrainBase<IPlayerGrainState>, IPlayerGrain
     {
