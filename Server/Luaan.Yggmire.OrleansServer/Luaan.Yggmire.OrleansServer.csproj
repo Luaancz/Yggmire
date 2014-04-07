@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Version;Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -12,6 +12,7 @@
     <AssemblyName>Luaan.Yggmire.OrleansServer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <MSBuildCommunityTasksPath>$(SolutionDir)\Build</MSBuildCommunityTasksPath>
   </PropertyGroup>
   <PropertyGroup>
     <StartAction>Program</StartAction>
@@ -51,9 +52,9 @@
   <ItemGroup>
     <Compile Include="Account\AccountGrain.cs" />
     <Compile Include="Account\PlayerGrain.cs" />
+    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Chat\ChatGrain.cs" />
     <Compile Include="Monitoring\MonitoringGrain.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionGrain.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,9 +75,11 @@
     <None Include="D:\Microsoft Codename Orleans SDK v0.9\SDK\LocalSilo\OrleansConfiguration.xml">
       <Link>OrleansConfiguration.xml</Link>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Actors\" />
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
@@ -99,8 +102,21 @@
       )
     </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="$(SolutionDir)\Build\MSBuild.Community.Tasks.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>-->
+  <PropertyGroup>
+    <Major>0</Major>
+    <Minor>1</Minor>
+    <Build>0</Build>
+    <Revision>0</Revision>
+  </PropertyGroup>
+  <Target Name="Version">
+    <GitVersion LocalPath="$(MSBuildProjectDirectory)">
+      <Output TaskParameter="CommitHash" PropertyName="Revision" />
+    </GitVersion>
+    <AssemblyInfo AssemblyInformationalVersion="$(Major).$(Minor).$(Build).$(Revision)" AssemblyVersion="$(Major).$(Minor).$(Build)" AssemblyFileVersion="$(Major).$(Minor).$(Build)" AssemblyTitle="Yggmire Server Grains" AssemblyProduct="Yggmire Engine" AssemblyCopyright="Copyright © Luaan 2014" AssemblyCompany="Jiří Borkovec (Luaan)" CodeLanguage="CS" ComVisible="False" />
+  </Target>
 </Project>

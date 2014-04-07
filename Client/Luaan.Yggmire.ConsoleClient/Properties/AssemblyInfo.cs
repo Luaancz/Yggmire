@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Luaan.Yggmire.ConsoleClient")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("NCR Corporation")]
+[assembly: AssemblyCompany("Jiří Borkovec (Luaan)")]
 [assembly: AssemblyProduct("Luaan.Yggmire.ConsoleClient")]
-[assembly: AssemblyCopyright("Copyright © NCR Corporation 2014")]
+[assembly: AssemblyCopyright("Copyright © Luaan 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

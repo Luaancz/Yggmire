@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Luaan.Yggmire.OrleansServerInterfaces.Monitoring;
 using Orleans;
+using System.Reflection;
 
 namespace Luaan.Yggmire.OrleansServer.Monitoring
 {
@@ -12,7 +13,10 @@ namespace Luaan.Yggmire.OrleansServer.Monitoring
     {
         Task<ServerStatusInfo> IMonitoringGrain.GetStatus()
         {
-            return Task.FromResult(new ServerStatusInfo());
+            var status = new ServerStatusInfo();
+            status.Revision = typeof(MonitoringGrain).Assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute)).OfType<AssemblyInformationalVersionAttribute>().First().InformationalVersion;
+
+            return Task.FromResult(status);
         }
     }
 }
