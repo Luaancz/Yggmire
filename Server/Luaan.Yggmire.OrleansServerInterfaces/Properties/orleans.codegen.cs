@@ -612,6 +612,222 @@ GrainFactoryBase.CheckGrainObserverParamInternal(observer);
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+namespace Luaan.Yggmire.OrleansServerInterfaces.Monitoring
+{
+    using System;
+    using System.Net;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.IO;
+    using System.Collections.Generic;
+    using Orleans;
+    using System.Reflection;
+    using Orleans.Serialization;
+    using Luaan.Yggmire.OrleansServerInterfaces.Monitoring;
+    
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    public class MonitoringGrainFactory
+    {
+        
+
+                        public static IMonitoringGrain GetGrain(long primaryKey)
+                        {
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IMonitoringGrain), -230746215, primaryKey));
+                        }
+
+                        public static IMonitoringGrain GetGrain(long primaryKey, string grainClassNamePrefix)
+                        {
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IMonitoringGrain), -230746215, primaryKey, grainClassNamePrefix));
+                        }
+
+                        public static IMonitoringGrain GetGrain(Guid primaryKey)
+                        {
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IMonitoringGrain), -230746215, primaryKey));
+                        }
+
+                        public static IMonitoringGrain GetGrain(Guid primaryKey, string grainClassNamePrefix)
+                        {
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IMonitoringGrain), -230746215, primaryKey, grainClassNamePrefix));
+                        }
+
+            public static IMonitoringGrain Cast(IAddressable grainRef)
+            {
+                
+                return MonitoringGrainReference.Cast(grainRef);
+            }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+        [System.SerializableAttribute()]
+        [Orleans.GrainReferenceAttribute("Luaan.Yggmire.OrleansServerInterfaces.Monitoring.IMonitoringGrain")]
+        internal class MonitoringGrainReference : Orleans.GrainReference, IMonitoringGrain, Orleans.IAddressable
+        {
+            
+
+            public static IMonitoringGrain Cast(IAddressable grainRef)
+            {
+                
+                return (IMonitoringGrain) GrainReference.CastInternal(typeof(IMonitoringGrain), (GrainReference gr) => { return new MonitoringGrainReference(gr);}, grainRef, -230746215);
+            }
+
+                protected override int InterfaceId { get { return -230746215; } }
+
+                public override bool IsCompatible(int interfaceId) { return interfaceId == this.InterfaceId; }
+
+                protected override string InterfaceName { get { return "Luaan.Yggmire.OrleansServerInterfaces.Monitoring.IMonitoringGrain"; } }
+
+                protected override string GetMethodName(int interfaceId, int methodId) { return MonitoringGrainMethodInvoker.GetMethodName(interfaceId, methodId); }
+            
+            protected internal MonitoringGrainReference(GrainReference reference) : 
+                    base(reference)
+            {
+            }
+            
+            [Orleans.CopierMethodAttribute()]
+            public static object _Copier(object original)
+            {
+                MonitoringGrainReference input = ((MonitoringGrainReference)(original));
+                return ((MonitoringGrainReference)(GrainReference.CopyGrainReference(input)));
+            }
+            
+            [Orleans.SerializerMethodAttribute()]
+            public static void _Serializer(object original, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
+            {
+                MonitoringGrainReference input = ((MonitoringGrainReference)(original));
+                GrainReference.SerializeGrainReference(input, stream, expected);
+            }
+            
+            [Orleans.DeserializerMethodAttribute()]
+            public static object _Deserializer(System.Type expected, Orleans.Serialization.BinaryTokenStreamReader stream)
+            {
+                return MonitoringGrainReference.Cast(((Orleans.GrainReference)(GrainReference.DeserializeGrainReference(expected, stream))));
+            }
+            
+            public System.Threading.Tasks.Task<Luaan.Yggmire.OrleansServerInterfaces.Monitoring.ServerStatusInfo> GetStatus()
+            {
+
+                return base.InvokeMethodAsync<Luaan.Yggmire.OrleansServerInterfaces.Monitoring.ServerStatusInfo>(-1251605435, new object[] {}, TimeSpan.Zero );
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    [Orleans.MethodInvokerAttribute("Luaan.Yggmire.OrleansServerInterfaces.Monitoring.IMonitoringGrain", -230746215)]
+    internal class MonitoringGrainMethodInvoker : IGrainMethodInvoker
+    {
+        
+        public int InterfaceId
+        {
+            get
+            {
+                return -230746215;
+            }
+        }
+        
+        public async System.Threading.Tasks.Task<Object> Invoke(IAddressable grain, int interfaceId, int methodId, object[] arguments)
+        {
+                if (grain == null) throw new System.ArgumentNullException("grain");
+                switch (interfaceId)
+                {
+                    case -230746215:  // IMonitoringGrain
+                        switch (methodId)
+                        {
+                            case -1251605435: 
+                                return await ((IMonitoringGrain)grain).GetStatus();
+                            default: 
+                                throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
+                        }
+                    default:
+                        throw new System.InvalidCastException("interfaceId="+interfaceId);
+                }
+        }
+        
+        public static string GetMethodName(int interfaceId, int methodId)
+        {
+
+            switch (interfaceId)
+            {
+                
+                case -230746215:  // IMonitoringGrain
+                    switch (methodId)
+                    {
+                        case -1251605435:
+                            return "GetStatus";
+                    case -606142484:
+                            return "GetProperties";
+                    
+                        default: 
+                            throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
+                    }
+
+                default:
+                    throw new System.InvalidCastException("interfaceId="+interfaceId);
+            }
+        }
+    }
+    
+    [Serializable()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    public class MonitoringGrainProperties
+    {
+        
+
+            public Dictionary<string,object> AsDictionary()
+            {  
+                var retValue = new Dictionary<string,object>();
+                return retValue;
+            }
+    }
+    
+    [Orleans.RegisterSerializerAttribute()]
+    internal class Luaan_Yggmire_OrleansServerInterfaces_Monitoring_ServerStatusInfoSerialization
+    {
+        
+        static Luaan_Yggmire_OrleansServerInterfaces_Monitoring_ServerStatusInfoSerialization()
+        {
+            Register();
+        }
+        
+        public static object DeepCopier(object original)
+        {
+            return original;
+        }
+        
+        public static void Serializer(object untypedInput, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
+        {
+            Luaan.Yggmire.OrleansServerInterfaces.Monitoring.ServerStatusInfo input = ((Luaan.Yggmire.OrleansServerInterfaces.Monitoring.ServerStatusInfo)(untypedInput));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.PlayerCount, stream, typeof(Nullable<Int32>));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.Revision, stream, typeof(String));
+        }
+        
+        public static object Deserializer(System.Type expected, Orleans.Serialization.BinaryTokenStreamReader stream)
+        {
+            Luaan.Yggmire.OrleansServerInterfaces.Monitoring.ServerStatusInfo result = new Luaan.Yggmire.OrleansServerInterfaces.Monitoring.ServerStatusInfo();
+            result.PlayerCount = ((Nullable<Int32>)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(Nullable<Int32>), stream)));
+            result.Revision = ((String)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(String), stream)));
+            return result;
+        }
+        
+        public static void Register()
+        {
+            Orleans.Serialization.SerializationManager.Register(typeof(Luaan.Yggmire.OrleansServerInterfaces.Monitoring.ServerStatusInfo), DeepCopier, Serializer, Deserializer);
+        }
+    }
+}
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//     Runtime Version:4.0.30319.18444
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
 namespace Luaan.Yggmire.OrleansServerInterfacesSerializers
 {
     using System;
