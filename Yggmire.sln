@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.30110.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Luaan.Yggmire.Core", "Core\Luaan.Yggmire.Core\Luaan.Yggmire.Core.csproj", "{FF2C5FAB-70CE-41C3-B424-F0B5F0728E84}"
 EndProject
@@ -34,6 +34,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{582C7D
 		Build.proj = Build.proj
 		.build\MSBuild.Community.Tasks.dll = .build\MSBuild.Community.Tasks.dll
 		.build\MSBuild.Community.Tasks.targets = .build\MSBuild.Community.Tasks.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{97CE1A69-71AE-4A39-BA74-26DE43019FEA}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
 Global
@@ -89,8 +96,5 @@ Global
 		{40C3E829-7FD6-4F54-994F-A01D5337FF1F} = {A9E40A38-84BB-47C6-8DED-CFE9F22FC02C}
 		{187D2879-4772-4A0A-B428-ACB2A6148A38} = {A9E40A38-84BB-47C6-8DED-CFE9F22FC02C}
 		{AC12AE48-B369-488E-8951-AC98310E56F7} = {A9E40A38-84BB-47C6-8DED-CFE9F22FC02C}
-	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal
