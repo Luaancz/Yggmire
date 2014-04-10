@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\AccountGrain.cs" />
-    <Compile Include="Account\PlayerGrain.cs" />
+    <Compile Include="Account\CharacterGrain.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Chat\ChatGrain.cs" />
     <Compile Include="Monitoring\MonitoringGrain.cs" />

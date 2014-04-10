@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Account\IAccountGrain.cs" />
     <Compile Include="Chat\IChatGrain.cs" />
-    <Compile Include="Account\IPlayerGrain.cs" />
+    <Compile Include="Account\ICharacterGrain.cs" />
     <Compile Include="Monitoring\IMonitoringGrain.cs" />
     <Compile Include="Monitoring\ServerStatusInfo.cs" />
     <Compile Include="Properties\orleans.codegen.cs" />

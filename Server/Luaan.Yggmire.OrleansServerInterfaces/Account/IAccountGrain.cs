@@ -22,6 +22,9 @@ namespace Luaan.Yggmire.OrleansServerInterfaces.Account
         Task<AccountInformation> GetState();
 
         Task Create(string password);
+        Task<ICharacterGrain> CreateCharacter();
+        Task<ICharacterGrain> SelectCharacter(string name);
+        Task CompleteCharacter(ICharacterGrain grain, CharacterInformation info);
 
         Task<bool> ValidatePassword(string password);
     }

@@ -139,6 +139,24 @@ namespace Luaan.Yggmire.OrleansServerInterfaces.Account
                 return base.InvokeMethodAsync<object>(-1446207851, new object[] {password}, TimeSpan.Zero );
             }
             
+            public System.Threading.Tasks.Task<Luaan.Yggmire.OrleansServerInterfaces.Account.ICharacterGrain> CreateCharacter()
+            {
+
+                return base.InvokeMethodAsync<Luaan.Yggmire.OrleansServerInterfaces.Account.ICharacterGrain>(757304272, new object[] {}, TimeSpan.Zero );
+            }
+            
+            public System.Threading.Tasks.Task<Luaan.Yggmire.OrleansServerInterfaces.Account.ICharacterGrain> SelectCharacter(string name)
+            {
+
+                return base.InvokeMethodAsync<Luaan.Yggmire.OrleansServerInterfaces.Account.ICharacterGrain>(-404060281, new object[] {name}, TimeSpan.Zero );
+            }
+            
+            public System.Threading.Tasks.Task CompleteCharacter(Luaan.Yggmire.OrleansServerInterfaces.Account.ICharacterGrain grain, Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation info)
+            {
+
+                return base.InvokeMethodAsync<object>(-2047775951, new object[] {grain is GrainBase ? Luaan.Yggmire.OrleansServerInterfaces.Account.CharacterGrainFactory.Cast(grain.AsReference()) : grain, info}, TimeSpan.Zero );
+            }
+            
             public System.Threading.Tasks.Task<bool> ValidatePassword(string password)
             {
 
@@ -179,6 +197,13 @@ namespace Luaan.Yggmire.OrleansServerInterfaces.Account
                             case -1446207851: 
                                 await ((IAccountGrain)grain).Create((String)arguments[0]);
                               return true;
+                            case 757304272: 
+                                return await ((IAccountGrain)grain).CreateCharacter();
+                            case -404060281: 
+                                return await ((IAccountGrain)grain).SelectCharacter((String)arguments[0]);
+                            case -2047775951: 
+                                await ((IAccountGrain)grain).CompleteCharacter((ICharacterGrain)arguments[0], (Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation)arguments[1]);
+                              return true;
                             case 1379941908: 
                                 return await ((IAccountGrain)grain).ValidatePassword((String)arguments[0]);
                             case -606142484: return ((IAccountGrain)grain).GetProperties();
@@ -207,6 +232,12 @@ namespace Luaan.Yggmire.OrleansServerInterfaces.Account
                             return "GetState";
                     case -1446207851:
                             return "Create";
+                    case 757304272:
+                            return "CreateCharacter";
+                    case -404060281:
+                            return "SelectCharacter";
+                    case -2047775951:
+                            return "CompleteCharacter";
                     case 1379941908:
                             return "ValidatePassword";
                     case -606142484:
@@ -254,96 +285,144 @@ static public System.Threading.Tasks.Task<AccountGrainProperties> GetProperties(
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
-    public class PlayerGrainFactory
+    public class CharacterGrainFactory
     {
         
 
-                        public static IPlayerGrain GetGrain(long primaryKey)
+                        public static ICharacterGrain GetGrain(long primaryKey)
                         {
-                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IPlayerGrain), 1768646660, primaryKey));
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(ICharacterGrain), 526290941, primaryKey));
                         }
 
-                        public static IPlayerGrain GetGrain(long primaryKey, string grainClassNamePrefix)
+                        public static ICharacterGrain GetGrain(long primaryKey, string grainClassNamePrefix)
                         {
-                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IPlayerGrain), 1768646660, primaryKey, grainClassNamePrefix));
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(ICharacterGrain), 526290941, primaryKey, grainClassNamePrefix));
                         }
 
-                        public static IPlayerGrain GetGrain(Guid primaryKey)
+                        public static ICharacterGrain GetGrain(Guid primaryKey)
                         {
-                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IPlayerGrain), 1768646660, primaryKey));
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(ICharacterGrain), 526290941, primaryKey));
                         }
 
-                        public static IPlayerGrain GetGrain(Guid primaryKey, string grainClassNamePrefix)
+                        public static ICharacterGrain GetGrain(Guid primaryKey, string grainClassNamePrefix)
                         {
-                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IPlayerGrain), 1768646660, primaryKey, grainClassNamePrefix));
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(ICharacterGrain), 526290941, primaryKey, grainClassNamePrefix));
                         }
 
-            public static IPlayerGrain Cast(IAddressable grainRef)
+            public static ICharacterGrain Cast(IAddressable grainRef)
             {
                 
-                return PlayerGrainReference.Cast(grainRef);
+                return CharacterGrainReference.Cast(grainRef);
             }
         
         [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
         [System.SerializableAttribute()]
-        [Orleans.GrainReferenceAttribute("Luaan.Yggmire.OrleansServerInterfaces.Account.IPlayerGrain")]
-        internal class PlayerGrainReference : Orleans.GrainReference, IPlayerGrain, Orleans.IAddressable
+        [Orleans.GrainReferenceAttribute("Luaan.Yggmire.OrleansServerInterfaces.Account.ICharacterGrain")]
+        internal class CharacterGrainReference : Orleans.GrainReference, ICharacterGrain, Orleans.IAddressable
         {
             
 
-            public static IPlayerGrain Cast(IAddressable grainRef)
+            public static ICharacterGrain Cast(IAddressable grainRef)
             {
                 
-                return (IPlayerGrain) GrainReference.CastInternal(typeof(IPlayerGrain), (GrainReference gr) => { return new PlayerGrainReference(gr);}, grainRef, 1768646660);
+                return (ICharacterGrain) GrainReference.CastInternal(typeof(ICharacterGrain), (GrainReference gr) => { return new CharacterGrainReference(gr);}, grainRef, 526290941);
             }
 
-                protected override int InterfaceId { get { return 1768646660; } }
+                protected override int InterfaceId { get { return 526290941; } }
 
                 public override bool IsCompatible(int interfaceId) { return interfaceId == this.InterfaceId; }
 
-                protected override string InterfaceName { get { return "Luaan.Yggmire.OrleansServerInterfaces.Account.IPlayerGrain"; } }
+                protected override string InterfaceName { get { return "Luaan.Yggmire.OrleansServerInterfaces.Account.ICharacterGrain"; } }
 
-                protected override string GetMethodName(int interfaceId, int methodId) { return PlayerGrainMethodInvoker.GetMethodName(interfaceId, methodId); }
+                protected override string GetMethodName(int interfaceId, int methodId) { return CharacterGrainMethodInvoker.GetMethodName(interfaceId, methodId); }
+
+            public async System.Threading.Tasks.Task<CharacterGrainProperties> GetProperties() 
+            { 
+                return await base.InvokeMethodAsync<CharacterGrainProperties>( -606142484, new object[]{}, TimeSpan.Zero);
+            }
             
-            protected internal PlayerGrainReference(GrainReference reference) : 
+            
+            protected internal CharacterGrainReference(GrainReference reference) : 
                     base(reference)
             {
+            }
+            
+            public System.Threading.Tasks.Task<bool> IsComplete
+            {
+                get
+                {
+
+                return base.InvokeMethodAsync<System.Boolean>(-527922512, new object[] {}, TimeSpan.Zero , options: InvokeMethodOptions.ReadOnly);
+                }
+            }
+            
+            public System.Threading.Tasks.Task<string> Name
+            {
+                get
+                {
+
+                return base.InvokeMethodAsync<System.String>(1096274493, new object[] {}, TimeSpan.Zero , options: InvokeMethodOptions.ReadOnly);
+                }
             }
             
             [Orleans.CopierMethodAttribute()]
             public static object _Copier(object original)
             {
-                PlayerGrainReference input = ((PlayerGrainReference)(original));
-                return ((PlayerGrainReference)(GrainReference.CopyGrainReference(input)));
+                CharacterGrainReference input = ((CharacterGrainReference)(original));
+                return ((CharacterGrainReference)(GrainReference.CopyGrainReference(input)));
             }
             
             [Orleans.SerializerMethodAttribute()]
             public static void _Serializer(object original, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
             {
-                PlayerGrainReference input = ((PlayerGrainReference)(original));
+                CharacterGrainReference input = ((CharacterGrainReference)(original));
                 GrainReference.SerializeGrainReference(input, stream, expected);
             }
             
             [Orleans.DeserializerMethodAttribute()]
             public static object _Deserializer(System.Type expected, Orleans.Serialization.BinaryTokenStreamReader stream)
             {
-                return PlayerGrainReference.Cast(((Orleans.GrainReference)(GrainReference.DeserializeGrainReference(expected, stream))));
+                return CharacterGrainReference.Cast(((Orleans.GrainReference)(GrainReference.DeserializeGrainReference(expected, stream))));
+            }
+            
+            public System.Threading.Tasks.Task BindAccount(Luaan.Yggmire.OrleansServerInterfaces.Account.IAccountGrain account)
+            {
+
+                return base.InvokeMethodAsync<object>(1168592711, new object[] {account is GrainBase ? Luaan.Yggmire.OrleansServerInterfaces.Account.AccountGrainFactory.Cast(account.AsReference()) : account}, TimeSpan.Zero );
+            }
+            
+            public System.Threading.Tasks.Task SetName(string name)
+            {
+
+                return base.InvokeMethodAsync<object>(316304768, new object[] {name}, TimeSpan.Zero );
+            }
+            
+            public System.Threading.Tasks.Task Complete()
+            {
+
+                return base.InvokeMethodAsync<object>(1162765578, new object[] {}, TimeSpan.Zero );
+            }
+            
+            public System.Threading.Tasks.Task<Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation> GetInfo()
+            {
+
+                return base.InvokeMethodAsync<Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation>(-1168913303, new object[] {}, TimeSpan.Zero );
             }
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
-    [Orleans.MethodInvokerAttribute("Luaan.Yggmire.OrleansServerInterfaces.Account.IPlayerGrain", 1768646660)]
-    internal class PlayerGrainMethodInvoker : IGrainMethodInvoker
+    [Orleans.MethodInvokerAttribute("Luaan.Yggmire.OrleansServerInterfaces.Account.ICharacterGrain", 526290941)]
+    internal class CharacterGrainMethodInvoker : IGrainMethodInvoker
     {
         
         public int InterfaceId
         {
             get
             {
-                return 1768646660;
+                return 526290941;
             }
         }
         
@@ -352,10 +431,26 @@ static public System.Threading.Tasks.Task<AccountGrainProperties> GetProperties(
                 if (grain == null) throw new System.ArgumentNullException("grain");
                 switch (interfaceId)
                 {
-                    case 1768646660:  // IPlayerGrain
+                    case 526290941:  // ICharacterGrain
                         switch (methodId)
                         {
-                            default: 
+                            case -527922512: 
+                                return await ((ICharacterGrain)grain).IsComplete;
+                            case 1168592711: 
+                                await ((ICharacterGrain)grain).BindAccount((IAccountGrain)arguments[0]);
+                              return true;
+                            case 1096274493: 
+                                return await ((ICharacterGrain)grain).Name;
+                            case 316304768: 
+                                await ((ICharacterGrain)grain).SetName((String)arguments[0]);
+                              return true;
+                            case 1162765578: 
+                                await ((ICharacterGrain)grain).Complete();
+                              return true;
+                            case -1168913303: 
+                                return await ((ICharacterGrain)grain).GetInfo();
+                            case -606142484: return ((ICharacterGrain)grain).GetProperties();
+                                                        default: 
                                 throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
                         }
                     default:
@@ -369,10 +464,22 @@ static public System.Threading.Tasks.Task<AccountGrainProperties> GetProperties(
             switch (interfaceId)
             {
                 
-                case 1768646660:  // IPlayerGrain
+                case 526290941:  // ICharacterGrain
                     switch (methodId)
                     {
-                        case -606142484:
+                        case -527922512:
+                            return "get_IsComplete";
+                    case 1168592711:
+                            return "BindAccount";
+                    case 1096274493:
+                            return "get_Name";
+                    case 316304768:
+                            return "SetName";
+                    case 1162765578:
+                            return "Complete";
+                    case -1168913303:
+                            return "GetInfo";
+                    case -606142484:
                             return "GetProperties";
                     
                         default: 
@@ -385,16 +492,34 @@ static public System.Threading.Tasks.Task<AccountGrainProperties> GetProperties(
         }
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    [System.SerializableAttribute()]
+    public static class CharacterGrainExtensionMethods
+    {
+        
+static public System.Threading.Tasks.Task<CharacterGrainProperties> GetProperties(this ICharacterGrain interfaceData) 
+            { 
+                CharacterGrainFactory.CharacterGrainReference gref = interfaceData as CharacterGrainFactory.CharacterGrainReference;
+                 return gref.GetProperties();
+            }
+            
+    }
+    
     [Serializable()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
-    public class PlayerGrainProperties
+    public class CharacterGrainProperties
     {
         
 
+            public Boolean IsComplete { get; set; }
+            public String Name { get; set; }
             public Dictionary<string,object> AsDictionary()
             {  
                 var retValue = new Dictionary<string,object>();
+                retValue["IsComplete"] = IsComplete;
+                retValue["Name"] = Name;
                 return retValue;
             }
     }
@@ -836,6 +961,7 @@ namespace Luaan.Yggmire.OrleansServerInterfacesSerializers
     using Orleans.Serialization;
     using Luaan.Yggmire.OrleansInterfaces.Account;
     using System.Collections;
+    using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
     
     
@@ -853,6 +979,7 @@ namespace Luaan.Yggmire.OrleansServerInterfacesSerializers
             Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation input = ((Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation)(original));
             Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation result = new Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation();
             Orleans.Serialization.SerializationContext.Current.RecordObject(original, result);
+            result.Characters = ((Dictionary<Guid,CharacterInformation>)(Orleans.Serialization.SerializationManager.DeepCopyInner(input.Characters)));
             result.Name = input.Name;
             return result;
         }
@@ -860,12 +987,14 @@ namespace Luaan.Yggmire.OrleansServerInterfacesSerializers
         public static void Serializer(object untypedInput, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
         {
             Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation input = ((Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation)(untypedInput));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.Characters, stream, typeof(Dictionary<Guid,CharacterInformation>));
             Orleans.Serialization.SerializationManager.SerializeInner(input.Name, stream, typeof(String));
         }
         
         public static object Deserializer(System.Type expected, Orleans.Serialization.BinaryTokenStreamReader stream)
         {
             Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation result = new Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation();
+            result.Characters = ((Dictionary<Guid,CharacterInformation>)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(Dictionary<Guid,CharacterInformation>), stream)));
             result.Name = ((String)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(String), stream)));
             return result;
         }
@@ -873,6 +1002,41 @@ namespace Luaan.Yggmire.OrleansServerInterfacesSerializers
         public static void Register()
         {
             Orleans.Serialization.SerializationManager.Register(typeof(Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation), DeepCopier, Serializer, Deserializer);
+        }
+    }
+    
+    [Orleans.RegisterSerializerAttribute()]
+    internal class Luaan_Yggmire_OrleansInterfaces_Account_CharacterInformationSerialization
+    {
+        
+        static Luaan_Yggmire_OrleansInterfaces_Account_CharacterInformationSerialization()
+        {
+            Register();
+        }
+        
+        public static object DeepCopier(object original)
+        {
+            return original;
+        }
+        
+        public static void Serializer(object untypedInput, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
+        {
+            Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation input = ((Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation)(untypedInput));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.Id, stream, typeof(Guid));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.Name, stream, typeof(String));
+        }
+        
+        public static object Deserializer(System.Type expected, Orleans.Serialization.BinaryTokenStreamReader stream)
+        {
+            Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation result = new Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation();
+            result.Id = ((Guid)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(Guid), stream)));
+            result.Name = ((String)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(String), stream)));
+            return result;
+        }
+        
+        public static void Register()
+        {
+            Orleans.Serialization.SerializationManager.Register(typeof(Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation), DeepCopier, Serializer, Deserializer);
         }
     }
 }

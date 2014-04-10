@@ -264,12 +264,12 @@ namespace Luaan.Yggmire.OrleansInterfaces
             {
             }
             
-            public System.Threading.Tasks.Task<string> PlayerName
+            public System.Threading.Tasks.Task<string> CharacterName
             {
                 get
                 {
 
-                return base.InvokeMethodAsync<System.String>(-234171525, new object[] {}, TimeSpan.Zero , options: InvokeMethodOptions.ReadOnly);
+                return base.InvokeMethodAsync<System.String>(211902227, new object[] {}, TimeSpan.Zero , options: InvokeMethodOptions.ReadOnly);
                 }
             }
             
@@ -309,6 +309,24 @@ namespace Luaan.Yggmire.OrleansInterfaces
             {
 
                 return base.InvokeMethodAsync<Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation>(2013465976, new object[] {name, password}, TimeSpan.Zero );
+            }
+            
+            public System.Threading.Tasks.Task<Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation> CreateCharacter()
+            {
+
+                return base.InvokeMethodAsync<Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation>(757304272, new object[] {}, TimeSpan.Zero );
+            }
+            
+            public System.Threading.Tasks.Task<Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation> SelectCharacter(string name)
+            {
+
+                return base.InvokeMethodAsync<Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation>(-404060281, new object[] {name}, TimeSpan.Zero );
+            }
+            
+            public System.Threading.Tasks.Task Disconnect()
+            {
+
+                return base.InvokeMethodAsync<object>(-1836674149, new object[] {}, TimeSpan.Zero );
             }
             
             public System.Threading.Tasks.Task SubscribeForChat(int channel, Luaan.Yggmire.OrleansInterfaces.Chat.IChatObserver observer)
@@ -355,14 +373,21 @@ GrainFactoryBase.CheckGrainObserverParamInternal(observer);
                     case -705986448:  // ISessionGrain
                         switch (methodId)
                         {
-                            case -234171525: 
-                                return await ((ISessionGrain)grain).PlayerName;
+                            case 211902227: 
+                                return await ((ISessionGrain)grain).CharacterName;
                             case 1891548347: 
                                 return await ((ISessionGrain)grain).Authorize((String)arguments[0], (String)arguments[1]);
                             case 1960002325: 
                                 return await ((ISessionGrain)grain).GetAccount();
                             case 2013465976: 
                                 return await ((ISessionGrain)grain).CreateAccount((String)arguments[0], (String)arguments[1]);
+                            case 757304272: 
+                                return await ((ISessionGrain)grain).CreateCharacter();
+                            case -404060281: 
+                                return await ((ISessionGrain)grain).SelectCharacter((String)arguments[0]);
+                            case -1836674149: 
+                                await ((ISessionGrain)grain).Disconnect();
+                              return true;
                             case -950310688: 
                                 await ((ISessionGrain)grain).SubscribeForChat((Int32)arguments[0], (Luaan.Yggmire.OrleansInterfaces.Chat.IChatObserver)arguments[1]);
                               return true;
@@ -390,14 +415,20 @@ GrainFactoryBase.CheckGrainObserverParamInternal(observer);
                 case -705986448:  // ISessionGrain
                     switch (methodId)
                     {
-                        case -234171525:
-                            return "get_PlayerName";
+                        case 211902227:
+                            return "get_CharacterName";
                     case 1891548347:
                             return "Authorize";
                     case 1960002325:
                             return "GetAccount";
                     case 2013465976:
                             return "CreateAccount";
+                    case 757304272:
+                            return "CreateCharacter";
+                    case -404060281:
+                            return "SelectCharacter";
+                    case -1836674149:
+                            return "Disconnect";
                     case -950310688:
                             return "SubscribeForChat";
                     case -1965559293:
@@ -438,11 +469,11 @@ static public System.Threading.Tasks.Task<SessionGrainProperties> GetProperties(
     {
         
 
-            public String PlayerName { get; set; }
+            public String CharacterName { get; set; }
             public Dictionary<string,object> AsDictionary()
             {  
                 var retValue = new Dictionary<string,object>();
-                retValue["PlayerName"] = PlayerName;
+                retValue["CharacterName"] = CharacterName;
                 return retValue;
             }
     }
@@ -465,6 +496,7 @@ namespace Luaan.Yggmire.OrleansInterfacesSerializers
     using Orleans.Serialization;
     using Luaan.Yggmire.OrleansInterfaces.Account;
     using System.Collections;
+    using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
     
     
@@ -482,6 +514,7 @@ namespace Luaan.Yggmire.OrleansInterfacesSerializers
             Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation input = ((Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation)(original));
             Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation result = new Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation();
             Orleans.Serialization.SerializationContext.Current.RecordObject(original, result);
+            result.Characters = ((Dictionary<Guid,CharacterInformation>)(Orleans.Serialization.SerializationManager.DeepCopyInner(input.Characters)));
             result.Name = input.Name;
             return result;
         }
@@ -489,12 +522,14 @@ namespace Luaan.Yggmire.OrleansInterfacesSerializers
         public static void Serializer(object untypedInput, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
         {
             Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation input = ((Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation)(untypedInput));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.Characters, stream, typeof(Dictionary<Guid,CharacterInformation>));
             Orleans.Serialization.SerializationManager.SerializeInner(input.Name, stream, typeof(String));
         }
         
         public static object Deserializer(System.Type expected, Orleans.Serialization.BinaryTokenStreamReader stream)
         {
             Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation result = new Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation();
+            result.Characters = ((Dictionary<Guid,CharacterInformation>)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(Dictionary<Guid,CharacterInformation>), stream)));
             result.Name = ((String)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(String), stream)));
             return result;
         }
@@ -502,6 +537,41 @@ namespace Luaan.Yggmire.OrleansInterfacesSerializers
         public static void Register()
         {
             Orleans.Serialization.SerializationManager.Register(typeof(Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation), DeepCopier, Serializer, Deserializer);
+        }
+    }
+    
+    [Orleans.RegisterSerializerAttribute()]
+    internal class Luaan_Yggmire_OrleansInterfaces_Account_CharacterInformationSerialization
+    {
+        
+        static Luaan_Yggmire_OrleansInterfaces_Account_CharacterInformationSerialization()
+        {
+            Register();
+        }
+        
+        public static object DeepCopier(object original)
+        {
+            return original;
+        }
+        
+        public static void Serializer(object untypedInput, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
+        {
+            Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation input = ((Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation)(untypedInput));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.Id, stream, typeof(Guid));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.Name, stream, typeof(String));
+        }
+        
+        public static object Deserializer(System.Type expected, Orleans.Serialization.BinaryTokenStreamReader stream)
+        {
+            Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation result = new Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation();
+            result.Id = ((Guid)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(Guid), stream)));
+            result.Name = ((String)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(String), stream)));
+            return result;
+        }
+        
+        public static void Register()
+        {
+            Orleans.Serialization.SerializationManager.Register(typeof(Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation), DeepCopier, Serializer, Deserializer);
         }
     }
 }

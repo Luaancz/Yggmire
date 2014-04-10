@@ -20,6 +20,17 @@ namespace Luaan.Yggmire.OrleansServer.Account
     {
         ISessionGrain currentSession;
 
+        public override Task ActivateAsync()
+        {
+            if (State.Id == Guid.Empty)
+            {
+                State.Id = Guid.NewGuid();
+                State.Characters = new List<CharacterInformation>();
+            }
+
+            return base.ActivateAsync();
+        }
+
         Task<string> IAccountGrain.Name
         {
             get
@@ -57,6 +68,34 @@ namespace Luaan.Yggmire.OrleansServer.Account
             return State.WriteStateAsync();
         }
 
+        async Task<ICharacterGrain> IAccountGrain.CreateCharacter()
+        {
+            var grain = CharacterGrainFactory.GetGrain(Guid.NewGuid());
+            
+            await grain.BindAccount(this);
+
+            return grain;
+        }
+
+        async Task<ICharacterGrain> IAccountGrain.SelectCharacter(string name)
+        {
+            var character = State.Characters.FirstOrDefault(i => i.Name == name);
+
+            if (character == null)
+                throw new InvalidOperationException("No character with such name.");
+
+            var grain = CharacterGrainFactory.GetGrain(character.Id);
+
+            return grain;
+        }
+
+        Task IAccountGrain.CompleteCharacter(ICharacterGrain grain, CharacterInformation info)
+        {
+            State.Characters.Add(info);
+
+            return State.WriteStateAsync();
+        }
+
         Task<AccountInformation> IAccountGrain.GetState()
         {
             return Task.FromResult(new AccountInformation { Name = State.Name });
@@ -70,6 +109,8 @@ namespace Luaan.Yggmire.OrleansServer.Account
     
     public interface IAccountGrainState : IGrainState
     {
+        Guid Id { get; set; }
+
         string Name { get; set; }
         // Secret! :) Obviously, we will not be storing the password in plain text in production.
         string Password { get; set; }
@@ -79,6 +120,6 @@ namespace Luaan.Yggmire.OrleansServer.Account
         DateTimeOffset CreatedOn { get; set; }
         DateTimeOffset LastLogin { get; set; }
 
-        List<Guid> Players { get; set; }
+        List<CharacterInformation> Characters { get; set; }
     }
 }

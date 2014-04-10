@@ -35,6 +35,7 @@ namespace Luaan.Yggmire.SharpClient.Pages
             IsEnabled = false;
 
             ISessionGrain session;
+            AccountInformation account;
 
             try
             {
@@ -45,7 +46,7 @@ namespace Luaan.Yggmire.SharpClient.Pages
 
                 session = SessionGrainFactory.GetGrain(Guid.NewGuid());
 
-                await action(session);
+                account = await action(session);
             }
             catch (AggregateException ae)
             {
@@ -68,8 +69,10 @@ namespace Luaan.Yggmire.SharpClient.Pages
                 IsEnabled = true;
             }
 
-            var gamePage = new GamePage(session);
-            NavigationService.Navigate(gamePage);
+            (MainWindow.GetWindow(this) as MainWindow).Session = session;
+
+            var page = new AccountPage(session, account);
+            NavigationService.Navigate(page);
         }
         
         private async void btnLogin_Click(object sender, System.Windows.RoutedEventArgs e)

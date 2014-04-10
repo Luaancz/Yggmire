@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\AccountInformation.cs" />
+    <Compile Include="Account\CharacterInformation.cs" />
     <Compile Include="Chat\IChatObserver.cs" />
     <Compile Include="ISessionGrain.cs" />
     <Compile Include="Properties\orleans.codegen.cs" />

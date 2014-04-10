@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Orleans;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,10 +8,10 @@ using System.Threading.Tasks;
 namespace Luaan.Yggmire.OrleansInterfaces.Account
 {
     [Serializable]
-    public class AccountInformation
+    [Immutable]
+    public class CharacterInformation
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
-
-        public Dictionary<Guid, CharacterInformation> Characters { get; set; }
     }
 }

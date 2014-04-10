@@ -19,7 +19,24 @@ namespace Luaan.Yggmire.OrleansServer
     public class SessionGrain : Orleans.GrainBase, ISessionGrain
     {
         IAccountGrain loggedAccount;
+        ICharacterGrain activeCharacter;
+
+        bool isCharacterComplete;
         string name;
+
+        void CheckLogged()
+        {
+            if (loggedAccount == null)
+                throw new UnauthorizedAccessException("Not logged in or session expired.");
+        }
+
+        void CheckCharacter()
+        {
+            CheckLogged();
+
+            if (activeCharacter == null)
+                throw new UnauthorizedAccessException("No character selected.");
+        }
 
         public override Task ActivateAsync()
         {
@@ -98,27 +115,57 @@ namespace Luaan.Yggmire.OrleansServer
             return await CompleteLogin(account);
         }
 
+        async Task<CharacterInformation> ISessionGrain.CreateCharacter()
+        {
+            CheckLogged();
+
+            activeCharacter = await loggedAccount.CreateCharacter();
+            isCharacterComplete = false;
+
+            await activeCharacter.SetName(name);
+            await activeCharacter.Complete();
+            isCharacterComplete = true;
+
+            return await activeCharacter.GetInfo();
+        }
+
+        async Task<CharacterInformation> ISessionGrain.SelectCharacter(string name)
+        {
+            CheckLogged();
+
+            activeCharacter = await loggedAccount.SelectCharacter(name);
+            isCharacterComplete = true;
+
+            var info = await activeCharacter.GetInfo();
+            name = info.Name;
+
+            return info;
+        }
+
         Task<AccountInformation> ISessionGrain.GetAccount()
         {
-            if (loggedAccount == null)
-                throw new UnauthorizedAccessException("Not logged in or session expired.");
+            CheckLogged();
 
             return loggedAccount.GetState();
         }
 
-        Task<string> ISessionGrain.PlayerName
+        Task<string> ISessionGrain.CharacterName
         {
             get
             {
-                if (loggedAccount == null)
-                    throw new UnauthorizedAccessException("Not logged in or session expired.");
+                CheckCharacter();
 
-                return loggedAccount.Name;
+                return Task.FromResult(name);
             }
         }
 
         async Task ISessionGrain.SendChatMessage(int channel, string message)
         {
+            CheckCharacter();
+
+            if (!isCharacterComplete)
+                throw new InvalidOperationException("Character not yet ready for chat!");
+
             var chat = ChatGrainFactory.GetGrain(channel);
 
             await chat.SendMessage(name, message);
@@ -128,6 +175,11 @@ namespace Luaan.Yggmire.OrleansServer
 
         Task ISessionGrain.SubscribeForChat(int channel, IChatObserver observer)
         {
+            CheckCharacter();
+
+            if (!isCharacterComplete)
+                throw new InvalidOperationException("Character not yet ready for chat!");
+
             var chat = ChatGrainFactory.GetGrain(channel);
 
             if (mySubscriptions.Any(i => i.Item1 == channel))
@@ -139,12 +191,28 @@ namespace Luaan.Yggmire.OrleansServer
 
         Task ISessionGrain.UnsubscribeFromChat(int channel, IChatObserver observer)
         {
+            CheckCharacter();
+
+            if (!isCharacterComplete)
+                throw new InvalidOperationException("Character not yet ready for chat!");
+
             var chat = ChatGrainFactory.GetGrain(channel);
 
             if (mySubscriptions.RemoveAll(i => i.Item1 == channel) == 0)
                 throw new InvalidOperationException("Not subscribed to channel " + channel);
 
             return chat.Unsubscribe(name, observer);
+        }
+
+        /// <summary>
+        /// Disconnects from the session.
+        /// </summary>
+        /// <returns></returns>
+        Task ISessionGrain.Disconnect()
+        {
+            DeactivateOnIdle();
+
+            return TaskDone.Done;
         }
     }
 }

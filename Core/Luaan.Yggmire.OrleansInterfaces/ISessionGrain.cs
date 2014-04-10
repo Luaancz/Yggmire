@@ -12,12 +12,16 @@ namespace Luaan.Yggmire.OrleansInterfaces
     /// </summary>
     public interface ISessionGrain : Orleans.IGrain
     {
-        Task<string> PlayerName { get; }
+        Task<string> CharacterName { get; }
 
         Task<AccountInformation> Authorize(string name, string password);
         Task<AccountInformation> GetAccount();
 
         Task<AccountInformation> CreateAccount(string name, string password);
+        Task<CharacterInformation> CreateCharacter();
+        Task<CharacterInformation> SelectCharacter(string name);
+
+        Task Disconnect();
 
         Task SubscribeForChat(int channel, IChatObserver observer);
         Task UnsubscribeFromChat(int channel, IChatObserver observer);
