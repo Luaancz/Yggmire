@@ -22,7 +22,13 @@ namespace Luaan.Yggmire.SharpClient
         async void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (Session != null)
-                await Session.Disconnect();
+            {
+                try
+                {
+                    await Session.Disconnect();
+                }
+                catch { }
+            }
         }
     }
 }

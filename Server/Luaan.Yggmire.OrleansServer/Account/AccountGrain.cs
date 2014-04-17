@@ -39,15 +39,19 @@ namespace Luaan.Yggmire.OrleansServer.Account
             }
         }
         
-        Task IAccountGrain.CaptureSession(ISessionGrain session)
+        async Task IAccountGrain.CaptureSession(ISessionGrain session)
         {
             if (currentSession != null && session != null)
-                throw new InvalidOperationException("The account is already logged in.");
+            {
+                await currentSession.Disconnect();
+                
+                throw new InvalidOperationException("The account is already logged in. Try again.");
+            }
 
             currentSession = session;
 
             State.LastLogin = DateTimeOffset.Now;
-            return State.WriteStateAsync();
+            await State.WriteStateAsync();
         }
 
         Task IAccountGrain.Create(string password)
@@ -63,6 +67,7 @@ namespace Luaan.Yggmire.OrleansServer.Account
 
             State.Name = name;
             State.Password = password;
+            State.Characters = new List<CharacterInformation>();
             State.CreatedOn = DateTimeOffset.Now;
 
             return State.WriteStateAsync();
@@ -77,7 +82,7 @@ namespace Luaan.Yggmire.OrleansServer.Account
             return grain;
         }
 
-        async Task<ICharacterGrain> IAccountGrain.SelectCharacter(string name)
+        Task<ICharacterGrain> IAccountGrain.SelectCharacter(string name)
         {
             var character = State.Characters.FirstOrDefault(i => i.Name == name);
 
@@ -86,7 +91,7 @@ namespace Luaan.Yggmire.OrleansServer.Account
 
             var grain = CharacterGrainFactory.GetGrain(character.Id);
 
-            return grain;
+            return Task.FromResult(grain);
         }
 
         Task IAccountGrain.CompleteCharacter(ICharacterGrain grain, CharacterInformation info)
@@ -98,7 +103,7 @@ namespace Luaan.Yggmire.OrleansServer.Account
 
         Task<AccountInformation> IAccountGrain.GetState()
         {
-            return Task.FromResult(new AccountInformation { Name = State.Name });
+            return Task.FromResult(new AccountInformation { Name = State.Name, Characters = State.Characters });
         }
 
         Task<bool> IAccountGrain.ValidatePassword(string password)

@@ -30,10 +30,9 @@ namespace Luaan.Yggmire.SharpClient.Pages
         public AccountPage(ISessionGrain session, AccountInformation account)
         {
             this.session = session;
+            this.account = account;
 
             InitializeComponent();
-
-
         }
 
         private async void btnCreateCharacter_Click(object sender, RoutedEventArgs e)

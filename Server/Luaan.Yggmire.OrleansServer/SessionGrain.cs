@@ -24,6 +24,8 @@ namespace Luaan.Yggmire.OrleansServer
         bool isCharacterComplete;
         string name;
 
+        ObserverSubscriptionManager<ISessionObserver> observers;
+
         void CheckLogged()
         {
             if (loggedAccount == null)
@@ -40,6 +42,7 @@ namespace Luaan.Yggmire.OrleansServer
 
         public override Task ActivateAsync()
         {
+            observers = new ObserverSubscriptionManager<ISessionObserver>();
             mySubscriptions = new List<Tuple<int, IChatObserver>>();
 
             return base.ActivateAsync();
@@ -122,9 +125,11 @@ namespace Luaan.Yggmire.OrleansServer
             activeCharacter = await loggedAccount.CreateCharacter();
             isCharacterComplete = false;
 
+            /*
             await activeCharacter.SetName(name);
             await activeCharacter.Complete();
             isCharacterComplete = true;
+            */
 
             return await activeCharacter.GetInfo();
         }
@@ -210,7 +215,58 @@ namespace Luaan.Yggmire.OrleansServer
         /// <returns></returns>
         Task ISessionGrain.Disconnect()
         {
+            observers.Notify(o => o.Disconnected());
+
             DeactivateOnIdle();
+
+            return TaskDone.Done;
+        }
+
+        int responseId = 1;
+        Dictionary<int, Func<string, Task>> expectedResponses = new Dictionary<int,Func<string, Task>>();
+
+        async Task ISessionGrain.Respond(int responseId, string response)
+        {
+            if (!expectedResponses.ContainsKey(responseId))
+                throw new InvalidOperationException("Already responded.");
+
+            await expectedResponses[responseId](response);
+
+            // If there's no exception, everything went fine.
+            expectedResponses.Remove(responseId);
+        }
+
+        Task ISessionGrain.RegisterObserver(ISessionObserver observer)
+        {
+            observers.Subscribe(observer);
+
+            // This is a good time to handle enter-game notifications. Later.
+            if (!isCharacterComplete)
+            {
+                // Let's ask for a name to get this character finished!
+                expectedResponses.
+                    Add
+                    (
+                        responseId,
+                        async (response) =>
+                        {
+                            if (!string.IsNullOrEmpty(response))
+                            {
+                                await activeCharacter.SetName(response);
+                                await activeCharacter.Complete();
+                                isCharacterComplete = true;
+
+                                observers.Notify(o => o.ReadyForChat());
+                            }
+                        }
+                    );
+
+                observer.ShowInputDialog(responseId++, "Please, enter your character's name: ");
+            }
+            else
+            {
+                observers.Notify(o => o.ReadyForChat());
+            }
 
             return TaskDone.Done;
         }

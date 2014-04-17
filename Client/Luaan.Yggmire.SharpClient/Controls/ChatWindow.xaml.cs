@@ -95,7 +95,19 @@ namespace Luaan.Yggmire.SharpClient.Controls
             {
                 if (!string.IsNullOrEmpty(tbxChat.Text))
                 {
-                    await Main.Game.Session.SendChatMessage(0, tbxChat.Text);
+                    try
+                    {
+                        await Main.Game.Session.SendChatMessage(0, tbxChat.Text);
+                    }
+                    catch (AggregateException ae)
+                    {
+                        ae = ae.Flatten();
+
+                        ae.Handle((ex) => { AppendLine("Error: " + ex.Message); return true; });
+
+                        return;
+                    }
+
                     tbxChat.Text = string.Empty;
                 }
 

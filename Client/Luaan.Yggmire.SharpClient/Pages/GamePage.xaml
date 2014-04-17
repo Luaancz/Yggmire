@@ -9,8 +9,7 @@
       d:DesignHeight="572" d:DesignWidth="1279"
 	Title="Login">
 
-    <Grid>
-        <!-- LowPriorityRendering: false - when set to true - executes the game loop with the DispatcherPriority.Input, which allows normal processing of input events, may skip some frames -->
+    <Grid x:Name="canvas">
         <toolkit:SharpDXElement x:Name="surface" x:FieldModifier="private" SendResizeToGame="True" SendResizeDelay="00:00:00.50" LowPriorityRendering="False" Focusable="True" KeyUp="surface_KeyUp" />
 
         <c:ChatWindow x:Name="chat" Width="500" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top" />

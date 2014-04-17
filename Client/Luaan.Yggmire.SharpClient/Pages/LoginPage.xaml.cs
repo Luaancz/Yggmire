@@ -29,6 +29,12 @@ namespace Luaan.Yggmire.SharpClient.Pages
             InitializeComponent();
         }
 
+        public LoginPage(string message)
+            : this()
+        {
+            txtError.Text = message;
+        }
+
         private async Task HandleAccountAction(Func<ISessionGrain, Task<AccountInformation>> action)
         {
             Mouse.OverrideCursor = Cursors.Wait;

@@ -961,7 +961,6 @@ namespace Luaan.Yggmire.OrleansServerInterfacesSerializers
     using Orleans.Serialization;
     using Luaan.Yggmire.OrleansInterfaces.Account;
     using System.Collections;
-    using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
     
     
@@ -979,7 +978,7 @@ namespace Luaan.Yggmire.OrleansServerInterfacesSerializers
             Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation input = ((Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation)(original));
             Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation result = new Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation();
             Orleans.Serialization.SerializationContext.Current.RecordObject(original, result);
-            result.Characters = ((Dictionary<Guid,CharacterInformation>)(Orleans.Serialization.SerializationManager.DeepCopyInner(input.Characters)));
+            result.Characters = ((List<CharacterInformation>)(Orleans.Serialization.SerializationManager.DeepCopyInner(input.Characters)));
             result.Name = input.Name;
             return result;
         }
@@ -987,14 +986,14 @@ namespace Luaan.Yggmire.OrleansServerInterfacesSerializers
         public static void Serializer(object untypedInput, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
         {
             Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation input = ((Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation)(untypedInput));
-            Orleans.Serialization.SerializationManager.SerializeInner(input.Characters, stream, typeof(Dictionary<Guid,CharacterInformation>));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.Characters, stream, typeof(List<CharacterInformation>));
             Orleans.Serialization.SerializationManager.SerializeInner(input.Name, stream, typeof(String));
         }
         
         public static object Deserializer(System.Type expected, Orleans.Serialization.BinaryTokenStreamReader stream)
         {
             Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation result = new Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation();
-            result.Characters = ((Dictionary<Guid,CharacterInformation>)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(Dictionary<Guid,CharacterInformation>), stream)));
+            result.Characters = ((List<CharacterInformation>)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(List<CharacterInformation>), stream)));
             result.Name = ((String)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(String), stream)));
             return result;
         }

@@ -1,16 +1,14 @@
-﻿using System;
-using System.Text;
+﻿using Luaan.Yggmire.OrleansInterfaces;
+using Luaan.Yggmire.SharpClient.Actors;
 using SharpDX;
-
+using SharpDX.Toolkit;
+using SharpDX.Toolkit.Graphics;
+using SharpDX.Toolkit.Input;
+using System;
+using System.Text;
 
 namespace Luaan.Yggmire.SharpClient
 {
-    using SharpDX.Toolkit;
-    using SharpDX.Toolkit.Graphics;
-    using SharpDX.Toolkit.Input;
-    using Luaan.Yggmire.SharpClient.Actors;
-using Luaan.Yggmire.OrleansInterfaces;
-
     public class YggmireGame : Game
     {
         private GraphicsDeviceManager graphicsDeviceManager;

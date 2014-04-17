@@ -24,6 +24,16 @@ namespace Luaan.Yggmire.OrleansServer.Account
             return base.ActivateAsync();
         }
 
+        public async override Task DeactivateAsync()
+        {
+            if (!isComplete)
+            {
+                await State.ClearStateAsync();
+            }
+
+            await base.DeactivateAsync();
+        }
+
         Task<bool> ICharacterGrain.IsComplete
         {
             get { return Task.FromResult(isComplete); }
@@ -38,13 +48,17 @@ namespace Luaan.Yggmire.OrleansServer.Account
 
         Task<string> ICharacterGrain.Name { get { return Task.FromResult(State.Name); } }
 
-        Task ICharacterGrain.SetName(string name)
+        async Task ICharacterGrain.SetName(string name)
         {
             if (isComplete)
                 throw new InvalidOperationException("Cannot change the name of an existing character.");
 
+            var accountState = await account.GetState();
+
+            if (accountState.Characters.Any(i => StringComparer.InvariantCultureIgnoreCase.Compare(name, i.Name) == 0))
+                throw new InvalidOperationException("A character with the same name already exists on your account.");
+
             State.Name = name;
-            return TaskDone.Done;
         }
 
         Task ICharacterGrain.Complete()
@@ -57,7 +71,7 @@ namespace Luaan.Yggmire.OrleansServer.Account
 
             State.AccountId = accountName;
 
-            return State.WriteStateAsync();
+            return Task.WhenAll(State.WriteStateAsync(), account.CompleteCharacter(this, new CharacterInformation { Id = this.GetPrimaryKey(), Name = State.Name }));
         }
 
         Task<CharacterInformation> ICharacterGrain.GetInfo()

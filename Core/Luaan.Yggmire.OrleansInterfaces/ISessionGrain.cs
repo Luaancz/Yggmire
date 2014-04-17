@@ -21,6 +21,9 @@ namespace Luaan.Yggmire.OrleansInterfaces
         Task<CharacterInformation> CreateCharacter();
         Task<CharacterInformation> SelectCharacter(string name);
 
+        Task RegisterObserver(ISessionObserver observer);
+        Task Respond(int responseId, string response);
+
         Task Disconnect();
 
         Task SubscribeForChat(int channel, IChatObserver observer);

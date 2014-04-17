@@ -323,6 +323,19 @@ namespace Luaan.Yggmire.OrleansInterfaces
                 return base.InvokeMethodAsync<Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation>(-404060281, new object[] {name}, TimeSpan.Zero );
             }
             
+            public System.Threading.Tasks.Task RegisterObserver(Luaan.Yggmire.OrleansInterfaces.ISessionObserver observer)
+            {
+GrainFactoryBase.CheckGrainObserverParamInternal(observer);
+
+                return base.InvokeMethodAsync<object>(1542836865, new object[] {observer is GrainBase ? Luaan.Yggmire.OrleansInterfaces.SessionObserverFactory.Cast(observer.AsReference()) : observer}, TimeSpan.Zero );
+            }
+            
+            public System.Threading.Tasks.Task Respond(int responseId, string response)
+            {
+
+                return base.InvokeMethodAsync<object>(-1099888414, new object[] {responseId, response}, TimeSpan.Zero );
+            }
+            
             public System.Threading.Tasks.Task Disconnect()
             {
 
@@ -385,6 +398,12 @@ GrainFactoryBase.CheckGrainObserverParamInternal(observer);
                                 return await ((ISessionGrain)grain).CreateCharacter();
                             case -404060281: 
                                 return await ((ISessionGrain)grain).SelectCharacter((String)arguments[0]);
+                            case 1542836865: 
+                                await ((ISessionGrain)grain).RegisterObserver((ISessionObserver)arguments[0]);
+                              return true;
+                            case -1099888414: 
+                                await ((ISessionGrain)grain).Respond((Int32)arguments[0], (String)arguments[1]);
+                              return true;
                             case -1836674149: 
                                 await ((ISessionGrain)grain).Disconnect();
                               return true;
@@ -427,6 +446,10 @@ GrainFactoryBase.CheckGrainObserverParamInternal(observer);
                             return "CreateCharacter";
                     case -404060281:
                             return "SelectCharacter";
+                    case 1542836865:
+                            return "RegisterObserver";
+                    case -1099888414:
+                            return "Respond";
                     case -1836674149:
                             return "Disconnect";
                     case -950310688:
@@ -477,6 +500,196 @@ static public System.Threading.Tasks.Task<SessionGrainProperties> GetProperties(
                 return retValue;
             }
     }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    public class SessionObserverFactory
+    {
+        
+
+            public static ISessionObserver Cast(IAddressable grainRef)
+            {
+                
+                return SessionObserverReference.Cast(grainRef);
+            }
+
+        private static IGrainMethodInvoker methodInvoker;
+
+        public async static System.Threading.Tasks.Task<ISessionObserver> CreateObjectReference(ISessionObserver obj)
+        {
+            if (methodInvoker == null) methodInvoker = new SessionObserverMethodInvoker();
+            return SessionObserverFactory.Cast(await GrainReference.CreateObjectReference(obj, methodInvoker));
+        }
+
+        public static void DeleteObjectReference(ISessionObserver reference)
+        {
+            GrainReference.DeleteObjectReference(reference);
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+        [System.SerializableAttribute()]
+        [Orleans.GrainReferenceAttribute("Luaan.Yggmire.OrleansInterfaces.ISessionObserver")]
+        internal class SessionObserverReference : Orleans.GrainReference, ISessionObserver, Orleans.IAddressable
+        {
+            
+
+            public static ISessionObserver Cast(IAddressable grainRef)
+            {
+                
+                return (ISessionObserver) GrainReference.CastInternal(typeof(ISessionObserver), (GrainReference gr) => { return new SessionObserverReference(gr);}, grainRef, 1563631474);
+            }
+
+                protected override int InterfaceId { get { return 1563631474; } }
+
+                public override bool IsCompatible(int interfaceId) { return interfaceId == this.InterfaceId; }
+
+                protected override string InterfaceName { get { return "Luaan.Yggmire.OrleansInterfaces.ISessionObserver"; } }
+
+                protected override string GetMethodName(int interfaceId, int methodId) { return SessionObserverMethodInvoker.GetMethodName(interfaceId, methodId); }
+            
+            protected internal SessionObserverReference(GrainReference reference) : 
+                    base(reference)
+            {
+            }
+            
+            [Orleans.CopierMethodAttribute()]
+            public static object _Copier(object original)
+            {
+                SessionObserverReference input = ((SessionObserverReference)(original));
+                return ((SessionObserverReference)(GrainReference.CopyGrainReference(input)));
+            }
+            
+            [Orleans.SerializerMethodAttribute()]
+            public static void _Serializer(object original, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
+            {
+                SessionObserverReference input = ((SessionObserverReference)(original));
+                GrainReference.SerializeGrainReference(input, stream, expected);
+            }
+            
+            [Orleans.DeserializerMethodAttribute()]
+            public static object _Deserializer(System.Type expected, Orleans.Serialization.BinaryTokenStreamReader stream)
+            {
+                return SessionObserverReference.Cast(((Orleans.GrainReference)(GrainReference.DeserializeGrainReference(expected, stream))));
+            }
+            
+            public void ReadyForChat()
+            {
+
+                base.InvokeOneWayMethod(1287266638, new object[] {} );
+            }
+            
+            public void Disconnected()
+            {
+
+                base.InvokeOneWayMethod(-15699575, new object[] {} );
+            }
+            
+            public void SystemMessage(string message)
+            {
+
+                base.InvokeOneWayMethod(-1808133108, new object[] {message} );
+            }
+            
+            public void ShowDialog(string message)
+            {
+
+                base.InvokeOneWayMethod(-377703801, new object[] {message} );
+            }
+            
+            public void ShowInputDialog(int responseId, string message)
+            {
+
+                base.InvokeOneWayMethod(-1619562930, new object[] {responseId, message} );
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    [Orleans.MethodInvokerAttribute("Luaan.Yggmire.OrleansInterfaces.ISessionObserver", 1563631474)]
+    internal class SessionObserverMethodInvoker : IGrainMethodInvoker
+    {
+        
+        public int InterfaceId
+        {
+            get
+            {
+                return 1563631474;
+            }
+        }
+        
+        public async System.Threading.Tasks.Task<Object> Invoke(IAddressable grain, int interfaceId, int methodId, object[] arguments)
+        {
+                if (grain == null) throw new System.ArgumentNullException("grain");
+                switch (interfaceId)
+                {
+                    case 1563631474:  // ISessionObserver
+                        switch (methodId)
+                        {
+                            case 1287266638: 
+                                ((ISessionObserver)grain).ReadyForChat(); return true;
+                            case -15699575: 
+                                ((ISessionObserver)grain).Disconnected(); return true;
+                            case -1808133108: 
+                                ((ISessionObserver)grain).SystemMessage((String)arguments[0]); return true;
+                            case -377703801: 
+                                ((ISessionObserver)grain).ShowDialog((String)arguments[0]); return true;
+                            case -1619562930: 
+                                ((ISessionObserver)grain).ShowInputDialog((Int32)arguments[0], (String)arguments[1]); return true;
+                            default: 
+                                throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
+                        }
+                    default:
+                        throw new System.InvalidCastException("interfaceId="+interfaceId);
+                }
+        }
+        
+        public static string GetMethodName(int interfaceId, int methodId)
+        {
+
+            switch (interfaceId)
+            {
+                
+                case 1563631474:  // ISessionObserver
+                    switch (methodId)
+                    {
+                        case 1287266638:
+                            return "ReadyForChat";
+                    case -15699575:
+                            return "Disconnected";
+                    case -1808133108:
+                            return "SystemMessage";
+                    case -377703801:
+                            return "ShowDialog";
+                    case -1619562930:
+                            return "ShowInputDialog";
+                    case -606142484:
+                            return "GetProperties";
+                    
+                        default: 
+                            throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
+                    }
+
+                default:
+                    throw new System.InvalidCastException("interfaceId="+interfaceId);
+            }
+        }
+    }
+    
+    [Serializable()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    public class SessionObserverProperties
+    {
+        
+
+            public Dictionary<string,object> AsDictionary()
+            {  
+                var retValue = new Dictionary<string,object>();
+                return retValue;
+            }
+    }
 }
 //------------------------------------------------------------------------------
 // <auto-generated>
@@ -496,7 +709,6 @@ namespace Luaan.Yggmire.OrleansInterfacesSerializers
     using Orleans.Serialization;
     using Luaan.Yggmire.OrleansInterfaces.Account;
     using System.Collections;
-    using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
     
     
@@ -514,7 +726,7 @@ namespace Luaan.Yggmire.OrleansInterfacesSerializers
             Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation input = ((Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation)(original));
             Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation result = new Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation();
             Orleans.Serialization.SerializationContext.Current.RecordObject(original, result);
-            result.Characters = ((Dictionary<Guid,CharacterInformation>)(Orleans.Serialization.SerializationManager.DeepCopyInner(input.Characters)));
+            result.Characters = ((List<CharacterInformation>)(Orleans.Serialization.SerializationManager.DeepCopyInner(input.Characters)));
             result.Name = input.Name;
             return result;
         }
@@ -522,14 +734,14 @@ namespace Luaan.Yggmire.OrleansInterfacesSerializers
         public static void Serializer(object untypedInput, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
         {
             Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation input = ((Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation)(untypedInput));
-            Orleans.Serialization.SerializationManager.SerializeInner(input.Characters, stream, typeof(Dictionary<Guid,CharacterInformation>));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.Characters, stream, typeof(List<CharacterInformation>));
             Orleans.Serialization.SerializationManager.SerializeInner(input.Name, stream, typeof(String));
         }
         
         public static object Deserializer(System.Type expected, Orleans.Serialization.BinaryTokenStreamReader stream)
         {
             Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation result = new Luaan.Yggmire.OrleansInterfaces.Account.AccountInformation();
-            result.Characters = ((Dictionary<Guid,CharacterInformation>)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(Dictionary<Guid,CharacterInformation>), stream)));
+            result.Characters = ((List<CharacterInformation>)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(List<CharacterInformation>), stream)));
             result.Name = ((String)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(String), stream)));
             return result;
         }

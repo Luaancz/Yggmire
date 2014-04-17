@@ -11,6 +11,6 @@ namespace Luaan.Yggmire.OrleansInterfaces.Account
     {
         public string Name { get; set; }
 
-        public Dictionary<Guid, CharacterInformation> Characters { get; set; }
+        public List<CharacterInformation> Characters { get; set; }
     }
 }
