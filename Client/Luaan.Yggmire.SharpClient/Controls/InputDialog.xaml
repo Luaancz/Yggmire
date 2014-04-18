@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="150" d:DesignWidth="300" HorizontalAlignment="Center" VerticalAlignment="Center">
-    <Border Padding="2" Background="White" CornerRadius="5" BorderBrush="Black" BorderThickness="5" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
+             d:DesignHeight="150" d:DesignWidth="450" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Border Padding="2" Background="White" CornerRadius="5" BorderBrush="Black" BorderThickness="5" Height="Auto" Width="400px" HorizontalAlignment="Center" VerticalAlignment="Center">
         <StackPanel Height="Auto" Orientation="Vertical">
             <StackPanel.Background>
                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">

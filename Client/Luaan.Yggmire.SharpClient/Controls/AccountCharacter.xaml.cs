@@ -1,11 +1,10 @@
 ﻿using Luaan.Yggmire.OrleansInterfaces;
 using Luaan.Yggmire.OrleansInterfaces.Account;
-using Luaan.Yggmire.SharpClient.Controls;
-using Orleans;
+using Luaan.Yggmire.OrleansInterfaces.Chat;
+using Luaan.Yggmire.SharpClient.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,40 +17,35 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Luaan.Yggmire.SharpClient.Pages
+namespace Luaan.Yggmire.SharpClient.Controls
 {
     /// <summary>
-    /// Interaction logic for AccountPage.xaml
+    /// Interaction logic for AccountCharacter.xaml
     /// </summary>
-    public partial class AccountPage : Page
+    public partial class AccountCharacter : UserControl
     {
         ISessionGrain session;
-        AccountInformation account;
 
-        public AccountPage(ISessionGrain session, AccountInformation account)
+        CharacterInformation character;
+
+        public AccountCharacter(ISessionGrain session, CharacterInformation character)
         {
             this.session = session;
-            this.account = account;
+            this.character = character;
 
             InitializeComponent();
 
-            foreach (var c in account.Characters)
-            {
-                var ac = new AccountCharacter(session, c);
-                pnlCharacters.Children.Add(ac);
-            }
+            this.txtCharacterName.Text = character.Name;
         }
 
-        private async void btnCreateCharacter_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.Wait;
             IsEnabled = false;
 
-            CharacterInformation character;
-
             try
             {
-                character = await this.session.CreateCharacter();
+                var tmp = await this.session.SelectCharacter(character.Name);
             }
             finally
             {
@@ -60,7 +54,7 @@ namespace Luaan.Yggmire.SharpClient.Pages
             }
 
             var page = new GamePage(session);
-            NavigationService.Navigate(page);
+            (MainWindow.GetWindow(this) as MainWindow).frame.NavigationService.Navigate(page);
         }
     }
 }

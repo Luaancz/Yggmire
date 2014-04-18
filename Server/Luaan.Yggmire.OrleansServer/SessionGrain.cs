@@ -125,12 +125,6 @@ namespace Luaan.Yggmire.OrleansServer
             activeCharacter = await loggedAccount.CreateCharacter();
             isCharacterComplete = false;
 
-            /*
-            await activeCharacter.SetName(name);
-            await activeCharacter.Complete();
-            isCharacterComplete = true;
-            */
-
             return await activeCharacter.GetInfo();
         }
 
@@ -142,7 +136,7 @@ namespace Luaan.Yggmire.OrleansServer
             isCharacterComplete = true;
 
             var info = await activeCharacter.GetInfo();
-            name = info.Name;
+            this.name = info.Name;
 
             return info;
         }

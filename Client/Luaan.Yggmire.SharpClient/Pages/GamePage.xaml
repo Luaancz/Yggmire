@@ -13,5 +13,22 @@
         <toolkit:SharpDXElement x:Name="surface" x:FieldModifier="private" SendResizeToGame="True" SendResizeDelay="00:00:00.50" LowPriorityRendering="False" Focusable="True" KeyUp="surface_KeyUp" />
 
         <c:ChatWindow x:Name="chat" Width="500" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" FontWeight="Bold" FontSize="24" Padding="15,5" Click="btnLogout_Click">
+            <Button.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="#FFB22A2A" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Foreground>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                    <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                    <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
+                    <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
+                    <GradientStop Color="#FFC3F974" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </Page>

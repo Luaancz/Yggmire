@@ -136,5 +136,12 @@ namespace Luaan.Yggmire.SharpClient.Pages
             if (e.Key == System.Windows.Input.Key.Enter)
                 chat.tbxChat.Focus();
         }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            IsEnabled = false;
+            Game.Session.Disconnect();
+        }
+
     }
 }
