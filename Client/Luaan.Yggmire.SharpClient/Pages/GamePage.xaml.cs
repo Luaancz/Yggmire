@@ -117,19 +117,6 @@ namespace Luaan.Yggmire.SharpClient.Pages
             Keyboard.ClearFocus();
             Keyboard.Focus(surface);
         }
-        
-        //void Network_ChatReceived(STC.ChatMessage message)
-        //{
-        //    if (!Dispatcher.CheckAccess())
-        //    {
-        //        Dispatcher.Invoke(chatReceived, message);
-
-        //        return;
-        //    }
-
-        //    chat.AppendLine(message.Speaker + "> " + message.Message);
-        //}
-
 
         private void surface_KeyUp(object sender, KeyEventArgs e)
         {

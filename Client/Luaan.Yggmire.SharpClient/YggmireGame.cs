@@ -37,8 +37,6 @@ namespace Luaan.Yggmire.SharpClient
             this.session = session;
 
             graphicsDeviceManager = new GraphicsDeviceManager(this);
-            graphicsDeviceManager.PreferredBackBufferWidth = 1600;
-            graphicsDeviceManager.PreferredBackBufferHeight = 1000;
 
             Content.RootDirectory = "Content";
 

@@ -106,6 +106,12 @@
     <ToolkitModel Include="..\..\Graphics\Models\Trees\Tree-1.obj">
       <Link>Content\Models\Trees\Tree-1.obj</Link>
     </ToolkitModel>
+    <None Include="..\..\Graphics\Models\Trees\Tree-2.mtl">
+      <Link>Content\Models\Trees\Tree-2.mtl</Link>
+    </None>
+    <ToolkitModel Include="..\..\Graphics\Models\Trees\Tree-2.obj">
+      <Link>Content\Models\Trees\Tree-2.obj</Link>
+    </ToolkitModel>
     <None Include="app.config" />
     <ToolkitTexture Include="Content\Dirt.dds" />
   </ItemGroup>
@@ -172,6 +178,9 @@
   <ItemGroup>
     <ToolkitTexture Include="..\..\Graphics\Models\Trees\Tree-1.Texture.png">
       <Link>Content\Models\Trees\Tree-1.Texture.png</Link>
+    </ToolkitTexture>
+    <ToolkitTexture Include="..\..\Graphics\Models\Trees\Tree-2.Texture.png">
+      <Link>Content\Models\Trees\Tree-2.Texture.png</Link>
     </ToolkitTexture>
     <Content Include="ClientConfiguration.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

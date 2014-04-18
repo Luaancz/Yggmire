@@ -28,8 +28,8 @@ namespace Luaan.Yggmire.SharpClient.Actors
             base.Initialize();
 
             effect = Game.Content.Load<Effect>("Simple");
-            model = Game.Content.Load<Model>("Models/Trees/Tree-1");
-            texture = Game.Content.Load<Texture2D>("Models/Trees/Tree-1.Texture.tkb");
+            model = Game.Content.Load<Model>("Models/Trees/Tree-2");
+            texture = Game.Content.Load<Texture2D>("Models/Trees/Tree-2.Texture.tkb");
         }
 
         protected override void UpdateInternal(GameTime gameTime)
