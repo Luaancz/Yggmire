@@ -9,6 +9,9 @@ namespace Luaan.Yggmire.OrleansServerInterfaces.Monitoring
 {
     public interface IMonitoringGrain : IGrain
     {
+        Task RegisterSession();
+        Task UnregisterSession();
+
         Task<ServerStatusInfo> GetStatus();
     }
 }

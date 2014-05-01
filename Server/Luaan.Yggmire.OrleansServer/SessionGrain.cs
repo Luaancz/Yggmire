@@ -10,6 +10,7 @@ using Luaan.Yggmire.OrleansInterfaces.Account;
 using Luaan.Yggmire.OrleansServerInterfaces.Account;
 using Luaan.Yggmire.OrleansServerInterfaces.Chat;
 using Luaan.Yggmire.OrleansInterfaces.Chat;
+using Luaan.Yggmire.OrleansServerInterfaces.Monitoring;
 
 namespace Luaan.Yggmire.OrleansServer
 {
@@ -55,7 +56,10 @@ namespace Luaan.Yggmire.OrleansServer
         public async override Task DeactivateAsync()
         {
             if (loggedAccount != null)
+            {
                 await loggedAccount.CaptureSession(null);
+                await MonitoringGrainFactory.GetGrain(0).UnregisterSession();
+            }
 
             if (mySubscriptions.Count > 0)
             {
@@ -77,6 +81,7 @@ namespace Luaan.Yggmire.OrleansServer
         async Task<AccountInformation> CompleteLogin(IAccountGrain account)
         {
             await account.CaptureSession(this);
+            await MonitoringGrainFactory.GetGrain(0).RegisterSession();
             loggedAccount = account;
 
             var state = await account.GetState();
@@ -218,6 +223,7 @@ namespace Luaan.Yggmire.OrleansServer
 
         int responseId = 1;
         Dictionary<int, Func<string, Task>> expectedResponses = new Dictionary<int,Func<string, Task>>();
+        private Task MonitoringGrain;
 
         async Task ISessionGrain.Respond(int responseId, string response)
         {

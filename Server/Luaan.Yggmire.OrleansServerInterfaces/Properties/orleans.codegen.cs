@@ -830,6 +830,18 @@ namespace Luaan.Yggmire.OrleansServerInterfaces.Monitoring
                 return MonitoringGrainReference.Cast(((Orleans.GrainReference)(GrainReference.DeserializeGrainReference(expected, stream))));
             }
             
+            public System.Threading.Tasks.Task RegisterSession()
+            {
+
+                return base.InvokeMethodAsync<object>(1130536441, new object[] {}, TimeSpan.Zero );
+            }
+            
+            public System.Threading.Tasks.Task UnregisterSession()
+            {
+
+                return base.InvokeMethodAsync<object>(-345122955, new object[] {}, TimeSpan.Zero );
+            }
+            
             public System.Threading.Tasks.Task<Luaan.Yggmire.OrleansServerInterfaces.Monitoring.ServerStatusInfo> GetStatus()
             {
 
@@ -860,6 +872,12 @@ namespace Luaan.Yggmire.OrleansServerInterfaces.Monitoring
                     case -230746215:  // IMonitoringGrain
                         switch (methodId)
                         {
+                            case 1130536441: 
+                                await ((IMonitoringGrain)grain).RegisterSession();
+                              return true;
+                            case -345122955: 
+                                await ((IMonitoringGrain)grain).UnregisterSession();
+                              return true;
                             case -1251605435: 
                                 return await ((IMonitoringGrain)grain).GetStatus();
                             default: 
@@ -879,7 +897,11 @@ namespace Luaan.Yggmire.OrleansServerInterfaces.Monitoring
                 case -230746215:  // IMonitoringGrain
                     switch (methodId)
                     {
-                        case -1251605435:
+                        case 1130536441:
+                            return "RegisterSession";
+                    case -345122955:
+                            return "UnregisterSession";
+                    case -1251605435:
                             return "GetStatus";
                     case -606142484:
                             return "GetProperties";

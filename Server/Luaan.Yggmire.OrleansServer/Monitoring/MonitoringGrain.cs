@@ -6,17 +6,39 @@ using System.Threading.Tasks;
 using Luaan.Yggmire.OrleansServerInterfaces.Monitoring;
 using Orleans;
 using System.Reflection;
+using Luaan.Yggmire.OrleansInterfaces;
 
 namespace Luaan.Yggmire.OrleansServer.Monitoring
 {
-    public class MonitoringGrain : GrainBase, IMonitoringGrain
+    [StorageProvider(ProviderName="MemoryStore")]
+    public class MonitoringGrain : GrainBase<IMonitoringStatus>, IMonitoringGrain
     {
         Task<ServerStatusInfo> IMonitoringGrain.GetStatus()
         {
             var status = new ServerStatusInfo();
             status.Revision = typeof(MonitoringGrain).Assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute)).OfType<AssemblyInformationalVersionAttribute>().First().InformationalVersion;
+            status.PlayerCount = State.PlayerCount;
 
             return Task.FromResult(status);
         }
+
+        Task IMonitoringGrain.RegisterSession()
+        {
+            State.PlayerCount++;
+
+            return State.WriteStateAsync();
+        }
+
+        Task IMonitoringGrain.UnregisterSession()
+        {
+            State.PlayerCount--;
+
+            return State.WriteStateAsync();
+        }
+    }
+
+    public interface IMonitoringStatus : IGrainState
+    {
+        int PlayerCount { get; set; }
     }
 }
