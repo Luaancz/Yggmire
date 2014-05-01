@@ -8,11 +8,7 @@
 	Title="Login">
 
     <DockPanel Background="CornflowerBlue">
-        <Border Background="#FFDEF1F9" VerticalAlignment="Center" HorizontalAlignment="Center" Height="180" Width="400" BorderBrush="White" BorderThickness="5px" CornerRadius="3">
-            <Border.Effect>
-                <DropShadowEffect/>
-            </Border.Effect>
-
+        <Border VerticalAlignment="Center" HorizontalAlignment="Center" Height="180" Width="400" Style="{DynamicResource SimplePanel}">
             <Grid Margin="5,25,5,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -34,8 +30,8 @@
                 <PasswordBox x:Name="tbxPassword" Height="23" Width="120" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right"  Margin="5" />
 
                 <WrapPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" Margin="5">
-                    <Button x:Name="btnCreate" Content="Create" Width="75" Click="btnCreate_Click" Margin="2"/>
-                    <Button x:Name="btnLogin" Content="Login" Width="75" Click="btnLogin_Click" Margin="2" IsDefault="True" />
+                    <Button x:Name="btnCreate" Content="Create" Width="75" Click="btnCreate_Click" Margin="2" Style="{DynamicResource BigButton}"/>
+                    <Button x:Name="btnLogin" Content="Login" Width="75" Click="btnLogin_Click" Margin="2" IsDefault="True" Style="{DynamicResource BigButton}" />
                 </WrapPanel>
             </Grid>
         </Border>

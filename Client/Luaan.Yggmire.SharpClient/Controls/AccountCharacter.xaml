@@ -8,7 +8,7 @@
     <Border Padding="2" Background="White" CornerRadius="5" BorderBrush="Black" BorderThickness="2" Height="100px" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30px" />
+                <ColumnDefinition Width="16" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -20,7 +20,7 @@
                 Luaan
             </TextBlock>
 
-            <Button Grid.Column="1" FontWeight="Bold" FontSize="14" Padding="15,2" Click="Button_Click" Grid.Row="1">
+            <Button Grid.Column="1" FontWeight="Bold" FontSize="14" Padding="15,2" Click="Button_Click" Grid.Row="1" Style="{DynamicResource BigButton}">
                 <Button.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="Black" Offset="0"/>

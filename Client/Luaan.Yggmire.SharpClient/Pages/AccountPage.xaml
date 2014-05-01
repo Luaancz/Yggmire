@@ -8,30 +8,11 @@
 	Title="Login">
 
     <Canvas Background="CornflowerBlue">
-        <Border Background="#FFDEF1F9" VerticalAlignment="Top" HorizontalAlignment="Left" Height="349" Width="291" BorderBrush="White" BorderThickness="5px" CornerRadius="3" Margin="5,5,5,0">
-            <Border.Effect>
-                <DropShadowEffect/>
-            </Border.Effect>
-
+        <Border VerticalAlignment="Top" HorizontalAlignment="Left" Height="349" Width="291" Margin="5,5,5,0" Style="{DynamicResource SimplePanel}">
             <StackPanel x:Name="pnlCharacters" Orientation="Vertical" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 
             </StackPanel>
         </Border>
-        <Button x:Name="btnCreateCharacter" Content="Create a new character" Canvas.Right="0" Canvas.Top="0" Margin="5" FontWeight="Bold" FontSize="24" Padding="15,5" Click="btnCreateCharacter_Click" >
-            <Button.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#FFB22A2A" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Foreground>
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                    <GradientStop Color="#FFF3F3F3" Offset="0"/>
-                    <GradientStop Color="#FFEBEBEB" Offset="0.5"/>
-                    <GradientStop Color="#FFDDDDDD" Offset="0.5"/>
-                    <GradientStop Color="#FFC3F974" Offset="1"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
+        <Button x:Name="btnCreateCharacter" Content="Create a new character" Canvas.Right="0" Canvas.Top="0" Margin="5" FontSize="24" Click="btnCreateCharacter_Click" Style="{DynamicResource BigButton}" />
     </Canvas>
 </Page>
