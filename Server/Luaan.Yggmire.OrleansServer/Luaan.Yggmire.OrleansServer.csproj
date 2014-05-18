@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Version;Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Version;Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -15,6 +15,7 @@
     <MSBuildCommunityTasksPath>$(SolutionDir)\Build</MSBuildCommunityTasksPath>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup>
     <StartAction>Program</StartAction>
@@ -54,12 +55,18 @@
   <ItemGroup>
     <Compile Include="Account\AccountGrain.cs" />
     <Compile Include="Account\CharacterGrain.cs" />
+    <Compile Include="Actors\ZoneGrain.cs" />
+    <Compile Include="Actors\ZoneManager.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Chat\ChatGrain.cs" />
     <Compile Include="Monitoring\MonitoringGrain.cs" />
     <Compile Include="SessionGrain.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Luaan.Yggmire.Core\Luaan.Yggmire.Core.csproj">
+      <Project>{ff2c5fab-70ce-41c3-b424-f0b5f0728e84}</Project>
+      <Name>Luaan.Yggmire.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\Luaan.Yggmire.OrleansInterfaces\Luaan.Yggmire.OrleansInterfaces.csproj">
       <Project>{8477394a-76a5-4698-a929-a3874d92c910}</Project>
       <Name>Luaan.Yggmire.OrleansInterfaces</Name>
@@ -80,7 +87,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Actors\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

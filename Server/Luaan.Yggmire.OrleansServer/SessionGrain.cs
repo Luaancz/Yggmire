@@ -11,6 +11,9 @@ using Luaan.Yggmire.OrleansServerInterfaces.Account;
 using Luaan.Yggmire.OrleansServerInterfaces.Chat;
 using Luaan.Yggmire.OrleansInterfaces.Chat;
 using Luaan.Yggmire.OrleansServerInterfaces.Monitoring;
+using Luaan.Yggmire.OrleansInterfaces.Actors;
+using Luaan.Yggmire.OrleansServer.Actors;
+using Luaan.Yggmire.OrleansServerInterfaces.Actors;
 
 namespace Luaan.Yggmire.OrleansServer
 {
@@ -25,7 +28,10 @@ namespace Luaan.Yggmire.OrleansServer
         bool isCharacterComplete;
         string name;
 
-        ObserverSubscriptionManager<ISessionObserver> observers;
+        ZoneManager zoneManager;
+
+        ISessionObserver sessionObserver;
+        IZoneObserver zoneObserver;
 
         void CheckLogged()
         {
@@ -43,7 +49,6 @@ namespace Luaan.Yggmire.OrleansServer
 
         public override Task ActivateAsync()
         {
-            observers = new ObserverSubscriptionManager<ISessionObserver>();
             mySubscriptions = new List<Tuple<int, IChatObserver>>();
 
             return base.ActivateAsync();
@@ -63,15 +68,15 @@ namespace Luaan.Yggmire.OrleansServer
 
             if (mySubscriptions.Count > 0)
             {
-                var tasks = 
+                var tasks =
                     mySubscriptions.Select
                         (
-                            i => 
-                                {
-                                    var chat = ChatGrainFactory.GetGrain(i.Item1);
+                            i =>
+                            {
+                                var chat = ChatGrainFactory.GetGrain(i.Item1);
 
-                                    return chat.Unsubscribe(name, i.Item2);
-                                }
+                                return chat.Unsubscribe(name, i.Item2);
+                            }
                         ).ToArray();
 
                 await Task.WhenAll(tasks);
@@ -117,7 +122,7 @@ namespace Luaan.Yggmire.OrleansServer
         async Task<AccountInformation> ISessionGrain.CreateAccount(string name, string password)
         {
             var account = AccountGrainFactory.GetGrain(0, name);
-            
+
             await account.Create(password);
 
             return await CompleteLogin(account);
@@ -214,7 +219,7 @@ namespace Luaan.Yggmire.OrleansServer
         /// <returns></returns>
         Task ISessionGrain.Disconnect()
         {
-            observers.Notify(o => o.Disconnected());
+            sessionObserver.Disconnected();
 
             DeactivateOnIdle();
 
@@ -222,8 +227,7 @@ namespace Luaan.Yggmire.OrleansServer
         }
 
         int responseId = 1;
-        Dictionary<int, Func<string, Task>> expectedResponses = new Dictionary<int,Func<string, Task>>();
-        private Task MonitoringGrain;
+        Dictionary<int, Func<string, Task>> expectedResponses = new Dictionary<int, Func<string, Task>>();
 
         async Task ISessionGrain.Respond(int responseId, string response)
         {
@@ -236,39 +240,43 @@ namespace Luaan.Yggmire.OrleansServer
             expectedResponses.Remove(responseId);
         }
 
-        Task ISessionGrain.RegisterObserver(ISessionObserver observer)
+        async Task FinishCharacter(string response)
         {
-            observers.Subscribe(observer);
+            if (string.IsNullOrEmpty(response))
+                throw new Exception("You have to give me a name!");
+
+            await activeCharacter.SetName(response);
+            await activeCharacter.Complete();
+            isCharacterComplete = true;
+
+            sessionObserver.ReadyForChat();
+        }
+
+        async Task ISessionGrain.RegisterObserver(ISessionObserver observer, IZoneObserver zoneObserver)
+        {
+            CheckCharacter();
+
+            this.sessionObserver = observer;
+            this.zoneObserver = zoneObserver;
+
+            zoneManager = new ZoneManager(zoneObserver);
 
             // This is a good time to handle enter-game notifications. Later.
             if (!isCharacterComplete)
             {
-                // Let's ask for a name to get this character finished!
-                expectedResponses.
-                    Add
-                    (
-                        responseId,
-                        async (response) =>
-                        {
-                            if (!string.IsNullOrEmpty(response))
-                            {
-                                await activeCharacter.SetName(response);
-                                await activeCharacter.Complete();
-                                isCharacterComplete = true;
+                await zoneManager.EnterZone(ZoneGrainFactory.GetGrain(0));
 
-                                observers.Notify(o => o.ReadyForChat());
-                            }
-                        }
-                    );
+                // Let's ask for a name to get this character finished!
+                expectedResponses.Add(responseId, FinishCharacter);
 
                 observer.ShowInputDialog(responseId++, "Please, enter your character's name: ");
             }
             else
             {
-                observers.Notify(o => o.ReadyForChat());
-            }
+                await zoneManager.EnterZone(ZoneGrainFactory.GetGrain(await activeCharacter.GetZoneId()));
 
-            return TaskDone.Done;
+                sessionObserver.ReadyForChat();
+            }
         }
     }
 }

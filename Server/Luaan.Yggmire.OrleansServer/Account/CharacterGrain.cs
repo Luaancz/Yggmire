@@ -78,5 +78,10 @@ namespace Luaan.Yggmire.OrleansServer.Account
         {
             return Task.FromResult(new CharacterInformation { Id = this.GetPrimaryKey(), Name = State.Name });
         }
+
+        Task<Guid> ICharacterGrain.GetZoneId()
+        {
+            return Task.FromResult(State.ZoneId);
+        }
     }
 }

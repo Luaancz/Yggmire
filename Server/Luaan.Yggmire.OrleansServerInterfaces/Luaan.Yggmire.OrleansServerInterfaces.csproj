@@ -11,6 +11,7 @@
     <AssemblyName>Luaan.Yggmire.OrleansServerInterfaces</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\IAccountGrain.cs" />
+    <Compile Include="Actors\IZoneGrain.cs" />
     <Compile Include="Chat\IChatGrain.cs" />
     <Compile Include="Account\ICharacterGrain.cs" />
     <Compile Include="Monitoring\IMonitoringGrain.cs" />
@@ -57,9 +59,7 @@
       <Name>Luaan.Yggmire.OrleansInterfaces</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Actors\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <OrleansProjectType>Client</OrleansProjectType>

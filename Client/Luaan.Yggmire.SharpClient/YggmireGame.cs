@@ -1,10 +1,14 @@
-﻿using Luaan.Yggmire.OrleansInterfaces;
+﻿using Luaan.Yggmire.Core.Structures;
+using Luaan.Yggmire.OrleansInterfaces;
+using Luaan.Yggmire.OrleansInterfaces.Actors;
 using Luaan.Yggmire.SharpClient.Actors;
 using SharpDX;
 using SharpDX.Toolkit;
 using SharpDX.Toolkit.Graphics;
 using SharpDX.Toolkit.Input;
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Luaan.Yggmire.SharpClient
@@ -26,7 +30,6 @@ namespace Luaan.Yggmire.SharpClient
         public InputManager InputManager { get { return this.inputManager; } }
 
         private readonly ISessionGrain session;
-
         public ISessionGrain Session { get { return this.session; } }
 
         /// <summary>
@@ -45,15 +48,33 @@ namespace Luaan.Yggmire.SharpClient
 
         protected override void Initialize()
         {
-            Window.Title = "Yggmire Client";
-
             base.Initialize();
 
             inputManager.Initialize();
         }
+        
+        List<PlacedActor> localActors = new List<PlacedActor>();
+        ConcurrentQueue<PlacedActor> addedActors = new ConcurrentQueue<PlacedActor>();
+        
+        public void AddWorldItem(WorldItem item)
+        {
+            var swi = item as StaticWorldItem;
 
-        BoxActor box;
-        TreeActor tree;
+            PlacedActor actor;
+
+            switch (item.PrototypeId)
+            {
+                case 1: actor = new TreeActor(this); break;
+                case 2: actor = new BoxActor(this); break;
+                default: return;
+            }
+
+            actor.Position = new Vector3(swi.Position.X / 1000f, 0, swi.Position.Y / 1000f);
+            actor.Scale *= 2.5f;
+            actor.Initialize();
+
+            addedActors.Enqueue(actor);
+        }
 
         protected override void LoadContent()
         {
@@ -71,17 +92,7 @@ namespace Luaan.Yggmire.SharpClient
             
             terrain = new TerrainActor(this);
             terrain.Initialize();
-
-            box = new BoxActor(this);
-            box.Initialize();
-            box.Position = new Vector3(10, 10, 0);
-            box.Scale *= 3;
-
-            tree = new TreeActor(this);
-            tree.Initialize();
-            tree.Position = new Vector3(0, 0, 0);
-            tree.Scale *= 3;
-
+            
             base.LoadContent();   
         }
 
@@ -93,9 +104,20 @@ namespace Luaan.Yggmire.SharpClient
 
             camera.Update(gameTime);
             terrain.Update(gameTime);
+            
+            // Not thread-safe, but we don't really care
+            if (addedActors.Count > 0)
+            {
+                PlacedActor actor;
 
-            box.Update(gameTime);
-            tree.Update(gameTime);
+                while (addedActors.TryDequeue(out actor))
+                {
+                    localActors.Add(actor);
+                }
+            }
+
+            foreach (var actor in localActors)
+                actor.Update(gameTime);
         }
         
         protected override void Draw(GameTime gameTime)
@@ -107,9 +129,9 @@ namespace Luaan.Yggmire.SharpClient
             GraphicsDevice.Clear(Color.CornflowerBlue);           
 
             terrain.Render(gameTime);
-
-            box.Render(gameTime);
-            tree.Render(gameTime);
+            
+            foreach (var actor in localActors)
+                actor.Render(gameTime);
 
             base.Draw(gameTime);
         }

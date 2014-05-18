@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Orleans;
 using Luaan.Yggmire.OrleansInterfaces.Account;
 using Luaan.Yggmire.OrleansInterfaces.Chat;
+using Luaan.Yggmire.OrleansInterfaces.Actors;
 
 namespace Luaan.Yggmire.OrleansInterfaces
 {
@@ -21,7 +22,7 @@ namespace Luaan.Yggmire.OrleansInterfaces
         Task<CharacterInformation> CreateCharacter();
         Task<CharacterInformation> SelectCharacter(string name);
 
-        Task RegisterObserver(ISessionObserver observer);
+        Task RegisterObserver(ISessionObserver observer, IZoneObserver zoneObserver);
         Task Respond(int responseId, string response);
 
         Task Disconnect();

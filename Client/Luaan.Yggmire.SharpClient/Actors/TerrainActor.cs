@@ -41,6 +41,7 @@ namespace Luaan.Yggmire.SharpClient.Actors
 
             byte[,] bmpData = new byte[patchWidth + 1, patchHeight + 1];
 
+            /*
             for (int x = 0; x <= patchWidth; x++ )
             {
                 for (int y = 0; y <= patchHeight; y++)
@@ -48,6 +49,7 @@ namespace Luaan.Yggmire.SharpClient.Actors
                     bmpData[x, y] = bmp.GetPixel(x, y).R;
                 }
             }
+            */
 
             terrainEffect = Game.Content.Load<Effect>("Terrain");
             texture = Game.Content.Load<Texture2D>("Dirt");

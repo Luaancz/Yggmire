@@ -14,6 +14,179 @@
 #pragma warning disable 1591
 #pragma warning disable 1998
 
+namespace Luaan.Yggmire.OrleansInterfaces.Actors
+{
+    using System;
+    using System.Net;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.IO;
+    using System.Collections.Generic;
+    using Orleans;
+    using Luaan.Yggmire.Core.Structures;
+    using System.Collections;
+    
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    public class ZoneObserverFactory
+    {
+        
+
+            public static IZoneObserver Cast(IAddressable grainRef)
+            {
+                
+                return ZoneObserverReference.Cast(grainRef);
+            }
+
+        private static IGrainMethodInvoker methodInvoker;
+
+        public async static System.Threading.Tasks.Task<IZoneObserver> CreateObjectReference(IZoneObserver obj)
+        {
+            if (methodInvoker == null) methodInvoker = new ZoneObserverMethodInvoker();
+            return ZoneObserverFactory.Cast(await GrainReference.CreateObjectReference(obj, methodInvoker));
+        }
+
+        public static void DeleteObjectReference(IZoneObserver reference)
+        {
+            GrainReference.DeleteObjectReference(reference);
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+        [System.SerializableAttribute()]
+        [Orleans.GrainReferenceAttribute("Luaan.Yggmire.OrleansInterfaces.Actors.IZoneObserver")]
+        internal class ZoneObserverReference : Orleans.GrainReference, IZoneObserver, Orleans.IAddressable
+        {
+            
+
+            public static IZoneObserver Cast(IAddressable grainRef)
+            {
+                
+                return (IZoneObserver) GrainReference.CastInternal(typeof(IZoneObserver), (GrainReference gr) => { return new ZoneObserverReference(gr);}, grainRef, 1865857157);
+            }
+
+                protected override int InterfaceId { get { return 1865857157; } }
+
+                public override bool IsCompatible(int interfaceId) { return interfaceId == this.InterfaceId; }
+
+                protected override string InterfaceName { get { return "Luaan.Yggmire.OrleansInterfaces.Actors.IZoneObserver"; } }
+
+                protected override string GetMethodName(int interfaceId, int methodId) { return ZoneObserverMethodInvoker.GetMethodName(interfaceId, methodId); }
+            
+            protected internal ZoneObserverReference(GrainReference reference) : 
+                    base(reference)
+            {
+            }
+            
+            [Orleans.CopierMethodAttribute()]
+            public static object _Copier(object original)
+            {
+                ZoneObserverReference input = ((ZoneObserverReference)(original));
+                return ((ZoneObserverReference)(GrainReference.CopyGrainReference(input)));
+            }
+            
+            [Orleans.SerializerMethodAttribute()]
+            public static void _Serializer(object original, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
+            {
+                ZoneObserverReference input = ((ZoneObserverReference)(original));
+                GrainReference.SerializeGrainReference(input, stream, expected);
+            }
+            
+            [Orleans.DeserializerMethodAttribute()]
+            public static object _Deserializer(System.Type expected, Orleans.Serialization.BinaryTokenStreamReader stream)
+            {
+                return ZoneObserverReference.Cast(((Orleans.GrainReference)(GrainReference.DeserializeGrainReference(expected, stream))));
+            }
+            
+            public void AddItems(System.Guid zoneId, Luaan.Yggmire.Core.Structures.WorldItem[] items)
+            {
+
+                base.InvokeOneWayMethod(1653213901, new object[] {zoneId, items} );
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    [Orleans.MethodInvokerAttribute("Luaan.Yggmire.OrleansInterfaces.Actors.IZoneObserver", 1865857157)]
+    internal class ZoneObserverMethodInvoker : IGrainMethodInvoker
+    {
+        
+        public int InterfaceId
+        {
+            get
+            {
+                return 1865857157;
+            }
+        }
+        
+        public async System.Threading.Tasks.Task<System.Object> Invoke(IAddressable grain, int interfaceId, int methodId, object[] arguments)
+        {
+                if (grain == null) throw new System.ArgumentNullException("grain");
+                switch (interfaceId)
+                {
+                    case 1865857157:  // IZoneObserver
+                        switch (methodId)
+                        {
+                            case 1653213901: 
+                                ((IZoneObserver)grain).AddItems((System.Guid)arguments[0], (Luaan.Yggmire.Core.Structures.WorldItem[])arguments[1]); return true;
+                            default: 
+                                throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
+                        }
+                    default:
+                        throw new System.InvalidCastException("interfaceId="+interfaceId);
+                }
+        }
+        
+        public static string GetMethodName(int interfaceId, int methodId)
+        {
+
+            switch (interfaceId)
+            {
+                
+                case 1865857157:  // IZoneObserver
+                    switch (methodId)
+                    {
+                        case 1653213901:
+                            return "AddItems";
+                    case -606142484:
+                            return "GetProperties";
+                    
+                        default: 
+                            throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
+                    }
+
+                default:
+                    throw new System.InvalidCastException("interfaceId="+interfaceId);
+            }
+        }
+    }
+    
+    [Serializable()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    public class ZoneObserverProperties
+    {
+        
+
+            public Dictionary<string,object> AsDictionary()
+            {  
+                var retValue = new Dictionary<string,object>();
+                return retValue;
+            }
+    }
+}
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//     Runtime Version:4.0.30319.18444
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
 namespace Luaan.Yggmire.OrleansInterfaces.Chat
 {
     using System;
@@ -323,11 +496,12 @@ namespace Luaan.Yggmire.OrleansInterfaces
                 return base.InvokeMethodAsync<Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation>(-404060281, new object[] {name}, TimeSpan.Zero );
             }
             
-            public System.Threading.Tasks.Task RegisterObserver(Luaan.Yggmire.OrleansInterfaces.ISessionObserver observer)
+            public System.Threading.Tasks.Task RegisterObserver(Luaan.Yggmire.OrleansInterfaces.ISessionObserver observer, Luaan.Yggmire.OrleansInterfaces.Actors.IZoneObserver zoneObserver)
             {
 GrainFactoryBase.CheckGrainObserverParamInternal(observer);
+GrainFactoryBase.CheckGrainObserverParamInternal(zoneObserver);
 
-                return base.InvokeMethodAsync<object>(1542836865, new object[] {observer is GrainBase ? Luaan.Yggmire.OrleansInterfaces.SessionObserverFactory.Cast(observer.AsReference()) : observer}, TimeSpan.Zero );
+                return base.InvokeMethodAsync<object>(891264617, new object[] {observer is GrainBase ? Luaan.Yggmire.OrleansInterfaces.SessionObserverFactory.Cast(observer.AsReference()) : observer, zoneObserver is GrainBase ? Luaan.Yggmire.OrleansInterfaces.Actors.ZoneObserverFactory.Cast(zoneObserver.AsReference()) : zoneObserver}, TimeSpan.Zero );
             }
             
             public System.Threading.Tasks.Task Respond(int responseId, string response)
@@ -398,8 +572,8 @@ GrainFactoryBase.CheckGrainObserverParamInternal(observer);
                                 return await ((ISessionGrain)grain).CreateCharacter();
                             case -404060281: 
                                 return await ((ISessionGrain)grain).SelectCharacter((String)arguments[0]);
-                            case 1542836865: 
-                                await ((ISessionGrain)grain).RegisterObserver((ISessionObserver)arguments[0]);
+                            case 891264617: 
+                                await ((ISessionGrain)grain).RegisterObserver((ISessionObserver)arguments[0], (Luaan.Yggmire.OrleansInterfaces.Actors.IZoneObserver)arguments[1]);
                               return true;
                             case -1099888414: 
                                 await ((ISessionGrain)grain).Respond((Int32)arguments[0], (String)arguments[1]);
@@ -446,7 +620,7 @@ GrainFactoryBase.CheckGrainObserverParamInternal(observer);
                             return "CreateCharacter";
                     case -404060281:
                             return "SelectCharacter";
-                    case 1542836865:
+                    case 891264617:
                             return "RegisterObserver";
                     case -1099888414:
                             return "Respond";
@@ -708,6 +882,7 @@ namespace Luaan.Yggmire.OrleansInterfacesSerializers
     using System.Reflection;
     using Orleans.Serialization;
     using Luaan.Yggmire.OrleansInterfaces.Account;
+    using Luaan.Yggmire.Core.Structures;
     using System.Collections;
     using System.Runtime.InteropServices;
     
@@ -784,6 +959,46 @@ namespace Luaan.Yggmire.OrleansInterfacesSerializers
         public static void Register()
         {
             Orleans.Serialization.SerializationManager.Register(typeof(Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation), DeepCopier, Serializer, Deserializer);
+        }
+    }
+    
+    [Orleans.RegisterSerializerAttribute()]
+    internal class Luaan_Yggmire_Core_Structures_WorldItemSerialization
+    {
+        
+        static Luaan_Yggmire_Core_Structures_WorldItemSerialization()
+        {
+            Register();
+        }
+        
+        public static object DeepCopier(object original)
+        {
+            Luaan.Yggmire.Core.Structures.WorldItem input = ((Luaan.Yggmire.Core.Structures.WorldItem)(original));
+            Luaan.Yggmire.Core.Structures.WorldItem result = new Luaan.Yggmire.Core.Structures.WorldItem();
+            Orleans.Serialization.SerializationContext.Current.RecordObject(original, result);
+            result.Id = input.Id;
+            result.PrototypeId = input.PrototypeId;
+            return result;
+        }
+        
+        public static void Serializer(object untypedInput, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
+        {
+            Luaan.Yggmire.Core.Structures.WorldItem input = ((Luaan.Yggmire.Core.Structures.WorldItem)(untypedInput));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.Id, stream, typeof(Int32));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.PrototypeId, stream, typeof(Int32));
+        }
+        
+        public static object Deserializer(System.Type expected, Orleans.Serialization.BinaryTokenStreamReader stream)
+        {
+            Luaan.Yggmire.Core.Structures.WorldItem result = new Luaan.Yggmire.Core.Structures.WorldItem();
+            result.Id = ((Int32)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(Int32), stream)));
+            result.PrototypeId = ((Int32)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(Int32), stream)));
+            return result;
+        }
+        
+        public static void Register()
+        {
+            Orleans.Serialization.SerializationManager.Register(typeof(Luaan.Yggmire.Core.Structures.WorldItem), DeepCopier, Serializer, Deserializer);
         }
     }
 }

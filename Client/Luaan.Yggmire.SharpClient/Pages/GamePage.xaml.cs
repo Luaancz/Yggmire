@@ -1,5 +1,6 @@
 ﻿using Luaan.Yggmire.OrleansInterfaces;
 using Luaan.Yggmire.OrleansInterfaces.Account;
+using Luaan.Yggmire.OrleansInterfaces.Actors;
 using Luaan.Yggmire.SharpClient.Controls;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,9 @@ namespace Luaan.Yggmire.SharpClient.Pages
     public partial class GamePage : Page
     {
         private readonly YggmireGame game;
+
         private SessionObserver sessionObserver;
+        private ZoneObserver zoneObserver;
 
         public YggmireGame Game { get { return this.game; } }
 
@@ -41,9 +44,10 @@ namespace Luaan.Yggmire.SharpClient.Pages
 
         async void GamePage_Loaded(object sender, RoutedEventArgs e)
         {
-            var observer = await SessionObserverFactory.CreateObjectReference(sessionObserver = new SessionObserver(this));
+            var so = await SessionObserverFactory.CreateObjectReference(sessionObserver = new SessionObserver(this));
+            var zo = await ZoneObserverFactory.CreateObjectReference(zoneObserver = new ZoneObserver(game));
 
-            await game.Session.RegisterObserver(observer);
+            await game.Session.RegisterObserver(so, zo);
         }
 
         class SessionObserver : ISessionObserver
@@ -57,7 +61,13 @@ namespace Luaan.Yggmire.SharpClient.Pages
 
             void ISessionObserver.ShowDialog(string message)
             {
-                throw new NotImplementedException();
+                page.Dispatcher.Invoke
+                    (
+                        () =>
+                        {
+                            MessageBox.Show(message);
+                        }
+                    );
             }
 
             void ISessionObserver.ShowInputDialog(int responseId, string message)

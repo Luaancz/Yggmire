@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Luaan.Yggmire.Core</RootNamespace>
     <AssemblyName>Luaan.Yggmire.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -42,6 +42,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structures\InventoryItem.cs" />
+    <Compile Include="Structures\ItemPayload.cs" />
+    <Compile Include="Structures\Position2.cs" />
+    <Compile Include="Structures\StaticWorldItem.cs" />
+    <Compile Include="Structures\WorldItem.cs" />
+    <Compile Include="Structures\ZonePosition.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Actors\" />
