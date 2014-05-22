@@ -1,6 +1,7 @@
 ﻿using Luaan.Yggmire.OrleansInterfaces;
 using Luaan.Yggmire.SharpClient.Pages;
 using System.Windows.Input;
+using Orleans;
 
 
 namespace Luaan.Yggmire.SharpClient
@@ -28,6 +29,11 @@ namespace Luaan.Yggmire.SharpClient
                     await Session.Disconnect();
                 }
                 catch { }
+            }
+
+            if (OrleansClient.IsInitialized)
+            {
+                OrleansClient.Uninitialize();
             }
         }
     }
