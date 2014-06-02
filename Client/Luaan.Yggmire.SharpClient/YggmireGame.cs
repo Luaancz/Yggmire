@@ -105,7 +105,8 @@ namespace Luaan.Yggmire.SharpClient
             camera.Update(gameTime);
             terrain.Update(gameTime);
             
-            // Not thread-safe, but we don't really care
+            // Not thread-safe, but we don't really care if a couple of actors
+            // are not added until the next update.
             if (addedActors.Count > 0)
             {
                 PlacedActor actor;

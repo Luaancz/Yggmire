@@ -48,6 +48,7 @@
     <Compile Include="Actors\IZoneGrain.cs" />
     <Compile Include="Chat\IChatGrain.cs" />
     <Compile Include="Account\ICharacterGrain.cs" />
+    <Compile Include="IClientConversationGrain.cs" />
     <Compile Include="Monitoring\IMonitoringGrain.cs" />
     <Compile Include="Monitoring\ServerStatusInfo.cs" />
     <Compile Include="Properties\orleans.codegen.cs" />

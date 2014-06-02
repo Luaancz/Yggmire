@@ -21,7 +21,8 @@ namespace Luaan.Yggmire.OrleansServer
     /// <summary>
     /// Orleans grain implementation class SessionGrain
     /// </summary>
-    public class SessionGrain : Orleans.Grain, ISessionGrain
+    [Reentrant]
+    public class SessionGrain : Orleans.Grain, ISessionGrain, IClientConversationGrain
     {
         IAccountGrain loggedAccount;
         ICharacterGrain activeCharacter;
@@ -225,30 +226,45 @@ namespace Luaan.Yggmire.OrleansServer
         }
 
         int responseId = 1;
-        Dictionary<int, Func<string, Task>> expectedResponses = new Dictionary<int, Func<string, Task>>();
+        Dictionary<int, TaskCompletionSource<string>> expectedResponses = new Dictionary<int, TaskCompletionSource<string>>();
 
-        async Task ISessionGrain.Respond(int responseId, string response)
+        Task ISessionGrain.Respond(int responseId, string response)
         {
             if (!expectedResponses.ContainsKey(responseId))
                 throw new InvalidOperationException("Already responded.");
 
-            await expectedResponses[responseId](response);
+            expectedResponses[responseId].SetResult(response);
 
             // If there's no exception, everything went fine.
             expectedResponses.Remove(responseId);
+
+            return TaskDone.Done;
         }
 
-        async Task FinishCharacter(string response)
+        async Task FinishCharacter(string name)
         {
-            if (string.IsNullOrEmpty(response))
+            if (string.IsNullOrEmpty(name))
                 throw new Exception("You have to give me a name!");
 
-            await activeCharacter.SetName(response);
+            await activeCharacter.SetName(name);
             await activeCharacter.Complete();
             isCharacterComplete = true;
 
             sessionObserver.ReadyForChat();
             await zoneManager.EnterZone(ZoneGrainFactory.GetGrain(await activeCharacter.GetZoneId()));
+        }
+
+        async Task<string> IClientConversationGrain.AskForText(string title, string question)
+        {
+            if (this.sessionObserver == null) 
+                throw new InvalidOperationException("No session observer.");
+
+            var tcs = new TaskCompletionSource<string>(TaskCreationOptions.AttachedToParent);
+            expectedResponses.Add(responseId, tcs);
+
+            sessionObserver.ShowInputDialog(responseId++, question);
+
+            return await tcs.Task;
         }
 
         async Task ISessionGrain.RegisterObserver(ISessionObserver observer, IZoneObserver zoneObserver)
@@ -265,10 +281,9 @@ namespace Luaan.Yggmire.OrleansServer
             {
                 await zoneManager.EnterZone(ZoneGrainFactory.GetGrain("0.0.0"));
 
-                // Let's ask for a name to get this character finished!
-                expectedResponses.Add(responseId, FinishCharacter);
+                var name = await (this as IClientConversationGrain).AskForText("Character name", "Please, enter your character's name: ");
 
-                observer.ShowInputDialog(responseId++, "Please, enter your character's name: ");
+                await FinishCharacter(name);
             }
             else
             {

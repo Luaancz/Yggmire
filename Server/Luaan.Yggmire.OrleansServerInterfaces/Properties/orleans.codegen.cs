@@ -934,6 +934,185 @@ global::Orleans.CodeGeneration.GrainFactoryBase.CheckGrainObserverParamInternal(
         }
     }
 }
+namespace Luaan.Yggmire.OrleansServerInterfaces
+{
+    using System;
+    using System.Net;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.IO;
+    using System.Collections.Generic;
+    using Orleans;
+    using System.Collections;
+    
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    public class ClientConversationGrainFactory
+    {
+        
+
+                        public static IClientConversationGrain GetGrain(long primaryKey)
+                        {
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IClientConversationGrain), -163582615, primaryKey));
+                        }
+
+                        public static IClientConversationGrain GetGrain(long primaryKey, string grainClassNamePrefix)
+                        {
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IClientConversationGrain), -163582615, primaryKey, grainClassNamePrefix));
+                        }
+
+                        public static IClientConversationGrain GetGrain(Guid primaryKey)
+                        {
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IClientConversationGrain), -163582615, primaryKey));
+                        }
+
+                        public static IClientConversationGrain GetGrain(Guid primaryKey, string grainClassNamePrefix)
+                        {
+                            return Cast(GrainFactoryBase.MakeGrainReferenceInternal(typeof(IClientConversationGrain), -163582615, primaryKey, grainClassNamePrefix));
+                        }
+
+            public static IClientConversationGrain Cast(IAddressable grainRef)
+            {
+                
+                return ClientConversationGrainReference.Cast(grainRef);
+            }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+        [System.SerializableAttribute()]
+        [Orleans.GrainReferenceAttribute("Luaan.Yggmire.OrleansServerInterfaces.IClientConversationGrain")]
+        internal class ClientConversationGrainReference : Orleans.GrainReference, IClientConversationGrain, Orleans.IAddressable
+        {
+            
+
+            public static IClientConversationGrain Cast(IAddressable grainRef)
+            {
+                
+                return (IClientConversationGrain) GrainReference.CastInternal(typeof(IClientConversationGrain), (GrainReference gr) => { return new ClientConversationGrainReference(gr);}, grainRef, -163582615);
+            }
+
+                protected override int InterfaceId { get { return -163582615; } }
+
+                public override bool IsCompatible(int interfaceId) { return interfaceId == this.InterfaceId; }
+
+                protected override string InterfaceName { get { return "Luaan.Yggmire.OrleansServerInterfaces.IClientConversationGrain"; } }
+
+                protected override string GetMethodName(int interfaceId, int methodId) { return ClientConversationGrainMethodInvoker.GetMethodName(interfaceId, methodId); }
+            
+            protected internal ClientConversationGrainReference(GrainReference reference) : 
+                    base(reference)
+            {
+            }
+            
+            [Orleans.CopierMethodAttribute()]
+            public static object _Copier(object original)
+            {
+                ClientConversationGrainReference input = ((ClientConversationGrainReference)(original));
+                return ((ClientConversationGrainReference)(GrainReference.CopyGrainReference(input)));
+            }
+            
+            [Orleans.SerializerMethodAttribute()]
+            public static void _Serializer(object original, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
+            {
+                ClientConversationGrainReference input = ((ClientConversationGrainReference)(original));
+                GrainReference.SerializeGrainReference(input, stream, expected);
+            }
+            
+            [Orleans.DeserializerMethodAttribute()]
+            public static object _Deserializer(System.Type expected, Orleans.Serialization.BinaryTokenStreamReader stream)
+            {
+                return ClientConversationGrainReference.Cast(((Orleans.GrainReference)(GrainReference.DeserializeGrainReference(expected, stream))));
+            }
+            
+            public System.Threading.Tasks.Task<string> AskForText(string title, string question)
+            {
+
+                return base.InvokeMethodAsync<System.String>(51048912, new object[] {title, question}, TimeSpan.Zero );
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    [Orleans.MethodInvokerAttribute("Luaan.Yggmire.OrleansServerInterfaces.IClientConversationGrain", -163582615)]
+    internal class ClientConversationGrainMethodInvoker : IGrainMethodInvoker
+    {
+        
+        public int InterfaceId
+        {
+            get
+            {
+                return -163582615;
+            }
+        }
+        
+        public async System.Threading.Tasks.Task<Object> Invoke(IAddressable grain, int interfaceId, int methodId, object[] arguments)
+        {
+                if (grain == null) throw new System.ArgumentNullException("grain");
+                switch (interfaceId)
+                {
+                    case -163582615:  // IClientConversationGrain
+                        switch (methodId)
+                        {
+                            case 51048912: 
+                                return await ((IClientConversationGrain)grain).AskForText((String)arguments[0], (String)arguments[1]);
+                            default: 
+                                throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
+                        }
+                    default:
+                        throw new System.InvalidCastException("interfaceId="+interfaceId);
+                }
+        }
+        
+        public static string GetMethodName(int interfaceId, int methodId)
+        {
+
+            switch (interfaceId)
+            {
+                
+                case -163582615:  // IClientConversationGrain
+                    switch (methodId)
+                    {
+                        case 51048912:
+                            return "AskForText";
+                    case -606142484:
+                            return "GetProperties";
+                    
+                        default: 
+                            throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
+                    }
+
+                default:
+                    throw new System.InvalidCastException("interfaceId="+interfaceId);
+            }
+        }
+    }
+    
+    [Serializable()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.814.60418")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    public class ClientConversationGrainProperties
+    {
+        
+
+            public Dictionary<string,object> AsDictionary()
+            {  
+                var retValue = new Dictionary<string,object>();
+                return retValue;
+            }
+    }
+}
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//     Runtime Version:4.0.30319.18444
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
 namespace Luaan.Yggmire.OrleansServerInterfaces.Monitoring
 {
     using System;
