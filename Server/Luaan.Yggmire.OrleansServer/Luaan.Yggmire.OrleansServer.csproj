@@ -60,6 +60,7 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Chat\ChatGrain.cs" />
     <Compile Include="Monitoring\MonitoringGrain.cs" />
+    <Compile Include="Properties\orleans.codegen.cs" />
     <Compile Include="SessionGrain.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -86,9 +87,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <OrleansProjectType>Server</OrleansProjectType>

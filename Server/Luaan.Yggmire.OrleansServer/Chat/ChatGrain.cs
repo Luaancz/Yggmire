@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Luaan.Yggmire.OrleansServer.Chat
 {    
-    public class ChatGrain : GrainBase, IChatGrain
+    public class ChatGrain : Grain, IChatGrain
     {
         private ObserverSubscriptionManager<IChatObserver> subscribers;
 

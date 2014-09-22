@@ -10,11 +10,11 @@ namespace Luaan.Yggmire.OrleansServerInterfaces.Account
 {
     public interface ICharacterGrain : IGrain
     {
-        Task<bool> IsComplete { get; }
+        Task<bool> IsComplete();
 
         Task BindAccount(IAccountGrain account);
 
-        Task<string> Name { get; }
+        Task<string> GetName();
         Task SetName(string name);
 
         Task Complete();

@@ -8,11 +8,12 @@ using Luaan.Yggmire.OrleansServerInterfaces;
 using Orleans;
 using Luaan.Yggmire.OrleansServerInterfaces.Account;
 using Luaan.Yggmire.OrleansInterfaces.Account;
+using Orleans.Providers;
 
 namespace Luaan.Yggmire.OrleansServer.Account
 {
     [StorageProvider(ProviderName = "Default")]
-    public class CharacterGrain : GrainBase<ICharacterGrainState>, ICharacterGrain
+    public class CharacterGrain : Grain<ICharacterGrainState>, ICharacterGrain
     {
         IAccountGrain account;
         bool isComplete;
@@ -34,9 +35,9 @@ namespace Luaan.Yggmire.OrleansServer.Account
             await base.DeactivateAsync();
         }
 
-        Task<bool> ICharacterGrain.IsComplete
+        Task<bool> ICharacterGrain.IsComplete()
         {
-            get { return Task.FromResult(isComplete); }
+            return Task.FromResult(isComplete);
         }
 
         Task ICharacterGrain.BindAccount(IAccountGrain account)
@@ -46,7 +47,10 @@ namespace Luaan.Yggmire.OrleansServer.Account
             return TaskDone.Done;
         }
 
-        Task<string> ICharacterGrain.Name { get { return Task.FromResult(State.Name); } }
+        Task<string> ICharacterGrain.GetName() 
+        { 
+            return Task.FromResult(State.Name);
+        }
 
         async Task ICharacterGrain.SetName(string name)
         {

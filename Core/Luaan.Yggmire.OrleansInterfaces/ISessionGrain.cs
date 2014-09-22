@@ -13,7 +13,7 @@ namespace Luaan.Yggmire.OrleansInterfaces
     /// </summary>
     public interface ISessionGrain : Orleans.IGrain
     {
-        Task<string> CharacterName { get; }
+        Task<string> GetCharacterName();
 
         Task<AccountInformation> Authorize(string name, string password);
         Task<AccountInformation> GetAccount();

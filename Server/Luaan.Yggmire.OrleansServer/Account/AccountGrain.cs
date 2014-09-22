@@ -9,6 +9,7 @@ using Luaan.Yggmire.OrleansInterfaces;
 using Luaan.Yggmire.OrleansServerInterfaces;
 using Luaan.Yggmire.OrleansInterfaces.Account;
 using Luaan.Yggmire.OrleansServerInterfaces.Account;
+using Orleans.Providers;
 
 namespace Luaan.Yggmire.OrleansServer.Account
 {
@@ -16,7 +17,7 @@ namespace Luaan.Yggmire.OrleansServer.Account
     /// Orleans grain implementation class AccountGrain
     /// </summary>
     [StorageProvider(ProviderName = "Default")]
-    public class AccountGrain : GrainBase<IAccountGrainState>, IAccountGrain
+    public class AccountGrain : Grain<IAccountGrainState>, IAccountGrain
     {
         ISessionGrain currentSession;
 
@@ -31,12 +32,9 @@ namespace Luaan.Yggmire.OrleansServer.Account
             return base.ActivateAsync();
         }
 
-        Task<string> IAccountGrain.Name
+        Task<string> IAccountGrain.GetName()
         {
-            get
-            {
-                return Task.FromResult(State.Name);
-            }
+            return Task.FromResult(State.Name);
         }
         
         async Task IAccountGrain.CaptureSession(ISessionGrain session)

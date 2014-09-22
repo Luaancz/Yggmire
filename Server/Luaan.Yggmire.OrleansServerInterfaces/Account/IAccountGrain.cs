@@ -16,7 +16,7 @@ namespace Luaan.Yggmire.OrleansServerInterfaces.Account
     [ExtendedPrimaryKey]
     public interface IAccountGrain : Orleans.IGrain
     {
-        Task<string> Name { get; }
+        Task<string> GetName();
 
         Task CaptureSession(ISessionGrain session);
         Task<AccountInformation> GetState();

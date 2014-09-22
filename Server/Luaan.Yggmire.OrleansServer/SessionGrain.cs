@@ -20,7 +20,7 @@ namespace Luaan.Yggmire.OrleansServer
     /// <summary>
     /// Orleans grain implementation class SessionGrain
     /// </summary>
-    public class SessionGrain : Orleans.GrainBase, ISessionGrain
+    public class SessionGrain : Orleans.Grain, ISessionGrain
     {
         IAccountGrain loggedAccount;
         ICharacterGrain activeCharacter;
@@ -158,14 +158,11 @@ namespace Luaan.Yggmire.OrleansServer
             return loggedAccount.GetState();
         }
 
-        Task<string> ISessionGrain.CharacterName
+        Task<string> ISessionGrain.GetCharacterName()
         {
-            get
-            {
-                CheckCharacter();
+            CheckCharacter();
 
-                return Task.FromResult(name);
-            }
+            return Task.FromResult(name);
         }
 
         async Task ISessionGrain.SendChatMessage(int channel, string message)

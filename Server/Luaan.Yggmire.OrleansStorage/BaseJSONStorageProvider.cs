@@ -21,6 +21,8 @@ using System.Web.Script.Serialization;
 using Orleans;
 using Orleans.Storage;
 using Orleans.Providers;
+using Orleans.CodeGeneration;
+using Orleans.Runtime;
 
 namespace Luaan.Yggmire.OrleansStorage
 {
@@ -119,7 +121,7 @@ namespace Luaan.Yggmire.OrleansStorage
         /// <param name="grainReference">Represents the long-lived identity of the grain.</param>
         /// <param name="grainState">An object holding the persisted state of the grain.</param>
         /// <returns></returns>
-        public Task ClearStateAsync(string grainType, GrainReference grainReference, GrainState grainState)
+        public Task ClearStateAsync(string grainType, GrainReference grainReference, IGrainState grainState)
         {
             if (DataManager == null) throw new ArgumentException("DataManager property not initialized");
             DataManager.Delete(grainState.GetType().Name, grainReference.ToKeyString());
@@ -137,7 +139,7 @@ namespace Luaan.Yggmire.OrleansStorage
         /// </remarks>
         protected static string ConvertToStorageFormat(IGrainState grainState)
         {
-            Dictionary<string, object> dataValues = grainState.AsDictionary();
+            IDictionary<string, object> dataValues = grainState.AsDictionary();
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             return serializer.Serialize(dataValues);
         }

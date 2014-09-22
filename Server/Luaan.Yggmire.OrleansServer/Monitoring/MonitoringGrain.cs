@@ -7,11 +7,12 @@ using Luaan.Yggmire.OrleansServerInterfaces.Monitoring;
 using Orleans;
 using System.Reflection;
 using Luaan.Yggmire.OrleansInterfaces;
+using Orleans.Providers;
 
 namespace Luaan.Yggmire.OrleansServer.Monitoring
 {
     [StorageProvider(ProviderName="MemoryStore")]
-    public class MonitoringGrain : GrainBase<IMonitoringStatus>, IMonitoringGrain
+    public class MonitoringGrain : Grain<IMonitoringStatus>, IMonitoringGrain
     {
         Task<ServerStatusInfo> IMonitoringGrain.GetStatus()
         {

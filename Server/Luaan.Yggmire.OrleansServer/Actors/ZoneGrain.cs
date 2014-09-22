@@ -13,7 +13,7 @@ namespace Luaan.Yggmire.OrleansServer.Actors
     /// <summary>
     /// Orleans grain implementation class ZoneGrain
     /// </summary>
-    public class ZoneGrain : GrainBase<IZoneState>, IZoneGrain
+    public class ZoneGrain : Grain<IZoneState>, IZoneGrain
     {
         private ObserverSubscriptionManager<IZoneObserver> subscribers;
 
