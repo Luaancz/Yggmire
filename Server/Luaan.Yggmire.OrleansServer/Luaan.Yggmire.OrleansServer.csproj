@@ -82,7 +82,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="D:\Microsoft Codename Orleans SDK v0.9\SDK\LocalSilo\OrleansConfiguration.xml">
+    <None Include="$(OrleansSDK)\LocalSilo\OrleansConfiguration.xml">
       <Link>OrleansConfiguration.xml</Link>
     </None>
     <None Include="packages.config" />

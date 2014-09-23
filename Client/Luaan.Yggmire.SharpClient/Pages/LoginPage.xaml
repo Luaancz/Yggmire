@@ -8,7 +8,7 @@
 	Title="Login">
 
     <DockPanel Background="CornflowerBlue">
-        <Border VerticalAlignment="Center" HorizontalAlignment="Center" Height="180" Width="400" Style="{DynamicResource SimplePanel}">
+        <Border VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="400" MaxWidth="800" Style="{DynamicResource SimplePanel}">
             <Grid Margin="5,25,5,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
