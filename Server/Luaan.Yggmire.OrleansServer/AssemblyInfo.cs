@@ -14,7 +14,7 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyInformationalVersion("0.1.0.bfdd005")]
+[assembly: AssemblyInformationalVersion("0.1.0.c46ef0f")]
 [assembly: AssemblyVersion("0.1.0")]
 [assembly: AssemblyFileVersion("0.1.0")]
 [assembly: AssemblyTitle("Yggmire Server Grains")]
