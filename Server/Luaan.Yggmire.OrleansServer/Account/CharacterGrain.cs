@@ -74,6 +74,8 @@ namespace Luaan.Yggmire.OrleansServer.Account
             account.GetPrimaryKey(out accountName);
 
             State.AccountId = accountName;
+            // TODO: Pick a random starting zone
+            State.ZoneId = "50.0.0";
 
             return Task.WhenAll(State.WriteStateAsync(), account.CompleteCharacter(this, new CharacterInformation { Id = this.GetPrimaryKey(), Name = State.Name }));
         }
@@ -83,7 +85,7 @@ namespace Luaan.Yggmire.OrleansServer.Account
             return Task.FromResult(new CharacterInformation { Id = this.GetPrimaryKey(), Name = State.Name });
         }
 
-        Task<Guid> ICharacterGrain.GetZoneId()
+        Task<string> ICharacterGrain.GetZoneId()
         {
             return Task.FromResult(State.ZoneId);
         }

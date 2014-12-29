@@ -140,7 +140,7 @@ namespace Luaan.Yggmire.OrleansStorage
         protected static string ConvertToStorageFormat(IGrainState grainState)
         {
             IDictionary<string, object> dataValues = grainState.AsDictionary();
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            JavaScriptSerializer serializer = new JavaScriptSerializer(new YggmireTypeResolver());
             return serializer.Serialize(dataValues);
         }
 
@@ -151,11 +151,25 @@ namespace Luaan.Yggmire.OrleansStorage
         /// <param name="entityData">JSON storage format representaiton of the grain state.</param>
         protected static void ConvertFromStorageFormat(IGrainState grainState, string entityData)
         {
-            JavaScriptSerializer deserializer = new JavaScriptSerializer();
+            
+            JavaScriptSerializer deserializer = new JavaScriptSerializer(new YggmireTypeResolver());
             object data = deserializer.Deserialize(entityData, grainState.GetType());
             var dict = ((IGrainState)data).AsDictionary();
             grainState.SetAll(dict);
         }
     }
 
+    public class YggmireTypeResolver : JavaScriptTypeResolver
+    {
+        public override Type ResolveType(string id)
+        {
+            return Type.GetType(id);
+        }
+
+        public override string ResolveTypeId(Type type)
+        {
+            if (type.BaseType != null && type.BaseType != typeof(object) && !type.IsValueType) return type.AssemblyQualifiedName;
+            else return null;
+        }
+    }
 }

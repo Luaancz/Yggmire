@@ -123,10 +123,10 @@ namespace Luaan.Yggmire.OrleansInterfaces.Actors
                 return ZoneObserverMethodInvoker.GetMethodName(interfaceId, methodId);
             }
             
-            void Luaan.Yggmire.OrleansInterfaces.Actors.IZoneObserver.AddItems(System.Guid zoneId, Luaan.Yggmire.Core.Structures.WorldItem[] items)
+            void Luaan.Yggmire.OrleansInterfaces.Actors.IZoneObserver.AddItems(string zoneId, Luaan.Yggmire.Core.Structures.WorldItem[] items)
             {
 
-                base.InvokeOneWayMethod(1653213901, new object[] {zoneId, items} );
+                base.InvokeOneWayMethod(-325194335, new object[] {zoneId, items} );
             }
         }
     }
@@ -156,8 +156,8 @@ namespace Luaan.Yggmire.OrleansInterfaces.Actors
                     case 1865857157:  // IZoneObserver
                         switch (methodId)
                         {
-                            case 1653213901: 
-                                ((IZoneObserver)grain).AddItems((System.Guid)arguments[0], (Luaan.Yggmire.Core.Structures.WorldItem[])arguments[1]); return System.Threading.Tasks.Task.FromResult((object)true);
+                            case -325194335: 
+                                ((IZoneObserver)grain).AddItems((System.String)arguments[0], (Luaan.Yggmire.Core.Structures.WorldItem[])arguments[1]); return System.Threading.Tasks.Task.FromResult((object)true);
                             default: 
                             throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
                         }
@@ -182,7 +182,7 @@ namespace Luaan.Yggmire.OrleansInterfaces.Actors
                 case 1865857157:  // IZoneObserver
                     switch (methodId)
                     {
-                        case 1653213901:
+                        case -325194335:
                             return "AddItems";
                     
                         default: 

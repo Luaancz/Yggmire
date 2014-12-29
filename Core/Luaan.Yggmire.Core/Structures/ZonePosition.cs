@@ -18,5 +18,10 @@ namespace Luaan.Yggmire.Core.Structures
             Layer = layer;
             Position = position;
         }
+
+        public ZonePosition Offset(int dX, int dY)
+        {
+            return new ZonePosition(Layer, Position.Offset(dX, dY));
+        }
     }
 }

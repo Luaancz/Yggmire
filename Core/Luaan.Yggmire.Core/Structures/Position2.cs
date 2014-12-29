@@ -18,5 +18,10 @@ namespace Luaan.Yggmire.Core.Structures
             X = x;
             Y = y;
         }
+
+        public Position2 Offset(int dX, int dY)
+        {
+            return new Position2(X + dX, Y + dY);
+        }
     }
 }

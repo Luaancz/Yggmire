@@ -56,7 +56,7 @@ namespace Luaan.Yggmire.SharpClient
         List<PlacedActor> localActors = new List<PlacedActor>();
         ConcurrentQueue<PlacedActor> addedActors = new ConcurrentQueue<PlacedActor>();
         
-        public void AddWorldItem(WorldItem item)
+        public void AddWorldItem(ZonePosition zoneOffset, WorldItem item)
         {
             var swi = item as StaticWorldItem;
 
@@ -69,7 +69,7 @@ namespace Luaan.Yggmire.SharpClient
                 default: return;
             }
 
-            actor.Position = new Vector3(swi.Position.X / 1000f, 0, swi.Position.Y / 1000f);
+            actor.Position = new Vector3(zoneOffset.Position.X * 255 + swi.Position.X / 1000f, 0, zoneOffset.Position.Y * 255 + swi.Position.Y / 1000f);
             actor.Scale *= 2.5f;
             actor.Initialize();
 

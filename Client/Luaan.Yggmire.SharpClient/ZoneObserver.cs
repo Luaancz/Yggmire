@@ -17,10 +17,10 @@ namespace Luaan.Yggmire.SharpClient
             this.game = game;
         }
 
-        public void AddItems(Guid zoneId, WorldItem[] items)
+        public void AddItems(string zoneId, WorldItem[] items)
         {
             foreach (var item in items)
-                game.AddWorldItem(item);
+                game.AddWorldItem(new ZonePosition(), item);
         }
     }
 }

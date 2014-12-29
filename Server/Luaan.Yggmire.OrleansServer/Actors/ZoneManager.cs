@@ -14,22 +14,37 @@ namespace Luaan.Yggmire.OrleansServer.Actors
 
         IZoneGrain currentZone;
 
+        List<IZoneGrain> neighbours;
+
         public ZoneManager(IZoneObserver zoneObserver)
         {
             this.zoneObserver = zoneObserver;
+            this.neighbours = new List<IZoneGrain>();
         }
 
         public async Task EnterZone(IZoneGrain zone)
         {
-            // TODO: We have to leave and enter zones around this one.
-
             // At this point we'll only handle one zone, without the neighbours.
+            var toUnsubscribe = new List<IZoneGrain>();
+            var toSubscribe = new List<IZoneGrain>();
+
+            var newNeighbours = (await zone.GetNeighbours()).ToList();
+
             if (currentZone != null)
-                await currentZone.Unsubscribe(zoneObserver);
+            {
+                toUnsubscribe.Add(currentZone);
+                toUnsubscribe.AddRange(neighbours.Where(i => !newNeighbours.Contains(i)));
 
+                await Task.WhenAll(toUnsubscribe.Select(i => i.Unsubscribe(zoneObserver)));
+            }
+
+            toSubscribe.Add(zone);
+            toSubscribe.AddRange(newNeighbours.Where(i => !neighbours.Contains(i)));
+            
             currentZone = zone;
+            neighbours = newNeighbours;
 
-            await zone.Subscribe(zoneObserver);
+            await Task.WhenAll(toSubscribe.Select(i => i.Subscribe(zoneObserver)));
         }
     }
 }

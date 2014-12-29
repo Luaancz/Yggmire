@@ -9,8 +9,10 @@ namespace Luaan.Yggmire.OrleansServerInterfaces.Actors
     /// <summary>
     /// Orleans grain communication interface IZoneGrain
     /// </summary>
-    public interface IZoneGrain : Orleans.IGrain
+    public interface IZoneGrain : Orleans.IGrainWithStringKey
     {
+        Task<IEnumerable<IZoneGrain>> GetNeighbours();
+
         Task Subscribe(IZoneObserver observer);
         Task Unsubscribe(IZoneObserver observer);
     }

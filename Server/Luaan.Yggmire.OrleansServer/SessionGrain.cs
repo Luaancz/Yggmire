@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text;
 using Orleans;
+using Orleans.Concurrency;
 using Luaan.Yggmire.OrleansInterfaces;
 using Luaan.Yggmire.OrleansServerInterfaces;
 using Luaan.Yggmire.OrleansInterfaces.Account;
@@ -247,6 +248,7 @@ namespace Luaan.Yggmire.OrleansServer
             isCharacterComplete = true;
 
             sessionObserver.ReadyForChat();
+            await zoneManager.EnterZone(ZoneGrainFactory.GetGrain(await activeCharacter.GetZoneId()));
         }
 
         async Task ISessionGrain.RegisterObserver(ISessionObserver observer, IZoneObserver zoneObserver)
@@ -261,7 +263,7 @@ namespace Luaan.Yggmire.OrleansServer
             // This is a good time to handle enter-game notifications. Later.
             if (!isCharacterComplete)
             {
-                await zoneManager.EnterZone(ZoneGrainFactory.GetGrain(0));
+                await zoneManager.EnterZone(ZoneGrainFactory.GetGrain("0.0.0"));
 
                 // Let's ask for a name to get this character finished!
                 expectedResponses.Add(responseId, FinishCharacter);

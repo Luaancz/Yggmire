@@ -21,7 +21,7 @@ namespace Luaan.Yggmire.OrleansServerInterfaces.Account
 
         Task<CharacterInformation> GetInfo();
 
-        Task<Guid> GetZoneId();
+        Task<string> GetZoneId();
     }
 
     public interface ICharacterGrainState : IGrainState
@@ -29,6 +29,6 @@ namespace Luaan.Yggmire.OrleansServerInterfaces.Account
         string AccountId { get; set; }
         string Name { get; set; }
 
-        Guid ZoneId { get; set; }
+        string ZoneId { get; set; }
     }
 }
