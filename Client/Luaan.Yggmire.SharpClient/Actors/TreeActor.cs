@@ -48,7 +48,7 @@ namespace Luaan.Yggmire.SharpClient.Actors
 
             effect.CurrentTechnique.Passes[0].Apply();
 
-            model.Meshes[0].Draw(Game.GraphicsDevice, effect);
+            model.Meshes[0].Draw(Game.GraphicsDevice, null, effect);
         }
     }
 }
