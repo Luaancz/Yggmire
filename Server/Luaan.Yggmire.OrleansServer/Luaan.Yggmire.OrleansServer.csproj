@@ -56,7 +56,7 @@
     <Compile Include="Account\CharacterGrain.cs" />
     <Compile Include="Actors\ZoneGrain.cs" />
     <Compile Include="Actors\ZoneManager.cs" />
-    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Chat\ChatGrain.cs" />
     <Compile Include="Monitoring\MonitoringGrain.cs" />
     <Compile Include="Properties\orleans.codegen.cs" />
