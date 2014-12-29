@@ -15,8 +15,6 @@ namespace Luaan.Yggmire.SharpClient.Actors
         Effect effect;
         Texture2D texture;
 
-        SamplerState samplerState;
-
         public TreeActor(YggmireGame game)
             : base(game)
         {
