@@ -157,5 +157,4 @@ $RECYCLE.BIN/
 .DS_Store
 /Libraries/Lidgren.Network/Documentation
 /Client/Luaan.Yggmire.UnityClient/Library/ScriptAssemblies/CompilationCompleted.txt
-Server/Luaan.Yggmire.OrleansServer/AssemblyInfo.cs
-Server/Luaan.Yggmire.OrleansServer/AssemblyInfo.cs
+/Server/Luaan.Yggmire.OrleansServer/AssemblyInfo.cs
