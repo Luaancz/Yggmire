@@ -48,25 +48,25 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="SharpDX">
-      <HintPath>C:\SharpDX\Bin\DirectX11-Signed-net40\SharpDX.dll</HintPath>
+      <HintPath>$(SharpDXSdkDir)\Bin\DirectX11-Signed-net40\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D11">
-      <HintPath>C:\SharpDX\Bin\DirectX11-Signed-net40\SharpDX.Direct3D11.dll</HintPath>
+      <HintPath>$(SharpDXSdkDir)\Bin\DirectX11-Signed-net40\SharpDX.Direct3D11.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D11.Effects">
-      <HintPath>C:\SharpDX\Bin\DirectX11-Signed-net40\SharpDX.Direct3D11.Effects.dll</HintPath>
+      <HintPath>$(SharpDXSdkDir)\Bin\DirectX11-Signed-net40\SharpDX.Direct3D11.Effects.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Toolkit">
-      <HintPath>C:\SharpDX\Bin\DirectX11-Signed-net40\SharpDX.Toolkit.dll</HintPath>
+      <HintPath>$(SharpDXSdkDir)\Bin\DirectX11-Signed-net40\SharpDX.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Toolkit.Game">
-      <HintPath>C:\SharpDX\Bin\DirectX11-Signed-net40\SharpDX.Toolkit.Game.dll</HintPath>
+      <HintPath>$(SharpDXSdkDir)\Bin\DirectX11-Signed-net40\SharpDX.Toolkit.Game.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Toolkit.Graphics">
-      <HintPath>C:\SharpDX\Bin\DirectX11-Signed-net40\SharpDX.Toolkit.Graphics.dll</HintPath>
+      <HintPath>$(SharpDXSdkDir)\Bin\DirectX11-Signed-net40\SharpDX.Toolkit.Graphics.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Toolkit.Input">
-      <HintPath>C:\SharpDX\Bin\DirectX11-Signed-net40\SharpDX.Toolkit.Input.dll</HintPath>
+      <HintPath>$(SharpDXSdkDir)\Bin\DirectX11-Signed-net40\SharpDX.Toolkit.Input.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
