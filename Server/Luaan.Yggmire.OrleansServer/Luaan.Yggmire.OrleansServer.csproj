@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Luaan.Yggmire.OrleansServer</RootNamespace>
     <AssemblyName>Luaan.Yggmire.OrleansServer</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
@@ -56,9 +56,9 @@
     <Compile Include="Account\CharacterGrain.cs" />
     <Compile Include="Actors\ZoneGrain.cs" />
     <Compile Include="Actors\ZoneManager.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Chat\ChatGrain.cs" />
     <Compile Include="Monitoring\MonitoringGrain.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\orleans.codegen.cs" />
     <Compile Include="SessionGrain.cs" />
   </ItemGroup>
