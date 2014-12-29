@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Version;Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -13,7 +13,6 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
-    <MSBuildCommunityTasksPath>$(SolutionDir)\.build</MSBuildCommunityTasksPath>
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -93,35 +92,6 @@
     <OrleansProjectType>Server</OrleansProjectType>
   </PropertyGroup>
   <Import Project="$(OrleansSDK)\Binaries\OrleansClient\Orleans.SDK.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>
-      if exist "$(OrleansSDK)\LocalSilo" (
-      if not exist "$(OrleansSDK)\LocalSilo\Applications" (md "$(OrleansSDK)\LocalSilo\Applications")
-      if not exist  "$(OrleansSDK)\LocalSilo\Applications\$(RootNamespace)" (md "$(OrleansSDK)\LocalSilo\Applications\$(RootNamespace)")
-      copy /y *.dll  "$(OrleansSDK)\LocalSilo\Applications\$(RootNamespace)\"
-      copy /y *.pdb  "$(OrleansSDK)\LocalSilo\Applications\$(RootNamespace)\"
-      )
-      if exist "$(OrleansSDK)\Binaries" (
-      if not exist "$(OrleansSDK)\Binaries\Applications" (md "$(OrleansSDK)\Binaries\Applications")
-      if not exist  "$(OrleansSDK)\Binaries\Applications\$(RootNamespace)" (md "$(OrleansSDK)\Binaries\Applications\$(RootNamespace)")
-      copy /y *.dll "$(OrleansSDK)\Binaries\Applications\$(RootNamespace)\"
-      copy /y *.pdb "$(OrleansSDK)\Binaries\Applications\$(RootNamespace)\"
-      )
-    </PostBuildEvent>
-  </PropertyGroup>
-  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets" />
-  <PropertyGroup>
-    <Major>0</Major>
-    <Minor>1</Minor>
-    <Build>0</Build>
-    <Revision>0</Revision>
-  </PropertyGroup>
-  <Target Name="Version">
-    <GitVersion LocalPath="$(MSBuildProjectDirectory)">
-      <Output TaskParameter="CommitHash" PropertyName="Revision" />
-    </GitVersion>
-    <AssemblyInfo AssemblyInformationalVersion="$(Major).$(Minor).$(Build).$(Revision)" AssemblyVersion="$(Major).$(Minor).$(Build)" AssemblyFileVersion="$(Major).$(Minor).$(Build)" AssemblyTitle="Yggmire Server Grains" AssemblyProduct="Yggmire Engine" AssemblyCopyright="Copyright © Luaan 2014" AssemblyCompany="Jiří Borkovec (Luaan)" CodeLanguage="CS" ComVisible="False" />
-  </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Reflection.AssemblyInformationalVersion("0.1.0.14207dd")]
+[assembly: System.Reflection.AssemblyInformationalVersion("0.1.0.cf1707b")]
 [assembly: System.Reflection.AssemblyVersion("0.1.0")]
 [assembly: System.Reflection.AssemblyFileVersion("0.1.0")]
 [assembly: System.Reflection.AssemblyTitle("Yggmire Server Grains")]
