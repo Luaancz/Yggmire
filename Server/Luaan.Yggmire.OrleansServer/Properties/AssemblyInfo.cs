@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Luaan.Yggmire.OrleansStorage")]
+[assembly: AssemblyTitle("Yggmire Server Grains")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jiří Borkovec (Luaan)")]
-[assembly: AssemblyProduct("Luaan.Yggmire.OrleansStorage")]
+[assembly: AssemblyProduct("Yggmire Engine")]
 [assembly: AssemblyCopyright("Copyright © Luaan 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f0a89df1-4aec-4316-87d5-474ae3005af6")]
+[assembly: Guid("e283a56b-f363-42e4-b74b-0db0dcc146ca")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -29,9 +29,6 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.1.0")]
+[assembly: AssemblyFileVersion("0.1.0")]
 [assembly: AssemblyInformationalVersion("D")]
