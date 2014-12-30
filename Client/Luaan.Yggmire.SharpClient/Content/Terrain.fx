@@ -46,8 +46,8 @@ PSInput VS(VSInput input)
 
 	psi.Position = mul(input.Position, wvp);
 	psi.Texture = input.Texture / 4;
-	psi.Normal = normalize(mul(input.Normal, (float3x3)world));
-	psi.Pos = mul(input.Position, world);
+	psi.Normal = normalize(mul(input.Normal, world).xyz);
+	psi.Pos = mul(input.Position, world).xyz;
 
 	return psi;
 }

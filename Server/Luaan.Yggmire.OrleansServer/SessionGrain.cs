@@ -218,7 +218,7 @@ namespace Luaan.Yggmire.OrleansServer
         /// <returns></returns>
         Task ISessionGrain.Disconnect()
         {
-            sessionObserver.Disconnected();
+            if (sessionObserver != null) sessionObserver.Disconnected();
 
             DeactivateOnIdle();
 

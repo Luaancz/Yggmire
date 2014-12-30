@@ -51,6 +51,7 @@ namespace Luaan.Yggmire.SharpClient
             base.Initialize();
 
             inputManager.Initialize();
+            graphicsDeviceManager.PreferMultiSampling = true;
         }
         
         List<PlacedActor> localActors = new List<PlacedActor>();
