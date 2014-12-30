@@ -147,7 +147,7 @@ namespace Luaan.Yggmire.OrleansStorage
             var dir = directory.CreateSubdirectory(collectionName);
 
             string fileName = key;
-            string path = Path.Combine(dir.FullName, fileName, ".json");
+            string path = Path.Combine(dir.FullName, fileName + ".json");
             return new FileInfo(path);
         }
 

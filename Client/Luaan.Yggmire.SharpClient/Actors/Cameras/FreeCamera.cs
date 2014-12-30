@@ -86,7 +86,7 @@ namespace Luaan.Yggmire.SharpClient.Actors
                 this.position += Vector3.Transform(move * (KeyDown(Keys.LeftShift) ? 100f : 2f), orientation);
             }
 
-            if (turn != Vector3.Zero && Game.InputManager.MouseState.RightButton.Pressed)
+            if (turn != Vector3.Zero && Game.InputManager.MouseState.RightButton.Down)
             {
                 yaw += turn.X * 5f;
                 pitch += turn.Y * 5f;
