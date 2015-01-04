@@ -89,7 +89,8 @@ namespace Luaan.Yggmire.OrleansServer.Actors
         {
             subscribers.Subscribe(observer);
 
-            observer.AddItems(State.Id, State.Items.ToArray());
+            observer.AddZone(State.Position);
+            observer.AddItems(State.Position, State.Items.ToArray());
 
             return TaskDone.Done;
         }
@@ -97,6 +98,7 @@ namespace Luaan.Yggmire.OrleansServer.Actors
         Task IZoneGrain.Unsubscribe(IZoneObserver observer)
         {
             subscribers.Unsubscribe(observer);
+            observer.DropZone(State.Position);
 
             return TaskDone.Done;
         }

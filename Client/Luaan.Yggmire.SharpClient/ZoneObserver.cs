@@ -17,10 +17,20 @@ namespace Luaan.Yggmire.SharpClient
             this.game = game;
         }
 
-        public void AddItems(string zoneId, WorldItem[] items)
+        public void AddZone(ZonePosition zonePosition)
+        {
+            game.AddZone(zonePosition);
+        }
+
+        public void AddItems(ZonePosition zonePosition, WorldItem[] items)
         {
             foreach (var item in items)
-                game.AddWorldItem(new ZonePosition(), item);
+                game.AddWorldItem(zonePosition, item);
+        }
+
+        public void DropZone(ZonePosition zonePosition)
+        {
+            game.DropZone(zonePosition);
         }
     }
 }

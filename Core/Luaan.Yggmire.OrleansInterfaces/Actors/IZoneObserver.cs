@@ -12,6 +12,8 @@ namespace Luaan.Yggmire.OrleansInterfaces.Actors
 {
     public interface IZoneObserver : IGrainObserver
     {
-        void AddItems(string zoneId, WorldItem[] items);
+        void AddZone(ZonePosition zonePosition);
+        void AddItems(ZonePosition zonePosition, WorldItem[] items);
+        void DropZone(ZonePosition zonePosition);
     }
 }
