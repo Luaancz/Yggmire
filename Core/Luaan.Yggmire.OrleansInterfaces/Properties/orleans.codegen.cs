@@ -123,10 +123,22 @@ namespace Luaan.Yggmire.OrleansInterfaces.Actors
                 return ZoneObserverMethodInvoker.GetMethodName(interfaceId, methodId);
             }
             
-            void Luaan.Yggmire.OrleansInterfaces.Actors.IZoneObserver.AddItems(string zoneId, Luaan.Yggmire.Core.Structures.WorldItem[] items)
+            void Luaan.Yggmire.OrleansInterfaces.Actors.IZoneObserver.AddZone(Luaan.Yggmire.Core.Structures.ZonePosition zonePosition)
             {
 
-                base.InvokeOneWayMethod(-325194335, new object[] {zoneId, items} );
+                base.InvokeOneWayMethod(-508328461, new object[] {zonePosition} );
+            }
+            
+            void Luaan.Yggmire.OrleansInterfaces.Actors.IZoneObserver.AddItems(Luaan.Yggmire.Core.Structures.ZonePosition zonePosition, Luaan.Yggmire.Core.Structures.WorldItem[] items)
+            {
+
+                base.InvokeOneWayMethod(1416935700, new object[] {zonePosition, items} );
+            }
+            
+            void Luaan.Yggmire.OrleansInterfaces.Actors.IZoneObserver.DropZone(Luaan.Yggmire.Core.Structures.ZonePosition zonePosition)
+            {
+
+                base.InvokeOneWayMethod(1843968344, new object[] {zonePosition} );
             }
         }
     }
@@ -156,8 +168,12 @@ namespace Luaan.Yggmire.OrleansInterfaces.Actors
                     case 1865857157:  // IZoneObserver
                         switch (methodId)
                         {
-                            case -325194335: 
-                                ((IZoneObserver)grain).AddItems((System.String)arguments[0], (Luaan.Yggmire.Core.Structures.WorldItem[])arguments[1]); return System.Threading.Tasks.Task.FromResult((object)true);
+                            case -508328461: 
+                                ((IZoneObserver)grain).AddZone((Luaan.Yggmire.Core.Structures.ZonePosition)arguments[0]); return System.Threading.Tasks.Task.FromResult((object)true);
+                            case 1416935700: 
+                                ((IZoneObserver)grain).AddItems((Luaan.Yggmire.Core.Structures.ZonePosition)arguments[0], (Luaan.Yggmire.Core.Structures.WorldItem[])arguments[1]); return System.Threading.Tasks.Task.FromResult((object)true);
+                            case 1843968344: 
+                                ((IZoneObserver)grain).DropZone((Luaan.Yggmire.Core.Structures.ZonePosition)arguments[0]); return System.Threading.Tasks.Task.FromResult((object)true);
                             default: 
                             throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
                         }
@@ -182,8 +198,12 @@ namespace Luaan.Yggmire.OrleansInterfaces.Actors
                 case 1865857157:  // IZoneObserver
                     switch (methodId)
                     {
-                        case -325194335:
+                        case -508328461:
+                            return "AddZone";
+                    case 1416935700:
                             return "AddItems";
+                    case 1843968344:
+                            return "DropZone";
                     
                         default: 
                             throw new NotImplementedException("interfaceId="+interfaceId+",methodId="+methodId);
@@ -971,6 +991,80 @@ namespace Luaan.Yggmire.OrleansInterfacesSerializers
         public static void Register()
         {
             global::Orleans.Serialization.SerializationManager.Register(typeof(Luaan.Yggmire.OrleansInterfaces.Account.CharacterInformation), DeepCopier, Serializer, Deserializer);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.1053.48452")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    [global::Orleans.CodeGeneration.RegisterSerializerAttribute()]
+    internal class Luaan_Yggmire_Core_Structures_ZonePositionSerialization
+    {
+        
+        static Luaan_Yggmire_Core_Structures_ZonePositionSerialization()
+        {
+            Register();
+        }
+        
+        public static object DeepCopier(object original)
+        {
+            return original;
+        }
+        
+        public static void Serializer(object untypedInput, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
+        {
+            Luaan.Yggmire.Core.Structures.ZonePosition input = ((Luaan.Yggmire.Core.Structures.ZonePosition)(untypedInput));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.Layer, stream, typeof(Int32));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.Position, stream, typeof(Position2));
+        }
+        
+        public static object Deserializer(System.Type expected, global::Orleans.Serialization.BinaryTokenStreamReader stream)
+        {
+            Luaan.Yggmire.Core.Structures.ZonePosition result = default(Luaan.Yggmire.Core.Structures.ZonePosition);
+            result.Layer = ((Int32)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(Int32), stream)));
+            result.Position = ((Position2)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(Position2), stream)));
+            return result;
+        }
+        
+        public static void Register()
+        {
+            global::Orleans.Serialization.SerializationManager.Register(typeof(Luaan.Yggmire.Core.Structures.ZonePosition), DeepCopier, Serializer, Deserializer);
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.1053.48452")]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute()]
+    [global::Orleans.CodeGeneration.RegisterSerializerAttribute()]
+    internal class Luaan_Yggmire_Core_Structures_Position2Serialization
+    {
+        
+        static Luaan_Yggmire_Core_Structures_Position2Serialization()
+        {
+            Register();
+        }
+        
+        public static object DeepCopier(object original)
+        {
+            return original;
+        }
+        
+        public static void Serializer(object untypedInput, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
+        {
+            Luaan.Yggmire.Core.Structures.Position2 input = ((Luaan.Yggmire.Core.Structures.Position2)(untypedInput));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.X, stream, typeof(Int32));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.Y, stream, typeof(Int32));
+        }
+        
+        public static object Deserializer(System.Type expected, global::Orleans.Serialization.BinaryTokenStreamReader stream)
+        {
+            Luaan.Yggmire.Core.Structures.Position2 result = default(Luaan.Yggmire.Core.Structures.Position2);
+            result.X = ((Int32)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(Int32), stream)));
+            result.Y = ((Int32)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(Int32), stream)));
+            return result;
+        }
+        
+        public static void Register()
+        {
+            global::Orleans.Serialization.SerializationManager.Register(typeof(Luaan.Yggmire.Core.Structures.Position2), DeepCopier, Serializer, Deserializer);
         }
     }
     

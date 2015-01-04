@@ -8,6 +8,7 @@ using Luaan.Yggmire.OrleansServerInterfaces.Actors;
 using Luaan.Yggmire.OrleansInterfaces.Actors;
 using Luaan.Yggmire.Core.Structures;
 using Orleans.Providers;
+using Luaan.Yggmire.OrleansServer.Generators;
 
 namespace Luaan.Yggmire.OrleansServer.Actors
 {
@@ -40,7 +41,9 @@ namespace Luaan.Yggmire.OrleansServer.Actors
                 State.Position = new ZonePosition(location[0], new Position2(location[1], location[2]));
                 State.Items = new List<WorldItem> { };
 
-                if (strid == "50.0.0") State.Items.AddRange(GetWorldItems());
+                // Eventually, this will be done on every activation - no point in saving items that aren't changed from what was generated
+                var gen = ZoneGenerator.Generate(State.Position);
+                State.Items.AddRange(gen.WorldItems);
 
                 await State.WriteStateAsync();
             }
@@ -68,22 +71,13 @@ namespace Luaan.Yggmire.OrleansServer.Actors
             await base.ActivateAsync();
         }
 
-        public override Task DeactivateAsync()
+        public override async Task DeactivateAsync()
         {
             subscribers.Clear();
 
-            return base.DeactivateAsync();
-        }
+            await State.WriteStateAsync();
 
-        WorldItem[] GetWorldItems()
-        {
-            return new WorldItem[] 
-                { 
-                    new StaticWorldItem { Id = 1, Position = new Position2(-100000, -100000), PrototypeId = 1},
-                    new StaticWorldItem { Id = 2, Position = new Position2( 100000, -100000), PrototypeId = 1},
-                    new StaticWorldItem { Id = 3, Position = new Position2( 100000,  100000), PrototypeId = 2},
-                    new StaticWorldItem { Id = 4, Position = new Position2(-100000,  100000), PrototypeId = 1},
-                };
+            await base.DeactivateAsync();
         }
 
         Task<IEnumerable<IZoneGrain>> IZoneGrain.GetNeighbours()
@@ -95,7 +89,8 @@ namespace Luaan.Yggmire.OrleansServer.Actors
         {
             subscribers.Subscribe(observer);
 
-            observer.AddItems(State.Id, State.Items.ToArray());
+            observer.AddZone(State.Position);
+            observer.AddItems(State.Position, State.Items.ToArray());
 
             return TaskDone.Done;
         }
@@ -103,6 +98,7 @@ namespace Luaan.Yggmire.OrleansServer.Actors
         Task IZoneGrain.Unsubscribe(IZoneObserver observer)
         {
             subscribers.Unsubscribe(observer);
+            observer.DropZone(State.Position);
 
             return TaskDone.Done;
         }

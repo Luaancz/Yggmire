@@ -12,7 +12,7 @@ using Buffer = SharpDX.Direct3D11.Buffer;
 
 namespace Luaan.Yggmire.SharpClient.Actors
 {
-    public class TerrainActor : VisibleActor
+    public class TerrainActor : PlacedActor
     {
         SharpDX.Toolkit.Graphics.Buffer<VertexPositionNormalTexture> vertexBuffer;
         SharpDX.Toolkit.Graphics.Buffer<int> indexBuffer;
@@ -35,7 +35,7 @@ namespace Luaan.Yggmire.SharpClient.Actors
             this.patchHeight = 255;
         }
 
-        public void Initialize()
+        public override void Initialize()
         {
             Bitmap bmp = (Bitmap)Bitmap.FromFile("heightmap01.bmp");
 
@@ -110,7 +110,7 @@ namespace Luaan.Yggmire.SharpClient.Actors
             Game.GraphicsDevice.SetVertexInputLayout(inputLayout);
             Game.GraphicsDevice.SetIndexBuffer(indexBuffer, true);
 
-            var world = Matrix.Scaling(1f);
+            var world = World;
 
             terrainEffect.Parameters["wvp"].SetValue(world * Game.Camera.ViewProjection);
             terrainEffect.Parameters["world"].SetValue(world);

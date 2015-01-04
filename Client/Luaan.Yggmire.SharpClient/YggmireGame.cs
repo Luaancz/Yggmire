@@ -56,7 +56,21 @@ namespace Luaan.Yggmire.SharpClient
         
         List<PlacedActor> localActors = new List<PlacedActor>();
         ConcurrentQueue<PlacedActor> addedActors = new ConcurrentQueue<PlacedActor>();
-        
+
+        public void AddZone(ZonePosition zoneOffset)
+        {
+            var terrain = new TerrainActor(this);
+            terrain.Position = new Vector3(zoneOffset.Position.X * 255, 0, zoneOffset.Position.Y * 255);
+            terrain.Initialize();
+
+            addedActors.Enqueue(terrain);
+        }
+
+        public void DropZone(ZonePosition zoneOffset)
+        {
+            // TODO
+        }
+
         public void AddWorldItem(ZonePosition zoneOffset, WorldItem item)
         {
             var swi = item as StaticWorldItem;
@@ -91,9 +105,6 @@ namespace Luaan.Yggmire.SharpClient
             camera = new FreeCamera(this);
             camera.Position = new Vector3(0, 5, -25);
             
-            terrain = new TerrainActor(this);
-            terrain.Initialize();
-            
             base.LoadContent();   
         }
 
@@ -104,7 +115,6 @@ namespace Luaan.Yggmire.SharpClient
             inputManager.Update();
 
             camera.Update(gameTime);
-            terrain.Update(gameTime);
             
             // Not thread-safe, but we don't really care if a couple of actors
             // are not added until the next update.
@@ -128,9 +138,7 @@ namespace Luaan.Yggmire.SharpClient
             var time = (float)gameTime.TotalGameTime.TotalSeconds;
             
             // Clears the screen with the Color.CornflowerBlue
-            GraphicsDevice.Clear(Color.CornflowerBlue);           
-
-            terrain.Render(gameTime);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
             
             foreach (var actor in localActors)
                 actor.Render(gameTime);
