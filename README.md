@@ -6,12 +6,10 @@ An crafting MMO platform built on top of Microsoft Research's Project "Orleans".
 You can follow my (Luaan's) blog for updates at http://www.luaan.cz/
 
 To set this up, you have to install the Orleans SDK CTP. Follow this guide to do that - https://orleans.codeplex.com/wikipage?title=Orleans%20Setup%20for%20Developers&referringTitle=Getting%20Started%20with%20Orleans.
-Next, you're going to have to setup your silo. At this point, this is tricky, since I'm using a few hard-coded paths in the projects. I'll try to solve this ASAP, for now, you have to play around with it a bit.
 
-To launch the server, you just have to open the solution, build it (make sure everything actually worked) and then just use the StartLocalSilo.cmd script in your Orleans SDK directory, and that should do it.
-Make sure that the OrleansConfiguration.XML in the LocalSilo folder is actually setup properly. You have to add a storage provider like this:
+Make sure that the environment variable for the OrleansSDK is properly setup. Also, you'll need to install SharpDX SDK, and add that path to your enviornmental variables as well (SharpDXSdk). I've got this setup from a clean slate on my build server, so it shouldn't be all that hard anymore.
 
-    <Provider Type="Luaan.Yggmire.OrleansStorage.OrleansFileStorage" Name="Default" RootDirectory="..\Data\"/>
+I've added a simple test silo host, so you no longer need to do any more manual configuration - just make sure the storage provider path in TestServerConfiguration.xml points to a valid path on your computer.
 
 There's usually a server running on the address `yggmire.net`. You can see the Git revision used to build the server on http://www.yggmire.net/. Using the same client, you should be able to connect
 and test that everything is working fine.
