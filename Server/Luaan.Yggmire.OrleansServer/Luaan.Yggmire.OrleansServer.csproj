@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Account\AccountGrain.cs" />
     <Compile Include="Account\CharacterGrain.cs" />
+    <Compile Include="Actors\WorldItemCreator.cs" />
     <Compile Include="Actors\ZoneGrain.cs" />
     <Compile Include="Actors\ZoneManager.cs" />
     <Compile Include="Chat\ChatGrain.cs" />

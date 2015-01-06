@@ -117,7 +117,7 @@ namespace Luaan.Yggmire.SharpClient.Actors
 
         protected override void UpdateInternal(GameTime gameTime)
         {
-            Orientation *= Quaternion.RotationYawPitchRoll((float)gameTime.ElapsedGameTime.TotalSeconds, 0, 0);
+            // Orientation *= Quaternion.RotationYawPitchRoll((float)gameTime.ElapsedGameTime.TotalSeconds, 0, 0);
         }
     }
 }

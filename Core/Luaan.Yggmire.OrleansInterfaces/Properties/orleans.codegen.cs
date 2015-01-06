@@ -911,8 +911,10 @@ namespace Luaan.Yggmire.OrleansInterfacesSerializers
     using Orleans.Serialization;
     using Luaan.Yggmire.OrleansInterfaces.Account;
     using Luaan.Yggmire.Core.Structures;
+    using Luaan.Yggmire.Core.Behaviours;
     using System.Collections;
     using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Orleans-CodeGenerator", "1.0.1053.48452")]
@@ -1084,6 +1086,8 @@ namespace Luaan.Yggmire.OrleansInterfacesSerializers
             Luaan.Yggmire.Core.Structures.WorldItem input = ((Luaan.Yggmire.Core.Structures.WorldItem)(original));
             Luaan.Yggmire.Core.Structures.WorldItem result = new Luaan.Yggmire.Core.Structures.WorldItem();
             Orleans.Serialization.SerializationContext.Current.RecordObject(original, result);
+            result.Behaviours = ((List<IItemBehaviour>)(Orleans.Serialization.SerializationManager.DeepCopyInner(input.Behaviours)));
+            result.BehaviourStates = ((Dictionary<String,IItemBehaviourState>)(Orleans.Serialization.SerializationManager.DeepCopyInner(input.BehaviourStates)));
             result.Id = input.Id;
             result.PrototypeId = input.PrototypeId;
             return result;
@@ -1092,6 +1096,8 @@ namespace Luaan.Yggmire.OrleansInterfacesSerializers
         public static void Serializer(object untypedInput, Orleans.Serialization.BinaryTokenStreamWriter stream, System.Type expected)
         {
             Luaan.Yggmire.Core.Structures.WorldItem input = ((Luaan.Yggmire.Core.Structures.WorldItem)(untypedInput));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.Behaviours, stream, typeof(List<IItemBehaviour>));
+            Orleans.Serialization.SerializationManager.SerializeInner(input.BehaviourStates, stream, typeof(Dictionary<String,IItemBehaviourState>));
             Orleans.Serialization.SerializationManager.SerializeInner(input.Id, stream, typeof(Int32));
             Orleans.Serialization.SerializationManager.SerializeInner(input.PrototypeId, stream, typeof(Int32));
         }
@@ -1099,6 +1105,8 @@ namespace Luaan.Yggmire.OrleansInterfacesSerializers
         public static object Deserializer(System.Type expected, global::Orleans.Serialization.BinaryTokenStreamReader stream)
         {
             Luaan.Yggmire.Core.Structures.WorldItem result = new Luaan.Yggmire.Core.Structures.WorldItem();
+            result.Behaviours = ((List<IItemBehaviour>)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(List<IItemBehaviour>), stream)));
+            result.BehaviourStates = ((Dictionary<String,IItemBehaviourState>)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(Dictionary<String,IItemBehaviourState>), stream)));
             result.Id = ((Int32)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(Int32), stream)));
             result.PrototypeId = ((Int32)(Orleans.Serialization.SerializationManager.DeserializeInner(typeof(Int32), stream)));
             return result;

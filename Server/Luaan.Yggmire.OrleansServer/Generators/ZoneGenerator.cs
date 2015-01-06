@@ -1,4 +1,6 @@
-﻿using Luaan.Yggmire.Core.Structures;
+﻿using Luaan.Yggmire.Core.Behaviours;
+using Luaan.Yggmire.Core.Structures;
+using Luaan.Yggmire.OrleansServer.Actors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,29 +34,25 @@ namespace Luaan.Yggmire.OrleansServer.Generators
 
                 for (var i = 0; i < treeCount; i++)
                 {
-                    var item = new StaticWorldItem { Id = i, Position = new Position2(rnd.Next(200000) - 100000, rnd.Next(200000) - 100000), PrototypeId = 1 };
+                    var item = (StaticWorldItem)WorldItemCreator.CreateWorldItem(i, 1);
+                    item.Position = new Position2(rnd.Next(200000) - 100000, rnd.Next(200000) - 100000);
+                    item.BehaviourStates.Add("1", new ItemStorageBehaviourState { BehaviourId = "1", Items = new List<InventoryItem> { new InventoryItem { PrototypeId = 1, Name = "Branch", Amount = 5 } } });
+
                     gen.WorldItems.Add(item);
                 }
 
                 if (position.Position.X == 0 && position.Position.Y == 0)
                 {
-                    gen.WorldItems.AddRange(GetWorldItems());
+                    var box = (StaticWorldItem)WorldItemCreator.CreateWorldItem(103, 2);
+                    box.Position = new Position2(100000,  100000);
+
+                    box.BehaviourStates.Add("contents", new ItemStorageBehaviourState { BehaviourId = "contents", Items = new List<InventoryItem> { new InventoryItem { PrototypeId = 1, Name = "Branch", Amount = 25 } } });
+
+                    gen.WorldItems.Add(box);
                 }
             }
             
             return gen;
-        }
-
-
-        static WorldItem[] GetWorldItems()
-        {
-            return new WorldItem[] 
-                { 
-                    new StaticWorldItem { Id = 101, Position = new Position2(-100000, -100000), PrototypeId = 1},
-                    new StaticWorldItem { Id = 102, Position = new Position2( 100000, -100000), PrototypeId = 1},
-                    new StaticWorldItem { Id = 103, Position = new Position2( 100000,  100000), PrototypeId = 2},
-                    new StaticWorldItem { Id = 104, Position = new Position2(-100000,  100000), PrototypeId = 1},
-                };
         }
     }
 }

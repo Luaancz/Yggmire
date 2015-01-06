@@ -23,8 +23,6 @@ namespace Luaan.Yggmire.SharpClient
         public CameraBase Camera { get { return this.camera; } }
 
         private Model model;
-       
-        private TerrainActor terrain;
 
         private readonly InputManager inputManager;
         public InputManager InputManager { get { return this.inputManager; } }
@@ -53,7 +51,7 @@ namespace Luaan.Yggmire.SharpClient
             inputManager.Initialize();
             graphicsDeviceManager.PreferMultiSampling = true;
         }
-        
+
         List<PlacedActor> localActors = new List<PlacedActor>();
         ConcurrentQueue<PlacedActor> addedActors = new ConcurrentQueue<PlacedActor>();
 
@@ -104,8 +102,8 @@ namespace Luaan.Yggmire.SharpClient
 
             camera = new FreeCamera(this);
             camera.Position = new Vector3(0, 5, -25);
-            
-            base.LoadContent();   
+
+            base.LoadContent();
         }
 
         protected override void Update(GameTime gameTime)
@@ -115,7 +113,7 @@ namespace Luaan.Yggmire.SharpClient
             inputManager.Update();
 
             camera.Update(gameTime);
-            
+
             // Not thread-safe, but we don't really care
             if (addedActors.Count > 0)
             {
@@ -130,15 +128,15 @@ namespace Luaan.Yggmire.SharpClient
             foreach (var actor in localActors)
                 actor.Update(gameTime);
         }
-        
+
         protected override void Draw(GameTime gameTime)
         {
             // Use time in seconds directly
             var time = (float)gameTime.TotalGameTime.TotalSeconds;
-            
+
             // Clears the screen with the Color.CornflowerBlue
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            
+
             foreach (var actor in localActors)
                 actor.Render(gameTime);
 

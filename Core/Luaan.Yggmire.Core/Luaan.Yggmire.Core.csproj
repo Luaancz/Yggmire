@@ -40,6 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviours\IItemBehaviour.cs" />
+    <Compile Include="Behaviours\IItemBehaviourState.cs" />
+    <Compile Include="Behaviours\ItemGeneratorBehaviour.cs" />
+    <Compile Include="Behaviours\ItemStorageBehaviour.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structures\InventoryItem.cs" />
     <Compile Include="Structures\ItemPayload.cs" />
