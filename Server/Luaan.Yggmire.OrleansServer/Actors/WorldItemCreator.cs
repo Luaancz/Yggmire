@@ -22,7 +22,7 @@ namespace Luaan.Yggmire.OrleansServer.Actors
                         box.Id = id;
                         box.PrototypeId = prototypeId;
 
-                        box.Behaviours.Add(new ItemStorageBehaviour { Id = "contents", Public = true });
+                        box.Behaviours.Add(new ItemStorageBehaviour { Id = "contents", IsContainer = true });
 
                         return box;
                     }
@@ -33,7 +33,7 @@ namespace Luaan.Yggmire.OrleansServer.Actors
                         tree.Id = id;
                         tree.PrototypeId = prototypeId;
 
-                        tree.Behaviours.Add(new ItemStorageBehaviour { Id = "1", Public = false });
+                        tree.Behaviours.Add(new ItemStorageBehaviour { Id = "1", IsContainer = false });
                         tree.Behaviours.Add(new ItemGeneratorBehaviour());
 
                         return tree;

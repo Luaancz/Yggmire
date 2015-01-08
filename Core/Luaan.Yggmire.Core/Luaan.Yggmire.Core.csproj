@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Behaviours\IItemBehaviour.cs" />
     <Compile Include="Behaviours\IItemBehaviourState.cs" />
+    <Compile Include="Behaviours\IItemBehaviourWithActions.cs" />
+    <Compile Include="Behaviours\ItemAction.cs" />
     <Compile Include="Behaviours\ItemGeneratorBehaviour.cs" />
     <Compile Include="Behaviours\ItemStorageBehaviour.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

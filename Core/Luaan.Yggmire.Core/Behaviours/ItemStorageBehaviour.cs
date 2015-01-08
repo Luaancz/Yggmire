@@ -8,14 +8,24 @@ using System.Threading.Tasks;
 namespace Luaan.Yggmire.Core.Behaviours
 {
     [Serializable]
-    public class ItemStorageBehaviour : IItemBehaviour<ItemStorageBehaviourState>
+    public class ItemStorageBehaviour : IItemBehaviour<ItemStorageBehaviourState>, IItemBehaviourWithActions
     {
         /// <summary>
         /// Id used to pair the configured prototypes of the item with the actual stored state for that behaviour.
         /// </summary>
         public string Id { get; set; }
 
-        public bool Public { get; set; }
+        public bool IsContainer { get; set; }
+
+        public ItemAction[] GetAvailableActions(WorldItem parent)
+        {
+            if (IsContainer)
+            {
+                return new ItemAction[] { new ItemAction { Id = "open", Name = "Open" } };
+            }
+
+            return new ItemAction[] { };
+        }
     }
 
     [Serializable]
