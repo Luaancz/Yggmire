@@ -26,6 +26,22 @@ namespace Luaan.Yggmire.Core.Behaviours
 
             return new ItemAction[] { };
         }
+
+        public void ExecuteAction(string actionId)
+        {
+            if (IsContainer)
+            {
+                switch (actionId)
+                {
+                    case "open":
+                        {
+                            // TODO: Hmm... what should this do and how? :D
+
+                            break;
+                        }
+                }
+            }
+        }
     }
 
     [Serializable]

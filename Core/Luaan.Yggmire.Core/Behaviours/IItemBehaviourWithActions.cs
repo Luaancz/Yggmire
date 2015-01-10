@@ -10,5 +10,6 @@ namespace Luaan.Yggmire.Core.Behaviours
     public interface IItemBehaviourWithActions : IItemBehaviour
     {
         ItemAction[] GetAvailableActions(WorldItem parent);
+        void ExecuteAction(string actionId);
     }
 }
