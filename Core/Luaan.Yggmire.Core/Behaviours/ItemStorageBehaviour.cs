@@ -27,7 +27,7 @@ namespace Luaan.Yggmire.Core.Behaviours
             return new ItemAction[] { };
         }
 
-        public void ExecuteAction(string actionId)
+        public void ExecuteAction(WorldItem parentItem, /* ISessionGrain session, */string actionId)
         {
             if (IsContainer)
             {
