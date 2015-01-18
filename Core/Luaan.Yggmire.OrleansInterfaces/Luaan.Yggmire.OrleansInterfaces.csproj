@@ -48,11 +48,15 @@
     <Compile Include="Account\AccountInformation.cs" />
     <Compile Include="Account\CharacterInformation.cs" />
     <Compile Include="Actors\IZoneObserver.cs" />
+    <Compile Include="Actors\ZoneItem.cs" />
     <Compile Include="Chat\IChatObserver.cs" />
     <Compile Include="ISessionGrain.cs" />
     <Compile Include="ISessionObserver.cs" />
     <Compile Include="Properties\orleans.codegen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Structures\InventoryItem.cs" />
+    <Compile Include="Structures\Position2.cs" />
+    <Compile Include="Structures\ZonePosition.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Luaan.Yggmire.Core\Luaan.Yggmire.Core.csproj">

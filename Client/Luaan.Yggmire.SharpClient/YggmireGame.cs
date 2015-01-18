@@ -1,4 +1,4 @@
-﻿using Luaan.Yggmire.Core.Structures;
+﻿using Luaan.Yggmire.OrleansInterfaces.Structures;
 using Luaan.Yggmire.OrleansInterfaces;
 using Luaan.Yggmire.OrleansInterfaces.Actors;
 using Luaan.Yggmire.SharpClient.Actors;
@@ -69,10 +69,8 @@ namespace Luaan.Yggmire.SharpClient
             // TODO
         }
 
-        public void AddWorldItem(ZonePosition zoneOffset, WorldItem item)
+        public void AddWorldItem(ZonePosition zoneOffset, ZoneItem item)
         {
-            var swi = item as StaticWorldItem;
-
             PlacedActor actor;
 
             switch (item.PrototypeId)
@@ -82,7 +80,7 @@ namespace Luaan.Yggmire.SharpClient
                 default: return;
             }
 
-            actor.Position = new Vector3(zoneOffset.Position.X * 255 + swi.Position.X / 1000f, 0, zoneOffset.Position.Y * 255 + swi.Position.Y / 1000f);
+            actor.Position = new Vector3(zoneOffset.Position.X * 255 + item.Position.X / 1000f, 0, zoneOffset.Position.Y * 255 + item.Position.Y / 1000f);
             actor.Scale *= 2.5f;
             actor.Initialize();
 

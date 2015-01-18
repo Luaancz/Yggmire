@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Luaan.Yggmire.Core.Structures
+namespace Luaan.Yggmire.OrleansInterfaces.Structures
 {
     [Serializable]
     public struct ZonePosition

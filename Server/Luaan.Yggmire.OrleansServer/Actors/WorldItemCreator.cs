@@ -1,10 +1,12 @@
-﻿using Luaan.Yggmire.Core.Behaviours;
-using Luaan.Yggmire.Core.Structures;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Luaan.Yggmire.OrleansInterfaces.Structures;
+using Luaan.Yggmire.OrleansServer.Actors;
+using Luaan.Yggmire.OrleansServer.Behaviours;
 
 namespace Luaan.Yggmire.OrleansServer.Actors
 {
@@ -18,7 +20,7 @@ namespace Luaan.Yggmire.OrleansServer.Actors
                 // Box
                 case 1:
                     {
-                        var box = new StaticWorldItem();
+                        var box = new WorldItem();
                         box.Id = id;
                         box.PrototypeId = prototypeId;
 
@@ -29,7 +31,7 @@ namespace Luaan.Yggmire.OrleansServer.Actors
                 // Tree
                 case 2:
                     {
-                        var tree = new StaticWorldItem();
+                        var tree = new WorldItem();
                         tree.Id = id;
                         tree.PrototypeId = prototypeId;
 

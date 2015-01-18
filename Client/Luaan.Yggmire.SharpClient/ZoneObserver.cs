@@ -1,10 +1,11 @@
-﻿using Luaan.Yggmire.Core.Structures;
-using Luaan.Yggmire.OrleansInterfaces.Actors;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Luaan.Yggmire.OrleansInterfaces.Structures;
+using Luaan.Yggmire.OrleansInterfaces.Actors;
 
 namespace Luaan.Yggmire.SharpClient
 {
@@ -22,7 +23,7 @@ namespace Luaan.Yggmire.SharpClient
             game.AddZone(zonePosition);
         }
 
-        public void AddItems(ZonePosition zonePosition, WorldItem[] items)
+        public void AddItems(ZonePosition zonePosition, ZoneItem[] items)
         {
             foreach (var item in items)
                 game.AddWorldItem(zonePosition, item);

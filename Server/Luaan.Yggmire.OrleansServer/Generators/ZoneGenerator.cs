@@ -1,11 +1,12 @@
-﻿using Luaan.Yggmire.Core.Behaviours;
-using Luaan.Yggmire.Core.Structures;
-using Luaan.Yggmire.OrleansServer.Actors;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Luaan.Yggmire.OrleansInterfaces.Structures;
+using Luaan.Yggmire.OrleansServer.Actors;
+using Luaan.Yggmire.OrleansServer.Behaviours;
 
 namespace Luaan.Yggmire.OrleansServer.Generators
 {
@@ -34,7 +35,7 @@ namespace Luaan.Yggmire.OrleansServer.Generators
 
                 for (var i = 0; i < treeCount; i++)
                 {
-                    var item = (StaticWorldItem)WorldItemCreator.CreateWorldItem(i, 1);
+                    var item = WorldItemCreator.CreateWorldItem(i, 1);
                     item.Position = new Position2(rnd.Next(200000) - 100000, rnd.Next(200000) - 100000);
                     item.BehaviourStates.Add("1", new ItemStorageBehaviourState { BehaviourId = "1", Items = new List<InventoryItem> { new InventoryItem { PrototypeId = 1, Name = "Branch", Amount = 5 } } });
 
@@ -43,7 +44,7 @@ namespace Luaan.Yggmire.OrleansServer.Generators
 
                 if (position.Position.X == 0 && position.Position.Y == 0)
                 {
-                    var box = (StaticWorldItem)WorldItemCreator.CreateWorldItem(103, 2);
+                    var box = WorldItemCreator.CreateWorldItem(103, 2);
                     box.Position = new Position2(100000,  100000);
 
                     box.BehaviourStates.Add("contents", new ItemStorageBehaviourState { BehaviourId = "contents", Items = new List<InventoryItem> { new InventoryItem { PrototypeId = 1, Name = "Branch", Amount = 25 } } });

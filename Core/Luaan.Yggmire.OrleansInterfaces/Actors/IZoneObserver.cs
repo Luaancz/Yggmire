@@ -5,15 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Luaan.Yggmire.Core;
-using Luaan.Yggmire.Core.Structures;
+using Luaan.Yggmire.OrleansInterfaces.Structures;
 
 namespace Luaan.Yggmire.OrleansInterfaces.Actors
 {
     public interface IZoneObserver : IGrainObserver
     {
         void AddZone(ZonePosition zonePosition);
-        void AddItems(ZonePosition zonePosition, WorldItem[] items);
+        void AddItems(ZonePosition zonePosition, ZoneItem[] items);
         void DropZone(ZonePosition zonePosition);
     }
 }

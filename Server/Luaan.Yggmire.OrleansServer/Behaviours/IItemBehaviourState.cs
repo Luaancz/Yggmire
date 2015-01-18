@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Luaan.Yggmire.Core.Structures
+namespace Luaan.Yggmire.OrleansServer.Behaviours
 {
-    [Serializable]
-    public class ItemPayload
+    public interface IItemBehaviourState
     {
-
+        string BehaviourId { get; set; }
     }
 }

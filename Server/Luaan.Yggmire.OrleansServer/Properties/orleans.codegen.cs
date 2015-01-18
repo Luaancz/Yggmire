@@ -200,7 +200,7 @@ namespace Luaan.Yggmire.OrleansServer.Actors
     using System;
     using System.Collections.Generic;
     using System.Collections;
-    using Luaan.Yggmire.Core.Structures;
+    using Luaan.Yggmire.OrleansInterfaces.Structures;
     using Orleans.CodeGeneration;
     using Orleans;
     using System.Runtime.InteropServices;

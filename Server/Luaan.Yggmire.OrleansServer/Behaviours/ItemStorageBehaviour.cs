@@ -1,11 +1,13 @@
-﻿using Luaan.Yggmire.Core.Structures;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Luaan.Yggmire.Core.Behaviours
+using Luaan.Yggmire.OrleansInterfaces.Structures;
+using Luaan.Yggmire.OrleansServer.Actors;
+
+namespace Luaan.Yggmire.OrleansServer.Behaviours
 {
     [Serializable]
     public class ItemStorageBehaviour : IItemBehaviour<ItemStorageBehaviourState>, IItemBehaviourWithActions

@@ -54,9 +54,16 @@
   <ItemGroup>
     <Compile Include="Account\AccountGrain.cs" />
     <Compile Include="Account\CharacterGrain.cs" />
+    <Compile Include="Actors\WorldItem.cs" />
     <Compile Include="Actors\WorldItemCreator.cs" />
     <Compile Include="Actors\ZoneGrain.cs" />
     <Compile Include="Actors\ZoneManager.cs" />
+    <Compile Include="Behaviours\IItemBehaviour.cs" />
+    <Compile Include="Behaviours\IItemBehaviourState.cs" />
+    <Compile Include="Behaviours\IItemBehaviourWithActions.cs" />
+    <Compile Include="Behaviours\ItemAction.cs" />
+    <Compile Include="Behaviours\ItemGeneratorBehaviour.cs" />
+    <Compile Include="Behaviours\ItemStorageBehaviour.cs" />
     <Compile Include="Chat\ChatGrain.cs" />
     <Compile Include="Generators\ZoneGenerator.cs" />
     <Compile Include="Monitoring\MonitoringGrain.cs" />

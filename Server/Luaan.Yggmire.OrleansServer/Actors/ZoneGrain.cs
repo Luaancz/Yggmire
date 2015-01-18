@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text;
 using Orleans;
-using Luaan.Yggmire.OrleansServerInterfaces.Actors;
-using Luaan.Yggmire.OrleansInterfaces.Actors;
-using Luaan.Yggmire.Core.Structures;
 using Orleans.Providers;
+
+using Luaan.Yggmire.OrleansInterfaces.Actors;
+using Luaan.Yggmire.OrleansInterfaces.Structures;
 using Luaan.Yggmire.OrleansServer.Generators;
+using Luaan.Yggmire.OrleansServerInterfaces.Actors;
 
 namespace Luaan.Yggmire.OrleansServer.Actors
 {
@@ -42,6 +43,7 @@ namespace Luaan.Yggmire.OrleansServer.Actors
                 State.Items = new List<WorldItem> { };
 
                 // Eventually, this will be done on every activation - no point in saving items that aren't changed from what was generated
+                // Also, some world item generation will always occur - forageables etc. But that should be on a timer
                 var gen = ZoneGenerator.Generate(State.Position);
                 State.Items.AddRange(gen.WorldItems);
 
@@ -90,7 +92,7 @@ namespace Luaan.Yggmire.OrleansServer.Actors
             subscribers.Subscribe(observer);
 
             observer.AddZone(State.Position);
-            observer.AddItems(State.Position, State.Items.ToArray());
+            observer.AddItems(State.Position, State.Items.Select(i => i.ToClient()).ToArray());
 
             return TaskDone.Done;
         }

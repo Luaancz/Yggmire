@@ -1,11 +1,14 @@
-﻿using Luaan.Yggmire.Core.Behaviours;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Luaan.Yggmire.Core.Structures
+using Luaan.Yggmire.OrleansInterfaces.Structures;
+using Luaan.Yggmire.OrleansInterfaces.Actors;
+using Luaan.Yggmire.OrleansServer.Behaviours;
+
+namespace Luaan.Yggmire.OrleansServer.Actors
 {
     [Serializable]
     public class WorldItem
@@ -19,13 +22,19 @@ namespace Luaan.Yggmire.Core.Structures
         public int Id { get; set; }
         public int PrototypeId { get; set; }
 
+        public Position2 Position { get; set; }
+
         /// <summary>
         /// This is loaded from the world item prototype.
         /// </summary>
-        // TODO: Shouldn't be serialized
-        public List<IItemBehaviour> Behaviours { get; set; }
+        public List<IItemBehaviour> Behaviours { get; private set; }
 
         // HACK: The ID has to be a string because of the JSON serializer for now.
         public Dictionary<string, IItemBehaviourState> BehaviourStates { get; set; }
+
+        public ZoneItem ToClient()
+        {
+            return new ZoneItem { Id = Id, PrototypeId = PrototypeId, Position = Position };
+        }
     }
 }

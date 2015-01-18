@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Luaan.Yggmire.Core.Behaviours
+namespace Luaan.Yggmire.OrleansServer.Behaviours
 {
-    public interface IItemBehaviourState
+    [Serializable]
+    public class ItemGeneratorBehaviour : IItemBehaviour
     {
-        string BehaviourId { get; set; }
+        
     }
 }
